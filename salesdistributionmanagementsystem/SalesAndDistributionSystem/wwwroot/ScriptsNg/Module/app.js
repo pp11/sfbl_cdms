@@ -1,0 +1,2 @@
+﻿var app = angular.module('app', []);
+var ngApp = angular.module('ngApp', ['ngAnimate', 'ngTouch', 'ui.grid', 'ui.grid.expandable', 'ui.grid.selection', 'ui.grid.edit', "ui.grid.cellNav", 'ui.grid.pagination', 'ui.grid.pinning', 'ui.grid.exporter', 'ui.grid.resizeColumns', 'ui.grid.autoResize', 'ui.grid.saveState', 'ui.bootstrap', 'ngFileUpload', 'ui.grid.importer']);

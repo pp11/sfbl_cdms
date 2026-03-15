@@ -1,0 +1,288 @@
+﻿@{
+    ViewData["Title"] = "Refurbishment Finalize";
+}
+<style>
+    .form-control {
+        border-color: #7e8197;
+    }
+</style>
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl" style="color:black;">
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn btn-success" ng-show="isSaveBtnVisible" ng-disabled="gridDtls.data.length<=0 || formRefurbishment.$invalid || model.APPROVED_STATUS=='A' || REST_AMOUNT<=-1 || REST_AMOUNT>=1" ng-click="SaveData(model)">{{saveBtnName}}</button></li>
+            <li class="breadcrumb-item"><button class="btn btn-danger" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button class="btn btn-success" ng-click="SearchMstData()"><i class="fa fa-search"></i>&nbspSearch</button></li>
+            <li class="breadcrumb-item"><button class="btn btn-primary" ng-show="model.APPROVED_STATUS=='P' && model.MST_SLNO !=0" ng-click="Confirm(model)"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbspApprove</button></li>
+            <li class="breadcrumb-item"><button class="btn btn-secondary" ng-show="model.APPROVED_STATUS=='A' && model.MST_SLNO !=0"><i class="fa fa-check" aria-hidden="true"></i>&nbspApproved</button></li>
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body" style=" background: url('/img/dust_scratches.png');border-color:blue;">
+            <form name="formRefurbishment">
+                <span ng-init="GetEditDataById('')"></span>
+                <fieldset>
+                    <div class="ml-3 mr-3 mt-4">
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CLAIM">Claim No:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="select2-single form-control" id="CLAIM" name="CLAIM" ng-model="model.CLAIM" style="width:100%" ng-change="onSelectClaim()">
+                                            <option ng-repeat="item in claims" ng-selected="item.CLAIM_NO == model.CLAIM_NO" value="{{item}}">{{item.CLAIM_NO}} [ Receive Date: {{item.RECEIVE_DATE}} ] </option>
+                                        </select>
+                                        <input id="MST_SLNO" type="text" class="form-control d-none"
+                                               name="MST_SLNO" ng-model="model.MST_SLNO">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="RECEIVE_DATE">Receive Date:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="RECEIVE_DATE" type="text" class="form-control" readonly
+                                               name="RECEIVE_DATE" ng-model="model.RECEIVE_DATE">
+                                        <input id="FINALIZE_DATE" type="text" class="form-control d-none" readonly
+                                               name="FINALIZE_DATE" ng-model="model.FINALIZE_DATE">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="RECEIVE_CATEGORY">Receiving Category:<sup>*</sup></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="RECEIVE_CATEGORY" type="text" class="form-control" readonly
+                                               name="RECEIVE_CATEGORY" ng-model="model.RECEIVE_CATEGORY">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CUSTOMER_TYPE">Distributor Type:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="CUSTOMER_TYPE" type="text" class="form-control" readonly
+                                               name="CUSTOMER_TYPE" ng-model="model.CUSTOMER_TYPE">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CUSTOMER_NAME">Distributor Name:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="CUSTOMER_NAME" type="text" class="form-control" readonly
+                                               name="CUSTOMER_NAME" ng-model="model.CUSTOMER_NAME">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CUSTOMER_CODE">Distributor Code:<sup>*</sup></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="CUSTOMER_CODE" type="text" class="form-control"
+                                               name="CUSTOMER_CODE" ng-model="model.CUSTOMER_CODE" required readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-1" style="width: 11%; flex: 0 0 11%;max-width: 11%;">
+                                        <label for="CUSTOMER_ADDRESS">Distributor Address:</label>
+                                    </div>
+                                    <div class="col-md-11" style="width: 89%; flex: 0 0 89%;max-width: 89%;">
+                                        <input id="CUSTOMER_ADDRESS" type="text" class="form-control"
+                                               name="CUSTOMER_ADDRESS" ng-model="model.CUSTOMER_ADDRESS" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CHALLAN_NUMBER">Challan No:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="CHALLAN_NUMBER" type="text" class="form-control"
+                                               name="CHALLAN_NUMBER" ng-model="model.CHALLAN_NUMBER" ng-readonly="isAutomatic">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CHALLAN_DATE">Challan Date:</label>
+                                    </div>
+                                    <div class="col-md-8 simple-date2">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" autocomplete="off" class="form-control"
+                                                   id="CHALLAN_DATE" name="CHALLAN_DATE" ng-model="model.CHALLAN_DATE" ng-disabled="isAutomatic" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="TOTAL_AMOUNT">Total Amount:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="TOTAL_AMOUNT" type="number" class="form-control text-right"
+                                               name="TOTAL_AMOUNT" ng-model="model.TOTAL_AMOUNT" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-1" style="width: 11%; flex: 0 0 11%;max-width: 11%;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="REMARKS">Remarks:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-11" style="width: 89%; flex: 0 0 89%;max-width: 89%;">
+                                <input id="REMARKS" type="text" class="form-control" name="REMARKS" ng-model="model.REMARKS">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="mb-3 mt-3">
+                    <legend style="width:500px">Approved product for Refurbishment (FG Stock Receiving)</legend>
+                    <div class="row" style="height: 50vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 45vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="mb-3 mt-3">
+                    <legend style="width:500px">Product analysis for Refurbishment (Adjustment by Invoice )</legend>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="CUSTOMER">Load Manual Product :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="typeaheadcontainer">
+                                    <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                           ng-model="PRODUCT_MANUAL"
+                                           uib-typeahead="Product.SKU_NAME as Product.NAME_WITH_CODE for Product in autoCompleteManualProductList($viewValue)"
+                                           typeahead-append-to-body="true"
+                                           placeholder="type name/code min. 2 char."
+                                           typeahead-editable="false"
+                                           typeahead-on-select="typeaheadSelectedProduct(model, $item)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 50vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="gridDtls" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 45vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="modal fade" id="SearchModal" role="dialog" aria-labelledby="SearchModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px;">
+            <div class="modal-content" style="height:600px !important;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Refurbished List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background: url('/img/dust_scratches.png');border-color:blue;">
+                    <div class="row" style="margin:10px">
+                        <div class="col-md-4 space-bottom" id="date_from_param">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DATE_FROM">From Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="DATE_FROM">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom" id="date_to_param">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DATE_TO">To Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="DATE_TO">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom " id="company_route_param" style="display:block">
+                            <button type="button" class="pull-right btn btn-outline-primary form-control mb-1" style="width: 70px;color:  green;cursor:pointer" ng-click="SearchMstData()">Search</button>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 70vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card">
+                                <div ui-grid="gridList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 65vh; z-index: 100;background: url('/img/dust_scratches.png');border-color:forestgreen;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/scriptsng/inventory/refurbishment/service/RefurbishmentServices.js?v=27"></script>
+    <script src="~/scriptsng/inventory/refurbishment/controller/RefurbishmentFinalizeCtr.js?v=27"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+        });
+    </script>
+}

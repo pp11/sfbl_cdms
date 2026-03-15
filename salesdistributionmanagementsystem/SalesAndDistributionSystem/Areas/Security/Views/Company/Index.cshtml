@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Company Page";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item" ng-show="!showDiv">
+                <a href="/Security/Company/Index" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+          
+            <li class="breadcrumb-item" ng-show="!showDiv">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid" ng-show="model.ADD_PERMISSION == 'Active'" ng-click="SaveData(model)" disable-button>
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <div class="card mb-2">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:160px">Company Entry</legend>
+                <form name="formMenuCategoryAdd">
+                    <div class="row" style="margin:10px">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="COMPANY_NAME">Company Name</label>
+                                <input type="text" class="form-control" autocomplete="off" data-val="true"
+                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME" placeholder="Enter Company Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="COMPANY_SHORT_NAME">Company Short Name</label>
+                                <input id="COMPANY_SHORT_NAME" type="text" class="form-control" name="COMPANY_SHORT_NAME" ng-model="model.COMPANY_SHORT_NAME" placeholder="Enter Company Short Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="COMPANY_ADDRESS1">Company Address 1 </label>
+                                <input id="COMPANY_ADDRESS1" type="text" class="form-control" name="COMPANY_ADDRESS1" ng-model="model.COMPANY_ADDRESS1" placeholder="Enter Company Address 1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="COMPANY_ADDRESS2">Company Address 2</label>
+                                <input id="COMPANY_ADDRESS2" type="text" class="form-control"
+                                       name="COMPANY_ADDRESS2" ng-model="model.COMPANY_ADDRESS2" placeholder="Enter Company Address 2">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset>
+                <legend style="width:140px">Company List</legend>
+                <div class="row" style="height: 37vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 30vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Security/Company/Controller/CompanyCtr.js"></script>
+    <script src="~/ScriptsNg/Security/Company/Service/CompanyService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+}

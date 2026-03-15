@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SalesRegisterDataSet" targetNamespace="http://tempuri.org/SalesRegisterDataSet.xsd" xmlns:mstns="http://tempuri.org/SalesRegisterDataSet.xsd" xmlns="http://tempuri.org/SalesRegisterDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;Persist Security Info=True;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="silsqadb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>
+SELECT 0 SLNO, '' INVOICE_NO, '' INVOICE_DATE, '' INVOICE_TYPE_CODE, '' INVOICE_TYPE_NAME,
+'' CUSTOMER_CODE, '' CUSTOMER_NAME, '' MARKET_CODE,'' MARKET_NAME , '' TERRITORY_NAME, 0 TOTAL_AMOUNT,
+0 COMMISSION_AMT, 0 DISCOUNT_AMT, 0 LOADING_CHARGE_AMOUNT, 0 VAT_ADJUSTMENT_AMT, 0 OTHERS_ADJUSTMENT_AMT, 0 NET_INVOICE_AMOUNT,
+0 TDS_AMOUNT, 0 TOTAL_PAYABLE FROM DUAL</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SLNO" DataSetColumn="SLNO" />
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="INVOICE_DATE" DataSetColumn="INVOICE_DATE" />
+              <Mapping SourceColumn="INVOICE_TYPE_CODE" DataSetColumn="INVOICE_TYPE_CODE" />
+              <Mapping SourceColumn="INVOICE_TYPE_NAME" DataSetColumn="INVOICE_TYPE_NAME" />
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="MARKET_CODE" DataSetColumn="MARKET_CODE" />
+              <Mapping SourceColumn="MARKET_NAME" DataSetColumn="MARKET_NAME" />
+              <Mapping SourceColumn="TERRITORY_NAME" DataSetColumn="TERRITORY_NAME" />
+              <Mapping SourceColumn="TOTAL_AMOUNT" DataSetColumn="TOTAL_AMOUNT" />
+              <Mapping SourceColumn="COMMISSION_AMT" DataSetColumn="COMMISSION_AMT" />
+              <Mapping SourceColumn="DISCOUNT_AMT" DataSetColumn="DISCOUNT_AMT" />
+              <Mapping SourceColumn="LOADING_CHARGE_AMOUNT" DataSetColumn="LOADING_CHARGE_AMOUNT" />
+              <Mapping SourceColumn="VAT_ADJUSTMENT_AMT" DataSetColumn="VAT_ADJUSTMENT_AMT" />
+              <Mapping SourceColumn="OTHERS_ADJUSTMENT_AMT" DataSetColumn="OTHERS_ADJUSTMENT_AMT" />
+              <Mapping SourceColumn="NET_INVOICE_AMOUNT" DataSetColumn="NET_INVOICE_AMOUNT" />
+              <Mapping SourceColumn="TDS_AMOUNT" DataSetColumn="TDS_AMOUNT" />
+              <Mapping SourceColumn="TOTAL_PAYABLE" DataSetColumn="TOTAL_PAYABLE" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SalesRegisterDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="SalesRegisterDataSet" msprop:Generator_DataSetName="SalesRegisterDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SLNO" msprop:Generator_ColumnPropNameInRow="SLNO" msprop:Generator_ColumnPropNameInTable="SLNOColumn" msprop:Generator_ColumnVarNameInTable="columnSLNO" msprop:Generator_UserColumnName="SLNO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_DATE" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" msprop:Generator_UserColumnName="INVOICE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_TYPE_CODE" msprop:Generator_ColumnPropNameInRow="INVOICE_TYPE_CODE" msprop:Generator_ColumnPropNameInTable="INVOICE_TYPE_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_TYPE_CODE" msprop:Generator_UserColumnName="INVOICE_TYPE_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_TYPE_NAME" msprop:Generator_ColumnPropNameInRow="INVOICE_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="INVOICE_TYPE_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_TYPE_NAME" msprop:Generator_UserColumnName="INVOICE_TYPE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="MARKET_CODE" msprop:Generator_ColumnPropNameInRow="MARKET_CODE" msprop:Generator_ColumnPropNameInTable="MARKET_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnMARKET_CODE" msprop:Generator_UserColumnName="MARKET_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="MARKET_NAME" msprop:Generator_ColumnPropNameInRow="MARKET_NAME" msprop:Generator_ColumnPropNameInTable="MARKET_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnMARKET_NAME" msprop:Generator_UserColumnName="MARKET_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="TERRITORY_NAME" msprop:Generator_ColumnPropNameInRow="TERRITORY_NAME" msprop:Generator_ColumnPropNameInTable="TERRITORY_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnTERRITORY_NAME" msprop:Generator_UserColumnName="TERRITORY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_AMOUNT" msprop:Generator_ColumnPropNameInRow="TOTAL_AMOUNT" msprop:Generator_ColumnPropNameInTable="TOTAL_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnTOTAL_AMOUNT" msprop:Generator_UserColumnName="TOTAL_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COMMISSION_AMT" msprop:Generator_ColumnPropNameInRow="COMMISSION_AMT" msprop:Generator_ColumnPropNameInTable="COMMISSION_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnCOMMISSION_AMT" msprop:Generator_UserColumnName="COMMISSION_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DISCOUNT_AMT" msprop:Generator_ColumnPropNameInRow="DISCOUNT_AMT" msprop:Generator_ColumnPropNameInTable="DISCOUNT_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnDISCOUNT_AMT" msprop:Generator_UserColumnName="DISCOUNT_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LOADING_CHARGE_AMOUNT" msprop:Generator_ColumnPropNameInRow="LOADING_CHARGE_AMOUNT" msprop:Generator_ColumnPropNameInTable="LOADING_CHARGE_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnLOADING_CHARGE_AMOUNT" msprop:Generator_UserColumnName="LOADING_CHARGE_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VAT_ADJUSTMENT_AMT" msprop:Generator_ColumnPropNameInRow="VAT_ADJUSTMENT_AMT" msprop:Generator_ColumnPropNameInTable="VAT_ADJUSTMENT_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnVAT_ADJUSTMENT_AMT" msprop:Generator_UserColumnName="VAT_ADJUSTMENT_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OTHERS_ADJUSTMENT_AMT" msprop:Generator_ColumnPropNameInRow="OTHERS_ADJUSTMENT_AMT" msprop:Generator_ColumnPropNameInTable="OTHERS_ADJUSTMENT_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnOTHERS_ADJUSTMENT_AMT" msprop:Generator_UserColumnName="OTHERS_ADJUSTMENT_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NET_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInRow="NET_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInTable="NET_INVOICE_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnNET_INVOICE_AMOUNT" msprop:Generator_UserColumnName="NET_INVOICE_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnTDS_AMOUNT" msprop:Generator_UserColumnName="TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTAL_PAYABLE" msprop:Generator_ColumnPropNameInRow="TOTAL_PAYABLE" msprop:Generator_ColumnPropNameInTable="TOTAL_PAYABLEColumn" msprop:Generator_ColumnVarNameInTable="columnTOTAL_PAYABLE" msprop:Generator_UserColumnName="TOTAL_PAYABLE" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

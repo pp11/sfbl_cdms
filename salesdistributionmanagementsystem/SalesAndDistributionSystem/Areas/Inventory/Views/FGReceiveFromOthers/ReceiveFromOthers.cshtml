@@ -1,0 +1,422 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Fg_Reciving_From_Others
+@{
+    ViewData["Title"] = "FG Receive From Others";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn btn-defaul mb-1" style="background-color: #25abba;color:white" ng-click="LoadListPage()" ng-show="getPermissions.confirM_PERMISSION != 'Active'">Search</button></li>
+            <li class="breadcrumb-item"><button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" data-target="#myModal1" ng-click="ApprovedList()">Approved List</button></li>
+            <li class="breadcrumb-item"><button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" data-target="#myModal1" ng-click="DataLoadUnchecked()" ng-show="getPermissions.confirM_PERMISSION === 'Active'">Pending for Approval</button></li>
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.RECEIVE_ID_ENCRYPTED')"></span>
+
+                <fieldset>
+                    <legend style="width:240px">FG Receive Entry</legend>
+                    <div class="ml-3 mr-3 mt-4">
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="UNIT_NAME">Unit</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="UNIT_NAME" ng-disabled="true" type="text" class="form-control" required
+                                               name="UNIT_NAME" ng-model="model.UNIT_NAME">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="RECEIVE_TYPE">Receive From</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="RECEIVE_TYPE" name="RECEIVE_TYPE"
+                                                ng-model="model.RECEIVE_TYPE" ng-change="LoadSupplier(model.RECEIVE_TYPE)"
+                                                style="width:100%" ng-disabled="model.IsChecked">
+                                            @*  <option value="Pabna">Pabna</option>
+                                            <option value="Rupshi">Rupshi</option>*@
+                                            <option value="SND">SND</option>
+                                            <option value="Supplier">Supplier</option>
+                                            <option value="Toll">Toll</option>
+                                            <option value="Refubrishment">Refubrishment</option>
+                                            <option value="Others">Others</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="SUPPLIER_ID">Supplier</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="select2-single form-control" id="SUPPLIER_ID"
+                                                ng-disabled="model.RECEIVE_TYPE == '' || model.RECEIVE_TYPE == null || model.IsChecked"
+                                                name="SUPPLIER_ID" ng-model="model.SUPPLIER_ID" style="width:100%">
+                                            <option ng-repeat="item in suppliers" value="{{item.SUPPLIER_ID}}" ng-selected="item.SUPPLIER_ID == model.SUPPLIER_ID">{{item.SUPPLIER_NAME}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CHALLAN_NO">Challan No</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="CHALLAN_NO" type="text" class="form-control" required placeholder="double Click for refubrishment"
+                                               ng-disabled="model.SUPPLIER_ID == '' || model.SUPPLIER_ID == null || model.IsChecked"
+                                               name="CHALLAN_NO" ng-model="model.CHALLAN_NO" ng-dblclick="Get_Refurbishment_SKU_ALL()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="CHALLAN_DATE">Challan Date</label>
+                                    </div>
+                                    <div class="col-md-8 simple-date2">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" ng-model="model.CHALLAN_DATE"
+                                                   ng-disabled="model.SUPPLIER_ID == '' || model.SUPPLIER_ID == null || model.IsChecked" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="SHIPPER_QTY">Shipper Qty</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="SHIPPER_QTY" type="text" disabled class="form-control" required
+                                               name="SHIPPER_QTY" ng-model="model.SHIPPER_QTY">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="SKU_ID">SKU Name</label>
+                                    </div>
+                                    <div class="col-md-8" ng-hide="model.RECEIVE_TYPE == 'Refubrishment'">
+                                        <select class="select2-single-Product form-control" id="SKU_ID"
+                                                ng-disabled="model.SUPPLIER_ID == '' || model.SUPPLIER_ID == null || model.IsChecked"
+                                                name="SKU_ID" ng-model="model.SKU_ID" style="width:100%" ng-change="SetProductInfo(model.SKU_ID)">
+
+                                            <option ng-repeat="item in products | orderBy : 'SKU_NAME'" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == model.SKU_ID">{{item.SKU_NAME}} -- {{item.SKU_CODE}} -- {{item.PACK_SIZE}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-8" ng-show="model.RECEIVE_TYPE == 'Refubrishment'">
+                                        <input id="SKU_NAME" type="text" class="form-control"
+                                               name="SKU_NAME" disabled ng-model="model.SKU_NAME">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="SKU_CODE">SKU CODE</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="SKU_CODE" type="text" class="form-control" required
+                                               name="SKU_CODE" disabled ng-model="model.SKU_CODE">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="PACK_SIZE">Pack Size</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="PACK_SIZE" type="text" class="form-control" required
+                                               name="PACK_SIZE" disabled ng-model="model.PACK_SIZE">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="BATCH_NO">Batch No</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="BATCH_NO" ng-disabled="IsBatchActive == false" type="text" class="form-control"
+                                               name="BATCH_NO" ng-model="model.BATCH_NO">
+                                        @* <div class="typeaheadcontainer">
+                                            <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="BATCH_NO"
+                                                   ng-disabled="model.RECEIVE_TYPE == '' || model.RECEIVE_TYPE == null || model.RECEIVE_TYPE == 'Supplier' || model.RECEIVE_TYPE == 'Toll'"
+                                                   ng-model="model.BATCH_NO"
+                                                   uib-typeahead="batch.BATCH_NO as batch.BATCH_NO for batch in AutoCompleteDataLoadForBatch($viewValue)"
+                                                   typeahead-append-to-body="true"
+                                                   typeahead-editable="false"
+                                                   typeahead-on-select="ChangeBatchNo($item)" />
+                                        </div>*@
+                                        @*
+                                        <select class="select2-single form-control" id="BATCH_NO"
+                                                ng-disabled="model.RECEIVE_TYPE == '' || model.RECEIVE_TYPE == null || model.RECEIVE_TYPE == 'Supplier' || model.RECEIVE_TYPE == 'Toll'"
+                                                name="BATCH_NO" ng-model="model.BATCH_NO" style="width:100%" ng-change="ChangeBatchNo()">
+                                            <option ng-repeat="item in batches" value="{{item.BATCH_NO}}" ng-selected="item.BATCH_NO == model.BATCH_NO">{{item.BATCH_NO}}</option>
+                                        </select>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="UNIT_TP">Unit TP</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="UNIT_TP" type="number" class="form-control"
+                                               name="UNIT_TP" min="0" ng-model="model.UNIT_TP">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="MRP">MRP</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="MRP" type="number" class="form-control" ng-disabled="model.SKU_CODE == ''"
+                                               name="MRP" min="0" ng-model="model.MRP" ng-blur="CheckMrp()">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="RECEIVE_QTY">Receive Qty</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="RECEIVE_QTY" type="number" class="form-control" min="1" ng-change="ChangeReceiveAmount()" required
+                                               name="RECEIVE_QTY" ng-model="model.RECEIVE_QTY">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="MFG_DATE">Menufacturing Date</label>
+                                    </div>
+                                    <div class="col-md-8 simple-date2">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" ng-model="model.MFG_DATE" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="EXPIRY_DATE">Expriry Date</label>
+                                    </div>
+                                    <div class="col-md-8 simple-date2">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" ng-model="model.EXPIRY_DATE" value="" id="oneYearView" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row space-bottom">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label for="REMARKS">Remarks</label>
+                                    </div>
+                                    <div class="col-md-11">
+                                        <input id="REMARKS" type="text" class="form-control"
+                                               name="REMARKS" ng-model="model.REMARKS">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset style="margin:10px">
+                                <div class="row" style="margin:20px;padding-top:20px;background-color: #eeedfa ">
+                                    <div class="col-md-6 ">
+                                        <div class="row space-bottom">
+                                            <div class="col-md-12">
+                                                <label for="RECEIVED_BY">Received By</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input id="RECEIVED_BY_ID" style="display:none" type="text" class="form-control"
+                                                       name="RECEIVED_BY" disabled ng-model="model.RECEIVED_BY_ID">
+                                                <input id="RECEIVED_BY_NAME" disabled type="text" class="form-control"
+                                                       name="RECEIVED_BY_NAME" ng-model="model.RECEIVED_BY_NAME">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="RECEIVE_DATE">Receive Date</label>
+                                            </div>
+                                            <div class="col-md-12 simple-date2">
+                                                <div class="input-group date">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled ng-model="model.RECEIVE_DATE" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset style="margin:10px">
+                                <div class="row" style="margin:20px;padding-top:20px;background-color: #eeedfa ">
+
+                                    <div class="col-md-6 ">
+                                        <div class="row  space-bottom">
+                                            <div class="col-md-12">
+                                                <label for="CHECKED_BY_ID">Approved By</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input id="CHECKED_BY_ID" style="display:none" disabled type="text" class="form-control"
+                                                       name="CHECKED_BY_ID" ng-model="model.CHECKED_BY_ID">
+                                                <input id="CHECKED_BY_NAME" disabled type="text" class="form-control"
+                                                       name="CHECKED_BY_NAME" ng-model="model.CHECKED_BY_NAME">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="CHECKED_BY_DATE">Approve Date</label>
+                                            </div>
+                                            <div class="col-md-12 simple-date2">
+                                                <div class="input-group date">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled ng-model="model.CHECKED_BY_DATE">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width:1000px;margin-left:-200px">
+                        <div class="modal-header">
+                            @*<h4 class="modal-title" id="myModalLabel">Select Unchecked Finished Product to Check</h4>*@
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row" style="height: 75vh;">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="card" style="margin: 10px">
+                                        <div ui-grid="gridOptionsListUnchecked" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                             style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width:1000px;margin-left:-200px">
+                        <div class="modal-header">
+                            @*<h4 class="modal-title" id="myModalLabel">Select Unchecked Finished Product to Check</h4>*@
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row" style="height: 75vh;">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="card" style="margin: 10px">
+                                        <div ui-grid="gridRefurbishment" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                             style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/FGReceiveFromOthers/Controller/ReceiveFromOthersCtr.js?v=2"></script>
+    <script src="~/ScriptsNg/Inventory/FGReceiveFromOthers/Service/ReceiveFromOthersServices.js?v=2"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+        });
+    </script>
+}

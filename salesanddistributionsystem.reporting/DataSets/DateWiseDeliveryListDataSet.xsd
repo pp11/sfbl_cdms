@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DateWiseDeliveryListDataSet" targetNamespace="http://tempuri.org/DateWiseDeliveryListDataSet.xsd" xmlns:mstns="http://tempuri.org/DateWiseDeliveryListDataSet.xsd" xmlns="http://tempuri.org/DateWiseDeliveryListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sildemodb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>  SELECT M.DISTRIBUTION_NO,
+         M.DISTRIBUTION_DATE,
+         M.DIST_ROUTE_ID,
+         M.VEHICLE_NO,
+         M.VEHICLE_DESCRIPTION,
+         M.DRIVER_ID,
+         COALESCE(M.DRIVER_PHONE,D.CONTACT_NO ) DRIVER_PHONE,
+         D.DRIVER_NAME,
+         I.INVOICE_NO,
+         I.INVOICE_DATE,
+         I.INVOICE_UNIT_ID,
+         SUM (P.TOTAL_DISTRIBUTION_QTY) AS TOTAL_QTY,
+         IM.ORDER_DATE,
+         IM.ORDER_NO,
+         C.CUSTOMER_NAME
+ FROM DEPOT_CUSTOMER_DIST_MST M
+         LEFT OUTER JOIN DEPOT_CUSTOMER_DIST_INVOICE I ON M.MST_ID = I.MST_ID
+         LEFT OUTER JOIN DEPOT_CUSTOMER_DIST_PRODUCT P ON P.DEPOT_INV_ID = I.DEPOT_INV_ID
+         LEFT OUTER JOIN DRIVER_INFO D ON D.DRIVER_ID = M.DRIVER_ID
+         LEFT OUTER JOIN INVOICE_MST IM ON IM.INVOICE_NO = I.INVOICE_NO
+         LEFT OUTER JOIN CUSTOMER_INFO C ON C.CUSTOMER_ID = IM.CUSTOMER_ID   
+ GROUP BY I.INVOICE_NO,
+         I.INVOICE_DATE,
+         I.INVOICE_UNIT_ID,
+         M.DISTRIBUTION_NO,
+         M.DISTRIBUTION_DATE,
+         M.DIST_ROUTE_ID,
+         M.VEHICLE_NO,
+         M.DRIVER_ID,
+         COALESCE(M.DRIVER_PHONE,D.CONTACT_NO ) ,
+         D.DRIVER_NAME,
+         M.VEHICLE_DESCRIPTION,
+         IM.ORDER_DATE,
+         IM.ORDER_NO,
+         C.CUSTOMER_NAME</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DISTRIBUTION_NO" DataSetColumn="DISTRIBUTION_NO" />
+              <Mapping SourceColumn="DISTRIBUTION_DATE" DataSetColumn="DISTRIBUTION_DATE" />
+              <Mapping SourceColumn="DIST_ROUTE_ID" DataSetColumn="DIST_ROUTE_ID" />
+              <Mapping SourceColumn="VEHICLE_NO" DataSetColumn="VEHICLE_NO" />
+              <Mapping SourceColumn="VEHICLE_DESCRIPTION" DataSetColumn="VEHICLE_DESCRIPTION" />
+              <Mapping SourceColumn="DRIVER_ID" DataSetColumn="DRIVER_ID" />
+              <Mapping SourceColumn="DRIVER_PHONE" DataSetColumn="DRIVER_PHONE" />
+              <Mapping SourceColumn="DRIVER_NAME" DataSetColumn="DRIVER_NAME" />
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="INVOICE_DATE" DataSetColumn="INVOICE_DATE" />
+              <Mapping SourceColumn="INVOICE_UNIT_ID" DataSetColumn="INVOICE_UNIT_ID" />
+              <Mapping SourceColumn="TOTAL_QTY" DataSetColumn="TOTAL_QTY" />
+              <Mapping SourceColumn="ORDER_DATE" DataSetColumn="ORDER_DATE" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="ORDER_NO" DataSetColumn="ORDER_NO" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DateWiseDeliveryListDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DateWiseDeliveryListDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DateWiseDeliveryListDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DISTRIBUTION_NO" msprop:Generator_ColumnPropNameInTable="DISTRIBUTION_NOColumn" msprop:Generator_ColumnPropNameInRow="DISTRIBUTION_NO" msprop:Generator_UserColumnName="DISTRIBUTION_NO" msprop:Generator_ColumnVarNameInTable="columnDISTRIBUTION_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DISTRIBUTION_DATE" msprop:Generator_ColumnPropNameInTable="DISTRIBUTION_DATEColumn" msprop:Generator_ColumnPropNameInRow="DISTRIBUTION_DATE" msprop:Generator_UserColumnName="DISTRIBUTION_DATE" msprop:Generator_ColumnVarNameInTable="columnDISTRIBUTION_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DIST_ROUTE_ID" msprop:Generator_ColumnPropNameInTable="DIST_ROUTE_IDColumn" msprop:Generator_ColumnPropNameInRow="DIST_ROUTE_ID" msprop:Generator_UserColumnName="DIST_ROUTE_ID" msprop:Generator_ColumnVarNameInTable="columnDIST_ROUTE_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VEHICLE_NO" msprop:Generator_ColumnPropNameInTable="VEHICLE_NOColumn" msprop:Generator_ColumnPropNameInRow="VEHICLE_NO" msprop:Generator_UserColumnName="VEHICLE_NO" msprop:Generator_ColumnVarNameInTable="columnVEHICLE_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VEHICLE_DESCRIPTION" msprop:Generator_ColumnPropNameInTable="VEHICLE_DESCRIPTIONColumn" msprop:Generator_ColumnPropNameInRow="VEHICLE_DESCRIPTION" msprop:Generator_UserColumnName="VEHICLE_DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnVEHICLE_DESCRIPTION" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER_ID" msprop:Generator_ColumnPropNameInTable="DRIVER_IDColumn" msprop:Generator_ColumnPropNameInRow="DRIVER_ID" msprop:Generator_UserColumnName="DRIVER_ID" msprop:Generator_ColumnVarNameInTable="columnDRIVER_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER_PHONE" msprop:Generator_ColumnPropNameInTable="DRIVER_PHONEColumn" msprop:Generator_ColumnPropNameInRow="DRIVER_PHONE" msprop:Generator_UserColumnName="DRIVER_PHONE" msprop:Generator_ColumnVarNameInTable="columnDRIVER_PHONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER_NAME" msprop:Generator_ColumnPropNameInTable="DRIVER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="DRIVER_NAME" msprop:Generator_UserColumnName="DRIVER_NAME" msprop:Generator_ColumnVarNameInTable="columnDRIVER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_UserColumnName="INVOICE_DATE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="INVOICE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="INVOICE_UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_UNIT_ID" msprop:Generator_UserColumnName="INVOICE_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnINVOICE_UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTAL_QTY" msprop:Generator_ColumnPropNameInTable="TOTAL_QTYColumn" msprop:Generator_ColumnPropNameInRow="TOTAL_QTY" msprop:Generator_UserColumnName="TOTAL_QTY" msprop:Generator_ColumnVarNameInTable="columnTOTAL_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ORDER_DATE" msprop:Generator_ColumnPropNameInTable="ORDER_DATEColumn" msprop:Generator_ColumnPropNameInRow="ORDER_DATE" msprop:Generator_UserColumnName="ORDER_DATE" msprop:Generator_ColumnVarNameInTable="columnORDER_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ORDER_NO" msprop:Generator_ColumnPropNameInRow="ORDER_NO" msprop:Generator_ColumnPropNameInTable="ORDER_NOColumn" msprop:Generator_ColumnVarNameInTable="columnORDER_NO" msprop:Generator_UserColumnName="ORDER_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:DISTRIBUTION_NO" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

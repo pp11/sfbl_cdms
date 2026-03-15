@@ -1,0 +1,161 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.BATCH_PRICE_MST
+@{
+    ViewData["Title"] = "TP Update";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item" id="Create" style="display:none"><button class="btn btn-info mb-1" ng-click="DataLoad('Create')">Go to Create</button></li>
+            <li class="breadcrumb-item" id="SaveData"><button id="SaveButton" type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">{{SaveButton}}</button></li>
+            @*            <li class="breadcrumb-item" id="Search"><button type="button" class="btn mb-1" ng-click="DataLoad('Search')">Search</button></li>
+*@        </ol>
+    </div>
+    <div class="card mb-4" id="MarketSalesCreate" style="display:block">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom" style="display:none">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="LoadGeneratedProductCode()">
+
+                                        <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SKU_ID">SKU</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="SKU_ID"
+                                            name="SKU_ID" ng-model="model.SKU_ID" style="width:100%" ng-change="typeaheadSelectedSku()">
+                                        <option value="0"> -----Select SKU-----  </option>
+                                        <option ng-repeat="item in Products" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == model.SKU_ID">{{item.SKU_NAME+" ("+item.SKU_CODE+")"}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SKU_CODE">SKU Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" readonly required autocomplete="off" class="form-control" ng-model="model.SKU_CODE" value="" id="SKU_CODE">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ENTERED_DATE">Entry Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input ng-disabled="true" type="text" required autocomplete="off" class="form-control" ng-model="model.ENTRY_DATE" value="" id="ENTERED_DATE">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BATCH_NO">Batch No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" required autocomplete="off" class="form-control" ng-model="model.BATCH_NO" value="" id="BATCH_NO">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PACK_SIZE">Pack Size</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" readonly required autocomplete="off" class="form-control" ng-model="model.PACK_SIZE" value="" id="PACK_SIZE">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="button" class="btn btn-secondary form-control" ng-click="loadBatchWiseStock(model)"> Load  <i class="fa fa-search " aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="height: 57vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4" id="BatchPriceList" style="display:none">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:250px">In Market Sales List</legend>
+                <div class="row" style="height: 60vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 58vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts{
+    <script src="~/ScriptsNg/SalesAndDistribution/TPUpdate/Controller/TPUpdateCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/TPUpdate/Service/TPUpdateServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Security/Notification/Service/LiveNotificationServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+        });
+    </script>
+}

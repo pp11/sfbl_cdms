@@ -1,0 +1,336 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Bonus_Mst
+
+@{
+    ViewData["Title"] = "Combo Bonus Configuration";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl" style="overflow: auto !important;max-height:40% !important;">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/Bonus/List">Search</a></li>
+
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid || gridLocationList.data.length<1 || gridProductList.data.length<1 || gridBonusList.data.length<2" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+
+                <div class="row" style="margin:20px">
+                    <span ng-init="GetEditDataById('@Model.BONUS_MST_ID_ENCRYPTED')"></span>
+
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="COMPANY_ID">Company</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                       name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="BONUS_NO">Bonus No</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="BONUS_NO" disabled type="number" class="form-control"
+                                       name="BONUS_MST_ID_SHOW" ng-model="model.BONUS_MST_ID_SHOW">
+                                <input id="BONUS_NO" hidden type="number" class="form-control"
+                                       name="BONUS_MST_ID" ng-model="model.BONUS_MST_ID">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Bonus Name</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="BONUS_NAME" type="text" class="form-control"
+                                       name="BONUS_NAME" ng-model="model.BONUS_NAME">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Effect Start</label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" required autocomplete="off" readonly class="form-control" ng-model="model.EFFECT_START_DATE" ng-change="CheckENDDateValidation(model) || CheckDateValidation(model)" value="" id="oneYearView">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Effect End</label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" required autocomplete="off" readonly class="form-control" ng-model="model.EFFECT_END_DATE" ng-change="CheckENDDateValidation(model) || CheckDateValidation(model)" value="" id="oneYearView">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Status</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="STATUS"
+                                        name="STATUS" ng-model="model.STATUS" style="width:100%">
+
+                                    <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.STATUS">{{item.STATUS}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <fieldset>
+                    <legend style="width:220px">Location Information</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Location Type</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="LOCATION_TYPE"
+                                            name="LOCATION_TYPE" ng-model="model.LOCATION_TYPE" ng-change="LoadLocationByLocationType()" style="width:100%">
+
+                                        <option ng-repeat="item in LocationTypes" value="{{item}}" ng-selected="item == model.LOCATION_TYPE">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Location</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single-Location form-control" multiple id="LOCATION_ID"
+                                            name="LOCATION_ID" ng-model="model.LOCATION_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Locations | orderBy : 'LOCATION_NAME'" value="{{item.LOCATION_ID}}" ng-selected="item.LOCATION_ID == model.LOCATION_ID">{{item.LOCATION_NAME}} -- {{item.LOCATION_CODE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-success" ng-click="LoadLocationsData()">Load Locations</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-danger" ng-click="UnLoadLocationsData()">Reset Locations</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridLocationList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </fieldset>
+                <br />
+
+                <fieldset>
+                    <legend style="width:220px">Product Information</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Group</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" multiple id="GROUP_ID"
+                                            name="GROUP_ID" ng-model="model.GROUP_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Groups | orderBy : 'GROUP_NAME'" value="{{item.GROUP_ID}}" ng-selected="item.GROUP_ID == model.GROUP_ID">{{item.GROUP_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Brand</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" multiple id="BRAND_ID"
+                                            name="BRAND_ID" ng-model="model.BRAND_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Brands | orderBy : 'BRAND_NAME'" value="{{item.BRAND_ID}}" ng-selected="item.BRAND_ID == model.BRAND_ID">{{item.BRAND_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Category</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" multiple id="CATEGORY_ID"
+                                            name="CATEGORY_ID" ng-model="model.CATEGORY_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Categories | orderBy : 'CATEGORY_NAME'" value="{{item.CATEGORY_ID}}" ng-selected="item.CATEGORY_ID == model.CATEGORY_ID">{{item.CATEGORY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Base Product</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" multiple id="BASE_PRODUCT_ID"
+                                            name="BASE_PRODUCT_ID" ng-model="model.BASE_PRODUCT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in BaseProducts | orderBy : 'BASE_PRODUCT_NAME'" value="{{item.BASE_PRODUCT_ID}}" ng-selected="item.BASE_PRODUCT_ID == model.BASE_PRODUCT_ID">{{item.BASE_PRODUCT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Product</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single-Product form-control" multiple id="SKU_ID"
+                                            name="SKU_ID" ng-model="model.SKU_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Products | orderBy : 'SKU_NAME'" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == model.SKU_ID">{{item.SKU_NAME}} -- {{item.SKU_CODE}} -- {{item.PACK_SIZE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-success" ng-click="LoadProductsDataFiltered()">Load Products</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-danger" ng-click="ReleaseProductsDataFiltered()">Reset Products</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridProductList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend style="width:350px">Free Product/Gift Discount Information</legend>
+
+                    <div class="row" style="margin:20px">
+
+
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridBonusList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+
+
+
+
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/Bonus/Controller/BonusConfigCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Bonus/Service/BonusConfigServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}

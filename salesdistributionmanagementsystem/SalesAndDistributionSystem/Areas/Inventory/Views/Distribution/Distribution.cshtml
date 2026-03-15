@@ -1,0 +1,251 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Inventory.DEPOT_REQ_DISTRIBUTION_MST
+@{
+    ViewData["Title"] = "Dispatch (Depot)";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item" ng-hide="model.MST_ID>0"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/Distribution/List">Search</a></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/Distribution/PendingList">Pending List</a></li>
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-body" style="padding:.5rem">
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Distribution Info</legend>
+
+                    <div class="row" style="margin:5px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VECHILE_NO">Dispatch Type</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-selected=" model.RETURN_TYPE" class="select2-single form-control" id="RETURN_TYPE" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'"*@
+                                            name="DISPATCH_TYPE" ng-model="model.DISPATCH_TYPE" style="width:100%" ng-change="LoadRequisitionData()">
+
+                                        <option value="Requisition">Requisition</option>
+                                        <option value="Stock">Stock</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DISPATCHN_NO">Distribution No</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input id="DISPATCHN_NO" type="text" class="form-control" required disabled
+                                           name="DISPATCHN_NO" ng-model="model.DISPATCH_NO" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="DISPATCH_DATE">Distribution Date</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="DISPATCH_DATE" type="text" disabled class="form-control" required
+                                           name="DISPATCH_DATE" ng-model="model.DISPATCH_DATE" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VECHILE_NO">Vehicle No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="VECHILE_NO" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'" *@
+                                            name="VEHICLE_NO" ng-model="model.VEHICLE_NO " style="width:100%" ng-change="LoadVehicleData()">
+
+                                        <option ng-repeat="item in Vehicles" ng-selected="item.VEHICLE_NO == model.VECHILE_NO" value="{{item.VEHICLE_NO}}">{{item.VEHICLE_NO}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VECHILE_DESCRIPTION">Description</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="VEHICLE_DESCRIPTION" disabled type="text" class="form-control" required
+                                           name="VEHICLE_DESCRIPTION" ng-model="model.VEHICLE_DESCRIPTION" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="DRIVER_ID">Driver</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="DRIVER_NAME" disabled type="text" class="form-control" required
+                                           name="DRIVER_NAME" ng-model="model.DRIVER_NAME" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="VECHILE_TOTAL_VOLUME">Vehicle Volume</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="VECHILE_VOLUME" disabled type="number" class="form-control" required
+                                           name="VECHILE_VOLUME" ng-model="model.VECHILE_VOLUME" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="DISPATCH_VOLUME">Dispatch Volume</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="DISPATCH_VOLUME" disabled type="number" class="form-control" required
+                                           name="DISPATCH_VOLUME" ng-model="model.DISPATCH_VOLUME" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="VECHILE_WEIGHT">Vehicle Weight</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="VECHILE_WEIGHT" disabled type="number" class="form-control" required
+                                           name="VECHILE_WEIGHT" ng-model="model.VECHILE_WEIGHT" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="DISPATCH_WEIGHT">Dispatch Weight</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="DISPATCH_WEIGHT" disabled type="number" class="form-control" required
+                                           name="DISPATCH_WEIGHT" ng-model="model.DISPATCH_WEIGHT" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Distribution Request</legend>
+                    <div class="row" style="margin:1px">
+                        <div class="col-lg-12 mb-2" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Distribution Product</legend>
+                    <div class="row" style="margin:1px">
+                        <div class="col-lg-12 mb-2" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsProductList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Shipper Details</legend>
+                    <div class="row" style="margin:2px">
+                        <div class="col-lg-12 mb-2" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsShipperList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Batch Details</legend>
+                    <div class="row" style="margin:2px">
+                        <div class="col-lg-12 mb-2" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsBatchList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/Distribution/Controller/DistributionCtr.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Inventory/Distribution/Service/DistributionService.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Security/Notification/Service/LiveNotificationServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+}

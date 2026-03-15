@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CustomerOutstandingWithInvoiceDataSet" targetNamespace="http://tempuri.org/CustomerOutstandingWithInvoiceDataSet.xsd" xmlns:mstns="http://tempuri.org/CustomerOutstandingWithInvoiceDataSet.xsd" xmlns="http://tempuri.org/CustomerOutstandingWithInvoiceDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sildemodb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  '' DIVISION_ID
+    , '' DIVISION_NAME
+    ,   '' REGION_ID
+    ,   '' REGION_NAME
+    ,   '' REGION_CODE
+    ,   '' AREA_ID
+    ,   '' AREA_NAME
+    ,   '' TERRITORY_ID
+    ,   '' TERRITORY_NAME
+    ,   '' CUSTOMER_CODE
+    ,   '' CUSTOMER_ID
+    ,   '' CUSTOMER_NAME
+    ,   '' INVOICE_NO
+    ,   0 TDS_AMT
+    ,   0 outstanding_balance
+    ,   0 INVOICE_AMT
+    ,   0 OUTSTANDING_AMT 
+    ,   '' INVOICE_DATE
+    ,   '' BALANCE_DATE 
+   FROM DUAL</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DIVISION_ID" DataSetColumn="DIVISION_ID" />
+              <Mapping SourceColumn="DIVISION_NAME" DataSetColumn="DIVISION_NAME" />
+              <Mapping SourceColumn="REGION_ID" DataSetColumn="REGION_ID" />
+              <Mapping SourceColumn="REGION_NAME" DataSetColumn="REGION_NAME" />
+              <Mapping SourceColumn="AREA_ID" DataSetColumn="AREA_ID" />
+              <Mapping SourceColumn="AREA_NAME" DataSetColumn="AREA_NAME" />
+              <Mapping SourceColumn="TERRITORY_ID" DataSetColumn="TERRITORY_ID" />
+              <Mapping SourceColumn="TERRITORY_NAME" DataSetColumn="TERRITORY_NAME" />
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_ID" DataSetColumn="CUSTOMER_ID" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="TDS_AMT" DataSetColumn="TDS_AMT" />
+              <Mapping SourceColumn="OUTSTANDING_AMT" DataSetColumn="OUTSTANDING_AMT" />
+              <Mapping SourceColumn="INVOICE_DATE" DataSetColumn="INVOICE_DATE" />
+              <Mapping SourceColumn="BALANCE_DATE" DataSetColumn="BALANCE_DATE" />
+              <Mapping SourceColumn="OUTSTANDING_BALANCE" DataSetColumn="OUTSTANDING_BALANCE" />
+              <Mapping SourceColumn="INVOICE_AMT" DataSetColumn="INVOICE_AMT" />
+              <Mapping SourceColumn="REGION_CODE" DataSetColumn="REGION_CODE" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CustomerOutstandingWithInvoiceDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="CustomerOutstandingWithInvoiceDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CustomerOutstandingWithInvoiceDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DIVISION_ID" msprop:Generator_ColumnPropNameInTable="DIVISION_IDColumn" msprop:Generator_ColumnPropNameInRow="DIVISION_ID" msprop:Generator_UserColumnName="DIVISION_ID" msprop:Generator_ColumnVarNameInTable="columnDIVISION_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="DIVISION_NAME" msprop:Generator_ColumnPropNameInTable="DIVISION_NAMEColumn" msprop:Generator_ColumnPropNameInRow="DIVISION_NAME" msprop:Generator_UserColumnName="DIVISION_NAME" msprop:Generator_ColumnVarNameInTable="columnDIVISION_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="REGION_ID" msprop:Generator_ColumnPropNameInTable="REGION_IDColumn" msprop:Generator_ColumnPropNameInRow="REGION_ID" msprop:Generator_UserColumnName="REGION_ID" msprop:Generator_ColumnVarNameInTable="columnREGION_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="REGION_NAME" msprop:Generator_ColumnPropNameInTable="REGION_NAMEColumn" msprop:Generator_ColumnPropNameInRow="REGION_NAME" msprop:Generator_UserColumnName="REGION_NAME" msprop:Generator_ColumnVarNameInTable="columnREGION_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="AREA_ID" msprop:Generator_ColumnPropNameInTable="AREA_IDColumn" msprop:Generator_ColumnPropNameInRow="AREA_ID" msprop:Generator_UserColumnName="AREA_ID" msprop:Generator_ColumnVarNameInTable="columnAREA_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="AREA_NAME" msprop:Generator_ColumnPropNameInTable="AREA_NAMEColumn" msprop:Generator_ColumnPropNameInRow="AREA_NAME" msprop:Generator_UserColumnName="AREA_NAME" msprop:Generator_ColumnVarNameInTable="columnAREA_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="TERRITORY_ID" msprop:Generator_ColumnPropNameInTable="TERRITORY_IDColumn" msprop:Generator_ColumnPropNameInRow="TERRITORY_ID" msprop:Generator_UserColumnName="TERRITORY_ID" msprop:Generator_ColumnVarNameInTable="columnTERRITORY_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="TERRITORY_NAME" msprop:Generator_ColumnPropNameInTable="TERRITORY_NAMEColumn" msprop:Generator_ColumnPropNameInRow="TERRITORY_NAME" msprop:Generator_UserColumnName="TERRITORY_NAME" msprop:Generator_ColumnVarNameInTable="columnTERRITORY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_ID" msprop:Generator_ColumnPropNameInTable="CUSTOMER_IDColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_ID" msprop:Generator_UserColumnName="CUSTOMER_ID" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="TDS_AMT" msprop:Generator_ColumnPropNameInTable="TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="TDS_AMT" msprop:Generator_UserColumnName="TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnTDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OUTSTANDING_AMT" msprop:Generator_ColumnPropNameInTable="OUTSTANDING_AMTColumn" msprop:Generator_ColumnPropNameInRow="OUTSTANDING_AMT" msprop:Generator_UserColumnName="OUTSTANDING_AMT" msprop:Generator_ColumnVarNameInTable="columnOUTSTANDING_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_UserColumnName="INVOICE_DATE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="BALANCE_DATE" msprop:Generator_ColumnPropNameInTable="BALANCE_DATEColumn" msprop:Generator_ColumnPropNameInRow="BALANCE_DATE" msprop:Generator_UserColumnName="BALANCE_DATE" msprop:Generator_ColumnVarNameInTable="columnBALANCE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTSTANDING_BALANCE" msprop:Generator_UserColumnName="OUTSTANDING_BALANCE" msprop:Generator_ColumnPropNameInTable="OUTSTANDING_BALANCEColumn" msprop:Generator_ColumnPropNameInRow="OUTSTANDING_BALANCE" msprop:Generator_ColumnVarNameInTable="columnOUTSTANDING_BALANCE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_AMT" msprop:Generator_ColumnPropNameInRow="INVOICE_AMT" msprop:Generator_ColumnPropNameInTable="INVOICE_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_AMT" msprop:Generator_UserColumnName="INVOICE_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REGION_CODE" msprop:Generator_ColumnPropNameInRow="REGION_CODE" msprop:Generator_ColumnPropNameInTable="REGION_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnREGION_CODE" msprop:Generator_UserColumnName="REGION_CODE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

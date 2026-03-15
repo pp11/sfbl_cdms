@@ -1,0 +1,77 @@
+﻿<button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" data-target="#exampleModalScrollable" ng-click="LoadOrderRationableSKUs()">Show Filter</button>
+<div class="modal fade" id="exampleModalScrollable" role="dialog"
+     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1000px;">
+        <div class="modal-content" style="height:350px !important;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Order View Filter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="row" style="margin:10px">
+                        <div class="col-md-4 space-bottom" id="date_from_param">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DATE_FROM">From Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input name="DATE_FROM" type="text" ng-click="event = $event" ng-change="cacheInput(event)" class="form-control" ng-model="model.DATE_FROM">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom" id="date_to_param">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DATE_TO">To Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input name="DATE_TO" type="text" ng-click="event = $event" ng-change="cacheInput(event)" class="form-control" ng-model="model.DATE_TO">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom" id="company_divition_param" style="display:block">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_STATUS">Status</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="ORDER_STATUS"
+                                            name="ORDER_STATUS" ng-model="model.ORDER_STATUS" ng-init="model.ORDER_STATUS='Active'" style="width:100%">
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-4 space-bottom" id="date_to_param">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn  bg-success mb-1" style="color:white;width:100%" data-toggle="modal" data-target="#exampleModalScrollable" ng-disabled="DATE_FROM =='' && DATE_TO == ''" ng-click="DataLoad(model)">Process</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn  btn-danger mb-1" style="color:white;width:100%" ng-click="ClearSearchForm()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

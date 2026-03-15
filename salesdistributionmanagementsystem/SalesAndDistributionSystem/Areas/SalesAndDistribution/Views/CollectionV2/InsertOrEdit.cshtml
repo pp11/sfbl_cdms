@@ -1,0 +1,179 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Collection_Mst
+@{
+    ViewData["Title"] = "Collection Central";
+}
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/CollectionV2/List" class="btn btn-info btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <span class="text">Search</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/CollectionV2/InsertOrEdit" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid || model.BATCH_POSTING_STATUS == 'Approved'" ng-click="SaveData(model)" disable-button>
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body p-1">
+            <fieldset>
+                <div ng-show="!showDiv">
+                    <form name="formMenuCategoryAdd">
+                        <span ng-init="GetEditDataById('@Model.COLLECTION_MST_ID_ENCRYPTED')"></span>
+                        <div class="row portion m-3">
+                            <div class="col-md-6 space-bottom">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="COMPANY_ID">Company</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                               name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                        <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                               name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 space-bottom">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="COMPANY_ID">Unit</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="UNIT_ID" type="number" hidden class="form-control" required
+                                               name="UNIT_ID" ng-model="model.COMPANY_ID">
+                                        <input id="UNIT_NAME" type="text" disabled class="form-control" required
+                                               name="UNIT_NAME" ng-model="model.UNIT_NAME">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 space-bottom">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="BATCH_NO">Batch No</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="BATCH_NO" type="text" class="form-control"
+                                               name="BATCH_NO" disabled ng-model="model.BATCH_NO">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 space-bottom">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="BATCH_DATE">Batch Date</label>
+                                    </div>
+                                    <div class="col-md-8 simple-date2">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" ng-model="model.BATCH_DATE" disabled="disabled" readonly value="" id="BATCH_DATE">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 space-bottom" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="BATCH_STATUS">Batch Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="BATCH_STATUS"
+                                                name="BATCH_STATUS" ng-model="model.BATCH_STATUS" style="width:100%">
+
+                                            <option ng-repeat="item in Batch_Status" value="{{item.BATCH_STATUS}}" ng-selected="item.BATCH_STATUS == model.BATCH_STATUS">{{item.BATCH_STATUS}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 space-bottom" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="BATCH_POSTING_STATUS">Batch Posting Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="BATCH_POSTING_STATUS"
+                                                name="BATCH_POSTING_STATUS" ng-model="model.BATCH_POSTING_STATUS" style="width:100%">
+
+                                            <option ng-repeat="item in Posting_Status" value="{{item.BATCH_POSTING_STATUS}}" ng-selected="item.BATCH_POSTING_STATUS == model.BATCH_POSTING_STATUS">{{item.BATCH_POSTING_STATUS}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @*<strong class="m-2">Special Price Information</strong>*@
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                     style="color: #252222; height: 70vh" class="grid m-2">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/CollectionV2/Controller/InsertOrEditCtr.js?v=seriousissue"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/CollectionV2/Service/InsertOrEditServices.js?v=seriousissue"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select",
+
+            });
+        });
+        $('form').on('focus', 'input[type=number]', function (e) {
+            $(this).on('wheel.disableScroll', function (e) {
+                e.preventDefault()
+            })
+        })
+        $('form').on('blur', 'input[type=number]', function (e) {
+            $(this).off('wheel.disableScroll')
+        })
+    </script>
+}

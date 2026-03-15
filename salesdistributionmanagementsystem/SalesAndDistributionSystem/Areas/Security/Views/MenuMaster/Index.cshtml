@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Menu Configuration";
+}
+<link href="/css/site.css" rel="stylesheet">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/Security/MenuMaster/index" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item" ng-show="model.INVOICE_STATUS !== 'Complete'">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid" ng-show="model.ADD_PERMISSION == 'Active'" ng-click="SaveData(model)" disable-button>
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+
+        </ol>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-body p-1">
+                    <form name="formMenuCategoryAdd">
+                        <fieldset>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-md-4 space-bottom d-none">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="COMPANY_ID">Company</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" autocomplete="off" data-val="true" required
+                                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME" ng-disabled="true">
+                                                <input type="text" class="form-control d-none" autocomplete="off" data-val="true" required
+                                                       name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="MENU_NAME">Menu Name</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" autocomplete="off" data-val="true" required
+                                                       name="MENU_NAME" ng-model="model.MENU_NAME" placeholder="Enter Menu Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_BY_SLNO">Menu Serial No</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="ORDER_BY_SLNO" type="number" class="form-control" required
+                                                       name="ORDER_BY_SLNO" ng-model="model.ORDER_BY_SLNO" placeholder="Enter Menu Serial">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label> Menu Show </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" style="width:100%"
+                                                        id="MENU_SHOW"
+                                                        name="MENU_SHOW"
+                                                        ng-model="model.MENU_SHOW"
+                                                        ng-options="option.STATUS as option.STATUS for option in IsReportValues">
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="AREA">
+                                                    Menu Area
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="AREA" type="text" class="form-control" ng-disabled="model.MENU_ID>0"
+                                                       name="AREA" ng-model="model.AREA" placeholder="Enter Area">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="CONTROLLER">Menu Controller </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="CONTROLLER" type="text" class="form-control" ng-disabled="model.MENU_ID>0"
+                                                       name="CONTROLLER" ng-model="model.CONTROLLER" placeholder="Enter Menu Controller">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ACTION">Menu Action</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="ACTION" type="text" class="form-control" ng-disabled="model.MENU_ID>0"
+                                                       name="ACTION" ng-model="model.ACTION" placeholder="Enter Menu Action">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label> Parent Menu </label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <select class="select2-single form-control" style="width:100%"
+                                                        id="PARENT_MENU_ID"
+                                                        ng-change="onSelectParentMenu(model.PARENT_MENU_ID)"
+                                                        name="PARENT_MENU_ID"
+                                                        ng-model="model.PARENT_MENU_ID"
+                                                        ng-options="option.PARENT_MENU_ID as option.SEQUENCE for option in ParantData">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label> Menu Module </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" style="width:100%"
+                                                        id="MODULE_ID"
+                                                        name="MODULE_ID"
+                                                        ng-disabled="model.PARENT_MENU_ID"
+                                                        ng-model="model.MODULE_ID"
+                                                        ng-options="option.MODULE_ID as option.MODULE_NAME for option in MenuCategories" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <fieldset>
+                        <legend style="width:190px">Manu List</legend>
+                        <div ng-show="model.LIST_VIEW == 'Active'">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="color: #252222;height: 53vh " class="grid m-2">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/Security/MenuMaster/Controller/MenuMasterCtr.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Security/MenuMaster/Service/MenuMasterServices.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select....",
+                allowClear: true
+            });
+        });
+    </script>
+}
+
+

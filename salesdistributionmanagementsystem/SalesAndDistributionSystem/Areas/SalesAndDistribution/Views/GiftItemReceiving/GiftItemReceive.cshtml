@@ -1,0 +1,231 @@
+﻿@{
+    ViewData["Title"] = "Gift Item Receive";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-danger mb-1" href="~/SalesAndDistribution/GiftItemReceiving/GiftItemReceive">Reset</a></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:220px">Gift Item Receive Entry</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                           name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                    <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                           name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SUPPLIER_ID">Supplier</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="SUPPLIER_ID"
+                                            name="SUPPLIER_ID" ng-model="model.SUPPLIER_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Suppliers" value="{{item.SUPPLIER_ID}}" ng-selected="item.SUPPLIER_CODE == model.SUPPLIER_CODE">{{item.SUPPLIER_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="GIFT_ITEM_ID">Gift Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="GIFT_ITEM_ID"
+                                            name="GIFT_ITEM_ID" ng-model="model.GIFT_ITEM_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Gifts" value="{{item.GIFT_ITEM_ID}}" ng-selected="item.GIFT_ITEM_ID == model.GIFT_ITEM_ID">{{item.GIFT_ITEM_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="GIFT_ITEM_PRICE">Gift Item Price </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="GIFT_ITEM_PRICE" type="number" min="0" class="form-control" required ng-change="GiftCalculation()"
+                                           name="GIFT_ITEM_PRICE" ng-model="model.GIFT_ITEM_PRICE">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="RECEIVE_QTY">Gift Receive Qty </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RECEIVE_QTY" type="number" min="0" class="form-control" required ng-change="GiftCalculation()"
+                                           name="RECEIVE_QTY" ng-model="model.RECEIVE_QTY">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="RECEIVE_AMOUNT">Gift Receive Amt </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RECEIVE_AMOUNT" min="0" type="number" class="form-control" required disabled
+                                           name="RECEIVE_AMOUNT" ng-model="model.RECEIVE_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="RECEIVE_DATE">Receive Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" disabled ng-model="model.RECEIVE_DATE" autocomplete="off" value="" id="oneYearView">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CHALLAN_NO">Challan No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CHALLAN_NO" type="text" class="form-control" required
+                                           name="CHALLAN_NO" ng-model="model.CHALLAN_NO">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CHALLAN_DATE">Challan Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" ng-model="model.CHALLAN_DATE" autocomplete="off" value="" id="oneYearView">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BATCH_NO">Batch No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="BATCH_NO" type="text" class="form-control"
+                                           name="BATCH_NO" ng-model="model.BATCH_NO" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="RECEIVE_STATUS">Status</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="RECEIVE_STATUS"
+                                            name="RECEIVE_STATUS" ng-model="model.RECEIVE_STATUS" style="width:100%">
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.RECEIVE_STATUS">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REMARKS" type="text" class="form-control"
+                                           name="REMARKS" ng-model="model.REMARKS">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:190px">Gift Item List</legend>
+                <div class="row" style="height: 57vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/GiftItemReceiving/Controller/GiftItemReceiveCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/GiftItemReceiving/Service/GiftItemReceiveServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}

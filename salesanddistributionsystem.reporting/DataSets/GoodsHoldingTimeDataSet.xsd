@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GoodsHoldingTimeDataSet" targetNamespace="http://tempuri.org/GoodsHoldingTimeDataSet.xsd" xmlns:mstns="http://tempuri.org/GoodsHoldingTimeDataSet.xsd" xmlns="http://tempuri.org/GoodsHoldingTimeDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GoodsHoldingTimeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="GoodsHoldingTimeDataSet" msprop:Generator_DataSetName="GoodsHoldingTimeDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" msprop:Generator_UserColumnName="COMPANY_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SKU_ID" msdata:Caption="STOCK_DATE" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" msprop:Generator_UserColumnName="SKU_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="MRP" msprop:Generator_ColumnPropNameInRow="MRP" msprop:Generator_ColumnPropNameInTable="MRPColumn" msprop:Generator_ColumnVarNameInTable="columnMRP" msprop:Generator_UserColumnName="MRP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BATCH_NO" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_ID" msdata:Caption="STOCK_QTY" msprop:Generator_ColumnPropNameInRow="BATCH_ID" msprop:Generator_ColumnPropNameInTable="BATCH_IDColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_ID" msprop:Generator_UserColumnName="BATCH_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="STOCK_QTY" msdata:Caption="BOOKING_QTY" msprop:Generator_ColumnPropNameInRow="STOCK_QTY" msprop:Generator_ColumnPropNameInTable="STOCK_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnSTOCK_QTY" msprop:Generator_UserColumnName="STOCK_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RECEIVE_DATE" msdata:Caption="FREEZING_STOCK_QTY" msprop:Generator_ColumnPropNameInRow="RECEIVE_DATE" msprop:Generator_ColumnPropNameInTable="RECEIVE_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnRECEIVE_DATE" msprop:Generator_UserColumnName="RECEIVE_DATE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MFG_DATE" msdata:Caption="FREEZING_STATUS" msprop:Generator_ColumnPropNameInRow="MFG_DATE" msprop:Generator_ColumnPropNameInTable="MFG_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnMFG_DATE" msprop:Generator_UserColumnName="MFG_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="EXPIRY_DATE" msdata:Caption="VALUE_IN_TP" msprop:Generator_ColumnPropNameInRow="EXPIRY_DATE" msprop:Generator_ColumnPropNameInTable="EXPIRY_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnEXPIRY_DATE" msprop:Generator_UserColumnName="EXPIRY_DATE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COMPANY_NAME" msprop:Generator_ColumnPropNameInRow="COMPANY_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_NAME" msprop:Generator_UserColumnName="COMPANY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_UNIT_NAME" msprop:Generator_ColumnPropNameInRow="COMPANY_UNIT_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_UNIT_NAME" msprop:Generator_UserColumnName="COMPANY_UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="STOCK_HOLDING_MONTHS" msdata:Caption="VALUE_IN_TP" msprop:Generator_ColumnPropNameInRow="STOCK_HOLDING_MONTHS" msprop:Generator_ColumnPropNameInTable="STOCK_HOLDING_MONTHSColumn" msprop:Generator_ColumnVarNameInTable="columnSTOCK_HOLDING_MONTHS" msprop:Generator_UserColumnName="STOCK_HOLDING_MONTHS" type="xs:string" minOccurs="0" />
+              <xs:element name="MONTHS_DUE_TO_EXPIRE" msprop:Generator_ColumnPropNameInRow="MONTHS_DUE_TO_EXPIRE" msprop:Generator_ColumnPropNameInTable="MONTHS_DUE_TO_EXPIREColumn" msprop:Generator_ColumnVarNameInTable="columnMONTHS_DUE_TO_EXPIRE" msprop:Generator_UserColumnName="MONTHS_DUE_TO_EXPIRE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

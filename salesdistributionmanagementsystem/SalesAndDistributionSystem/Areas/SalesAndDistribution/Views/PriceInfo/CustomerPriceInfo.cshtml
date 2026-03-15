@@ -1,0 +1,337 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Customer_SKU_Price_Mst
+@{
+    ViewData["Title"] = "Customer Wise Product Price";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)" ng-disabled="gridOptionsList.data.length<0">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/PriceInfo/List">Search</a></li>
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.CUSTOMER_PRICE_MSTID_ENCRYPTED','@Model.Mode')"></span>
+                <div class="hidea" onclick="hideportion()" style="height:25px;width:22px;float:right;cursor:pointer"><i class="fa fa-arrow-alt-circle-up hidea" style="height:25px;width:22px;float:right"></i></div>
+                <div class="showa" onclick="showportion()" style="height:25px;width:22px;float:right;display:none;cursor:pointer"><i class="fa fa-arrow-alt-circle-down showa" style="height:25px;width:22px;float:right;display:none"></i></div>
+
+                <div class="row portion" style="margin:20px">
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="COMPANY_ID">Company <sup>*</sup> </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                       name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="MRP">Customer Type</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="select2-single form-control" id="CUSTOMER_TYPE_ID" ng-change="LoadCustomerData(model)"
+                                        name="CUSTOMER_TYPE_ID" ng-model="model.CUSTOMER_TYPE_ID" style="width:100%">
+                                    <option ng-repeat="item in CustomerType" value="{{item.CUSTOMER_TYPE_ID}}" ng-selected="item.CUSTOMER_TYPE_ID == model.CUSTOMER_TYPE_ID">{{item.CUSTOMER_TYPE_NAME}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea" style="display:none">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="MRP">Customer Code<sup>*</sup></label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="CUSTOMER_CODE" type="number" class="form-control" required disabled
+                                       name="CUSTOMER_CODE" ng-model="model.CUSTOMER_CODE" placeholder="Customer Code">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="ENTRYDATE">Entry Date<sup>*</sup></label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" disabled ng-model="model.ENTRY_DATE" ng-change="CheckENDDateValidation(model) || CheckDateValidation(model)" value="" id="oneYearView">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="UNIT_ID">Customer Name<sup>*</sup></label>
+                            </div>
+                            <div class="col-md-8" ng-show="model.CUSTOMER_PRICE_MSTID>0">
+                                <select class="select2-single form-control" id="CUSTOMER_ID" ng-change="typeaheadSelectedCustomer()"
+                                        name="CUSTOMER_ID" ng-model="model.CUSTOMER_ID" style="width:100%" ng-disabled="!model.CUSTOMER_TYPE_ID">
+                                    <option ng-repeat="item in CustomerData" value="{{item.CUSTOMER_ID}}" ng-selected="item.CUSTOMER_ID == model.CUSTOMER_ID">{{item.CUSTOMER_NAME}} | {{item.CUSTOMER_CODE}} </option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-8" ng-hide="model.CUSTOMER_PRICE_MSTID>0">
+
+                                <select class="select2-single form-control" multiple ng-show="1==2" id="CUSTOMER_IDs" ng-change="typeaheadSelectedCustomer()"
+                                        name="CUSTOMER_IDs" ng-model="model.CUSTOMER_IDs" style="width:100%" ng-disabled="!model.CUSTOMER_TYPE_ID">
+                                    <option ng-repeat="item in CustomerData" value="{{item.CUSTOMER_ID}}">{{item.CUSTOMER_NAME}} | {{item.CUSTOMER_CODE}} </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="">Effect Start Date<sup>*</sup></label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" required class="form-control" ng-model="model.EFFECT_START_DATE" ng-change="CheckENDDateValidation(model) || CheckDateValidation(model)" value="" id="oneYearView">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="EMPLOYEE_PRICE">Effect End Date<sup>*</sup></label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input required type="text" class="form-control" ng-model="model.EFFECT_END_DATE" ng-change="CheckENDDateValidation(model) || CheckDateValidation(model)" value="" id="oneYearView">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="PRICE_EFFECT_DATE">Remarks</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="REMARKS" type="text" class="form-control"
+                                       name="REMARKS" ng-model="model.REMARKS" placeholder="Remarks">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom tdea">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="SPECIAL_PRICE">Status</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="CUSTOMER_STATUS" type="text" class="form-control" required disabled
+                                       name="CUSTOMER_STATUS" ng-model="model.CUSTOMER_STATUS" placeholder="Status">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <fieldset style="margin-top: 30px;">
+                    <legend style="width:220px">Product Information</legend>
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Group</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="GROUP_ID"
+                                            name="GROUP_ID" ng-model="model.GROUP_ID" style="width:100%">
+                                        <option ng-repeat="item in Groups" value="{{item.GROUP_ID}}" ng-selected="item.GROUP_ID == model.GROUP_ID">{{item.GROUP_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Brand</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" id="BRAND_ID"
+                                            name="BRAND_ID" ng-model="model.BRAND_ID" style="width:100%">
+                                        <option ng-repeat="item in Brands" value="{{item.BRAND_ID}}" ng-selected="item.BRAND_ID == model.BRAND_ID">{{item.BRAND_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Category</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" id="CATEGORY_ID"
+                                            name="CATEGORY_ID" ng-model="model.CATEGORY_ID" style="width:100%">
+                                        <option ng-repeat="item in Categories" value="{{item.CATEGORY_ID}}" ng-selected="item.CATEGORY_ID == model.CATEGORY_ID">{{item.CATEGORY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Base Product</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="BASE_PRODUCT_ID"
+                                            name="BASE_PRODUCT_ID" ng-model="model.BASE_PRODUCT_ID" style="width:100%">
+                                        <option ng-repeat="item in BaseProducts" value="{{item.BASE_PRODUCT_ID}}" ng-selected="item.BASE_PRODUCT_ID == model.BASE_PRODUCT_ID">{{item.BASE_PRODUCT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Product</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-multiple form-control" id="PRODUCT_ID" multiple
+                                            name="PRODUCT_ID" ng-model="model.PRODUCT_ID" style="width:100%">
+                                        <option ng-repeat="item in Products" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == model.SKU_ID">{{item.SKU_NAME}} | {{item.SKU_CODE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-success" ng-click="DataLoad()">Load Products</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn btn-danger" ng-click="ClearProductForm()">Reset Products</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 mb-4" style="height: 57vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 55vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+                        <div class="modal-content" style="height:1000px !important">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Transfer Receiveable Finishd Products</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="height: 75vh;">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                @*                  <button type="button" class="btn btn-primary">Save changes</button>
+                                    *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/CustomerPrice/Controller/CustomerPriceInfoCtr.js?v=14"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/CustomerPrice/Service/CustomerPriceInfoService.js?v=14"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select....",
+                allowClear: true
+            });
+
+            $(".select2-multiple").select2({
+                placeholder: "Select....",
+            });
+        });
+    </script>
+    <script>
+        function showportion(){
+            debugger
+             $('.hidea').css("display", "block");
+                $('.showa').css("display", "none");
+                $('.portion').css("height", "");
+                $('.tdea').css("display","block");
+        }
+        function hideportion(){
+                debugger
+              $('.hidea').css("display", "none");
+            $('.showa').css("display", "block");
+            $('.portion').css("height", "0px");
+                        $('.tdea').css("display","none");
+
+        }
+
+
+        //$('#txtSearchProdAssign').keypress(function (e) {
+        //    var key = e.which;
+        //    if (key == 13)
+        //    {
+        //        $('input[name = butAssignProd]').click();
+        //        return false;
+        //    }
+        //});
+
+    </script>
+}

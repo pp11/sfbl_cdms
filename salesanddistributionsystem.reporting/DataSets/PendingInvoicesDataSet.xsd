@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PendingInvoicesDataSet" targetNamespace="http://tempuri.org/PendingInvoicesDataSet.xsd" xmlns:mstns="http://tempuri.org/PendingInvoicesDataSet.xsd" xmlns="http://tempuri.org/PendingInvoicesDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PendingInvoicesDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="PendingInvoicesDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PendingInvoicesDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PendingInvoices" msprop:Generator_RowEvHandlerName="PendingInvoicesRowChangeEventHandler" msprop:Generator_RowDeletedName="PendingInvoicesRowDeleted" msprop:Generator_RowDeletingName="PendingInvoicesRowDeleting" msprop:Generator_RowEvArgName="PendingInvoicesRowChangeEvent" msprop:Generator_TablePropName="PendingInvoices" msprop:Generator_RowChangedName="PendingInvoicesRowChanged" msprop:Generator_UserTableName="PendingInvoices" msprop:Generator_RowChangingName="PendingInvoicesRowChanging" msprop:Generator_RowClassName="PendingInvoicesRow" msprop:Generator_TableClassName="PendingInvoicesDataTable" msprop:Generator_TableVarName="tablePendingInvoices">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_UserColumnName="INVOICE_DATE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_ADDRESS" msprop:Generator_ColumnPropNameInTable="CUSTOMER_ADDRESSColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_ADDRESS" msprop:Generator_UserColumnName="CUSTOMER_ADDRESS" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_ADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="INVOICE_TYPE_NAMEColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_TYPE_NAME" msprop:Generator_UserColumnName="INVOICE_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnINVOICE_TYPE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_UserColumnName="SKU_ID" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="INVOICE_QTYColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_QTY" msprop:Generator_UserColumnName="INVOICE_QTY" msprop:Generator_ColumnVarNameInTable="columnINVOICE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="RETURN_INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="RETURN_INVOICE_QTYColumn" msprop:Generator_ColumnPropNameInRow="RETURN_INVOICE_QTY" msprop:Generator_UserColumnName="RETURN_INVOICE_QTY" msprop:Generator_ColumnVarNameInTable="columnRETURN_INVOICE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="NET_INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="NET_INVOICE_QTYColumn" msprop:Generator_ColumnPropNameInRow="NET_INVOICE_QTY" msprop:Generator_UserColumnName="NET_INVOICE_QTY" msprop:Generator_ColumnVarNameInTable="columnNET_INVOICE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="DISTRIBUTION_INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="DISTRIBUTION_INVOICE_QTYColumn" msprop:Generator_ColumnPropNameInRow="DISTRIBUTION_INVOICE_QTY" msprop:Generator_UserColumnName="DISTRIBUTION_INVOICE_QTY" msprop:Generator_ColumnVarNameInTable="columnDISTRIBUTION_INVOICE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="PENDING_INVOICE_DIST_QTY" msprop:Generator_ColumnPropNameInTable="PENDING_INVOICE_DIST_QTYColumn" msprop:Generator_ColumnPropNameInRow="PENDING_INVOICE_DIST_QTY" msprop:Generator_UserColumnName="PENDING_INVOICE_DIST_QTY" msprop:Generator_ColumnVarNameInTable="columnPENDING_INVOICE_DIST_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="BONUS_QTY" msprop:Generator_ColumnPropNameInTable="BONUS_QTYColumn" msprop:Generator_ColumnPropNameInRow="BONUS_QTY" msprop:Generator_UserColumnName="BONUS_QTY" msprop:Generator_ColumnVarNameInTable="columnBONUS_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="RETURN_BONUS_QTY" msprop:Generator_ColumnPropNameInTable="RETURN_BONUS_QTYColumn" msprop:Generator_ColumnPropNameInRow="RETURN_BONUS_QTY" msprop:Generator_UserColumnName="RETURN_BONUS_QTY" msprop:Generator_ColumnVarNameInTable="columnRETURN_BONUS_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="NET_BONUS_QTY" msprop:Generator_ColumnPropNameInTable="NET_BONUS_QTYColumn" msprop:Generator_ColumnPropNameInRow="NET_BONUS_QTY" msprop:Generator_UserColumnName="NET_BONUS_QTY" msprop:Generator_ColumnVarNameInTable="columnNET_BONUS_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="DISTRIBUTION_BONUS_QTY" msprop:Generator_ColumnPropNameInTable="DISTRIBUTION_BONUS_QTYColumn" msprop:Generator_ColumnPropNameInRow="DISTRIBUTION_BONUS_QTY" msprop:Generator_UserColumnName="DISTRIBUTION_BONUS_QTY" msprop:Generator_ColumnVarNameInTable="columnDISTRIBUTION_BONUS_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="PENDING_BONUS_DIST_QTY" msprop:Generator_ColumnPropNameInTable="PENDING_BONUS_DIST_QTYColumn" msprop:Generator_ColumnPropNameInRow="PENDING_BONUS_DIST_QTY" msprop:Generator_UserColumnName="PENDING_BONUS_DIST_QTY" msprop:Generator_ColumnVarNameInTable="columnPENDING_BONUS_DIST_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="ROUTE_NAME" msprop:Generator_ColumnPropNameInTable="ROUTE_NAMEColumn" msprop:Generator_ColumnPropNameInRow="ROUTE_NAME" msprop:Generator_UserColumnName="ROUTE_NAME" msprop:Generator_ColumnVarNameInTable="columnROUTE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="DB" msprop:Generator_ColumnPropNameInTable="DBColumn" msprop:Generator_ColumnPropNameInRow="DB" msprop:Generator_UserColumnName="DB" msprop:Generator_ColumnVarNameInTable="columnDB" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="INVOICE_UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_UNIT_ID" msprop:Generator_UserColumnName="INVOICE_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnINVOICE_UNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_UserColumnName="COMPANY_ID" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PendingGift" msprop:Generator_RowEvHandlerName="PendingGiftRowChangeEventHandler" msprop:Generator_RowDeletedName="PendingGiftRowDeleted" msprop:Generator_RowDeletingName="PendingGiftRowDeleting" msprop:Generator_RowEvArgName="PendingGiftRowChangeEvent" msprop:Generator_TablePropName="PendingGift" msprop:Generator_RowChangedName="PendingGiftRowChanged" msprop:Generator_UserTableName="PendingGift" msprop:Generator_RowChangingName="PendingGiftRowChanging" msprop:Generator_RowClassName="PendingGiftRow" msprop:Generator_TableClassName="PendingGiftDataTable" msprop:Generator_TableVarName="tablePendingGift">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GIFT_ITEM_NAME" msprop:Generator_ColumnPropNameInTable="GIFT_ITEM_NAMEColumn" msprop:Generator_ColumnPropNameInRow="GIFT_ITEM_NAME" msprop:Generator_UserColumnName="GIFT_ITEM_NAME" msprop:Generator_ColumnVarNameInTable="columnGIFT_ITEM_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="GIFT_QTY" msprop:Generator_ColumnPropNameInTable="GIFT_QTYColumn" msprop:Generator_ColumnPropNameInRow="GIFT_QTY" msprop:Generator_UserColumnName="GIFT_QTY" msprop:Generator_ColumnVarNameInTable="columnGIFT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="DISTRIBUTION_GIFT_QTY" msprop:Generator_ColumnPropNameInTable="DISTRIBUTION_GIFT_QTYColumn" msprop:Generator_ColumnPropNameInRow="DISTRIBUTION_GIFT_QTY" msprop:Generator_UserColumnName="DISTRIBUTION_GIFT_QTY" msprop:Generator_ColumnVarNameInTable="columnDISTRIBUTION_GIFT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="PENDING_GIFT_QTY" msprop:Generator_ColumnPropNameInTable="PENDING_GIFT_QTYColumn" msprop:Generator_ColumnPropNameInRow="PENDING_GIFT_QTY" msprop:Generator_UserColumnName="PENDING_GIFT_QTY" msprop:Generator_ColumnVarNameInTable="columnPENDING_GIFT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

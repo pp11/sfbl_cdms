@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "User Account Relation List";
+}
+@section Styles {
+    <link href="/css/site.css" rel="stylesheet">
+}
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/UserAccountRelation/InsertOrEdit" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Entry Page</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button type="button" class="btn btn-info btn-icon-split btn-sm" ng-click="ClearForm()">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </span>
+                    <span class="text">Reset</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <!--row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <fieldset>
+                        <legend style="width:190px">Employee List</legend>
+                        <div ng-show="model.LIST_VIEW == 'Active'">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="color: #252222;height: 70vh " class="grid m-2">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/UserAccountRelation/Controller/ListCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/UserAccountRelation/Service/InsertOrEditServices.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Customer/Service/CustomerInfoServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+               $(".select2-single").select2({
+                   placeholder: "Select"
+               });
+        });
+    </script>
+}

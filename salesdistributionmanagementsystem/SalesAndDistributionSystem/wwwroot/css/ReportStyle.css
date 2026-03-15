@@ -1,0 +1,31 @@
+﻿.header {
+    text-align: center;
+    color: dimgray;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    page-break-inside: auto;
+}
+
+td, th {
+    border: 1px solid gray;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    min-width: 100px;
+    max-width: 140px;
+}
+tr {
+    page-break-after: always;
+    page-break-inside:avoid;
+
+}
+table th {
+    background-color: whitesmoke;
+    color: black;
+}
+footer{
+    margin:310px !important;
+}

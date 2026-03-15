@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TransferVsRcv" targetNamespace="http://tempuri.org/TransferVsRcv.xsd" xmlns:mstns="http://tempuri.org/TransferVsRcv.xsd" xmlns="http://tempuri.org/TransferVsRcv.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TransferVsRcv" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="TransferVsRcv" msprop:Generator_DataSetName="TransferVsRcv">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SKU_CODE" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_ID" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" msprop:Generator_UserColumnName="SKU_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_TP" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_PRODUCTION" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_PRODUCTION" msprop:Generator_ColumnPropNameInTable="RECV_PRODUCTIONColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_PRODUCTION" msprop:Generator_UserColumnName="RECV_PRODUCTION" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_PABNA" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_PABNA" msprop:Generator_ColumnPropNameInTable="RECV_PABNAColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_PABNA" msprop:Generator_UserColumnName="RECV_PABNA" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_RUPSHI" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_RUPSHI" msprop:Generator_ColumnPropNameInTable="RECV_RUPSHIColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_RUPSHI" msprop:Generator_UserColumnName="RECV_RUPSHI" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_ADHURIA" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_ADHURIA" msprop:Generator_ColumnPropNameInTable="RECV_ADHURIAColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_ADHURIA" msprop:Generator_UserColumnName="RECV_ADHURIA" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_CHITTAGONG" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_CHITTAGONG" msprop:Generator_ColumnPropNameInTable="RECV_CHITTAGONGColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_CHITTAGONG" msprop:Generator_UserColumnName="RECV_CHITTAGONG" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_DISTRIBUTOR" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_DISTRIBUTOR" msprop:Generator_ColumnPropNameInTable="RECV_DISTRIBUTORColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_DISTRIBUTOR" msprop:Generator_UserColumnName="RECV_DISTRIBUTOR" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_OTHERS" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_OTHERS" msprop:Generator_ColumnPropNameInTable="RECV_OTHERSColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_OTHERS" msprop:Generator_UserColumnName="RECV_OTHERS" type="xs:string" minOccurs="0" />
+              <xs:element name="RECV_MISC" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="RECV_MISC" msprop:Generator_ColumnPropNameInTable="RECV_MISCColumn" msprop:Generator_ColumnVarNameInTable="columnRECV_MISC" msprop:Generator_UserColumnName="RECV_MISC" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_PRODUCTION" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_PRODUCTION" msprop:Generator_ColumnPropNameInTable="TRANS_PRODUCTIONColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_PRODUCTION" msprop:Generator_UserColumnName="TRANS_PRODUCTION" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_PABNA" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_PABNA" msprop:Generator_ColumnPropNameInTable="TRANS_PABNAColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_PABNA" msprop:Generator_UserColumnName="TRANS_PABNA" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_RUPSHI" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_RUPSHI" msprop:Generator_ColumnPropNameInTable="TRANS_RUPSHIColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_RUPSHI" msprop:Generator_UserColumnName="TRANS_RUPSHI" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_ADHURIA" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_ADHURIA" msprop:Generator_ColumnPropNameInTable="TRANS_ADHURIAColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_ADHURIA" msprop:Generator_UserColumnName="TRANS_ADHURIA" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_CHITTAGONG" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_CHITTAGONG" msprop:Generator_ColumnPropNameInTable="TRANS_CHITTAGONGColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_CHITTAGONG" msprop:Generator_UserColumnName="TRANS_CHITTAGONG" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_DISTRIBUTOR" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_DISTRIBUTOR" msprop:Generator_ColumnPropNameInTable="TRANS_DISTRIBUTORColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_DISTRIBUTOR" msprop:Generator_UserColumnName="TRANS_DISTRIBUTOR" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_OTHERS" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_OTHERS" msprop:Generator_ColumnPropNameInTable="TRANS_OTHERSColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_OTHERS" msprop:Generator_UserColumnName="TRANS_OTHERS" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANS_MISC" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInRow="TRANS_MISC" msprop:Generator_ColumnPropNameInTable="TRANS_MISCColumn" msprop:Generator_ColumnVarNameInTable="columnTRANS_MISC" msprop:Generator_UserColumnName="TRANS_MISC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,213 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Inventory.DEPOT_REQUISITION_RCV_MST
+@{
+    ViewData["Title"] = "Requisition Receive";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/RequisitionReceive/List">Search</a></li>
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Requisition Receive Info</legend>
+
+                    <div class="row" style="margin:20px">
+
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Requisition No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (Model.MST_ID_ENCRYPTED == "0")
+                                    {
+                                        <select class="select2-single form-control" id="REQUISITION_NO" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'" *@
+                                                name="DISPATCH_REQ_ID" ng-model="model.DISPATCH_REQ_ID" style="width:100%" ng-change="LoadRequisitionDtlData()">
+
+                                            <option ng-repeat="item in RequisitionList" ng-selected="item.DISPATCH_REQ_ID == model.DISPATCH_REQ_ID" value="{{item.DISPATCH_REQ_ID}}">{{item.REQUISITION_NO}} Dispatch No: {{item.DISPATCH_NO}}</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <input id="REQUISITION_NO" type="text" class="form-control" required disabled
+                                               name="REQUISITION_NO" ng-model="model.REQUISITION_NO" placeholder="">
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Receive No</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input id="RECEIVE_NO" type="text" class="form-control" required disabled
+                                           name="RECEIVE_NO" ng-model="model.RECEIVE_NO" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Receive Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RECEIVE_DATE" type="text" disabled class="form-control" required
+                                           name="RECEIVE_DATE" ng-model="model.RECEIVE_DATE" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Issue No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ISSUE_NO" type="text" class="form-control" required disabled
+                                           name="ISSUE_NO" ng-model="model.ISSUE_NO" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Issue Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ISSUE_DATE" type="text" class="form-control" required disabled
+                                           name="ISSUE_DATE" ng-model="model.ISSUE_DATE" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Issue Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ISSUE_UNIT_NAME" type="text" class="form-control" required disabled
+                                           name="ISSUE_UNIT_NAME" ng-model="model.ISSUE_UNIT_NAME" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Receive Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REQUISITION_UNIT_NAME" type="text" class="form-control" required disabled
+                                           name="REQUISITION_UNIT_NAME" ng-model="model.REQUISITION_UNIT_NAME" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Receive Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RECEIVE_AMOUNT" type="number" class="form-control" required disabled
+                                           name="RECEIVE_AMOUNT" ng-model="model.RECEIVE_AMOUNT" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Issue Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ISSUE_AMOUNT" type="number" class="form-control" required disabled
+                                           name="ISSUE_AMOUNT" ng-model="model.ISSUE_AMOUNT" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4" hidden>
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8" hidden>
+                                    <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="LoadUnitData()">
+
+                                        <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:300px">Requisition Receive Detail Info</legend>
+                    <div class="row" style="margin:20px">
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/RequisitionReceive/Controller/RequisitionReceiveCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/RequisitionReceive/Service/RequisitionReceiveService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CustomerPriceDataSet" targetNamespace="http://tempuri.org/CustomerPriceDataSet.xsd" xmlns:mstns="http://tempuri.org/CustomerPriceDataSet.xsd" xmlns="http://tempuri.org/CustomerPriceDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;Persist Security Info=True;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="silsqadb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT M.CUSTOMER_CODE,
+         M.CUSTOMER_ID,
+         M.CUSTOMER_PRICE_MSTID,
+         TO_DATE(M.EFFECT_END_DATE, 'DD/MM/YYYY') EFFECT_END_DATE,
+         TO_DATE(M.EFFECT_START_DATE, 'DD/MM/YYYY') EFFECT_START_DATE,
+         M.ENTERED_DATE,
+         M.REMARKS,
+         M.STATUS,
+         D.ADD_COMMISSION1,
+         D.ADD_COMMISSION2,
+         D.COMMISSION_FLAG,
+         D.COMMISSION_TYPE,
+         D.COMMISSION_VALUE,
+         D.CUSTOMER_PRICE_DTLID,
+         D.PRICE_FLAG,
+         D.SKU_CODE,
+         FN_SKU_NAME(D.COMPANY_ID, D.SKU_ID) SKU_NAME,
+         FN_PACK_SIZE(D.COMPANY_ID, D.SKU_ID) PACK_SIZE,
+         D.SKU_PRICE,
+         D.STATUS AS EXPR1,
+         C.COMPANY_NAME,
+         U.UNIT_NAME,
+         R.CUSTOMER_NAME,
+         '' CUSTOMER_TYPE_NAME
+    FROM CUSTOMER_SKU_PRICE_MST M,
+         CUSTOMER_INFO R,
+         CUSTOMER_SKU_PRICE_DTL D,
+         PRODUCT_INFO P,
+         STL_ERP_SCS.COMPANY_INFO C,
+         STL_ERP_SCS.COMPANY_INFO U
+   WHERE R.CUSTOMER_ID = M.CUSTOMER_ID
+         AND D.CUSTOMER_PRICE_MSTID = M.CUSTOMER_PRICE_MSTID
+         AND P.SKU_ID = D.SKU_ID
+         AND C.COMPANY_ID = M.COMPANY_ID
+         AND C.UNIT_ID = M.UNIT_ID
+         AND U.COMPANY_ID = M.COMPANY_ID
+   ORDER BY M.CUSTOMER_PRICE_MSTID, D.CUSTOMER_PRICE_DTLID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_ID" DataSetColumn="CUSTOMER_ID" />
+              <Mapping SourceColumn="CUSTOMER_PRICE_MSTID" DataSetColumn="CUSTOMER_PRICE_MSTID" />
+              <Mapping SourceColumn="EFFECT_END_DATE" DataSetColumn="EFFECT_END_DATE" />
+              <Mapping SourceColumn="EFFECT_START_DATE" DataSetColumn="EFFECT_START_DATE" />
+              <Mapping SourceColumn="ENTERED_DATE" DataSetColumn="ENTERED_DATE" />
+              <Mapping SourceColumn="REMARKS" DataSetColumn="REMARKS" />
+              <Mapping SourceColumn="STATUS" DataSetColumn="STATUS" />
+              <Mapping SourceColumn="ADD_COMMISSION1" DataSetColumn="ADD_COMMISSION1" />
+              <Mapping SourceColumn="ADD_COMMISSION2" DataSetColumn="ADD_COMMISSION2" />
+              <Mapping SourceColumn="COMMISSION_FLAG" DataSetColumn="COMMISSION_FLAG" />
+              <Mapping SourceColumn="COMMISSION_TYPE" DataSetColumn="COMMISSION_TYPE" />
+              <Mapping SourceColumn="COMMISSION_VALUE" DataSetColumn="COMMISSION_VALUE" />
+              <Mapping SourceColumn="CUSTOMER_PRICE_DTLID" DataSetColumn="CUSTOMER_PRICE_DTLID" />
+              <Mapping SourceColumn="PRICE_FLAG" DataSetColumn="PRICE_FLAG" />
+              <Mapping SourceColumn="SKU_CODE" DataSetColumn="SKU_CODE" />
+              <Mapping SourceColumn="SKU_NAME" DataSetColumn="SKU_NAME" />
+              <Mapping SourceColumn="PACK_SIZE" DataSetColumn="PACK_SIZE" />
+              <Mapping SourceColumn="SKU_PRICE" DataSetColumn="SKU_PRICE" />
+              <Mapping SourceColumn="EXPR1" DataSetColumn="EXPR1" />
+              <Mapping SourceColumn="COMPANY_NAME" DataSetColumn="COMPANY_NAME" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="CUSTOMER_TYPE_NAME" DataSetColumn="CUSTOMER_TYPE_NAME" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CustomerPriceDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="CustomerPriceDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CustomerPriceDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_ID" msprop:Generator_UserColumnName="CUSTOMER_ID" msprop:Generator_ColumnPropNameInTable="CUSTOMER_IDColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_ID" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_ID" type="xs:decimal" />
+              <xs:element name="CUSTOMER_PRICE_MSTID" msprop:Generator_UserColumnName="CUSTOMER_PRICE_MSTID" msprop:Generator_ColumnPropNameInTable="CUSTOMER_PRICE_MSTIDColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_PRICE_MSTID" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_PRICE_MSTID" type="xs:decimal" />
+              <xs:element name="EFFECT_END_DATE" msprop:Generator_UserColumnName="EFFECT_END_DATE" msprop:Generator_ColumnPropNameInTable="EFFECT_END_DATEColumn" msprop:Generator_ColumnPropNameInRow="EFFECT_END_DATE" msprop:Generator_ColumnVarNameInTable="columnEFFECT_END_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EFFECT_START_DATE" msprop:Generator_UserColumnName="EFFECT_START_DATE" msprop:Generator_ColumnPropNameInTable="EFFECT_START_DATEColumn" msprop:Generator_ColumnPropNameInRow="EFFECT_START_DATE" msprop:Generator_ColumnVarNameInTable="columnEFFECT_START_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ENTERED_DATE" msprop:Generator_UserColumnName="ENTERED_DATE" msprop:Generator_ColumnPropNameInTable="ENTERED_DATEColumn" msprop:Generator_ColumnPropNameInRow="ENTERED_DATE" msprop:Generator_ColumnVarNameInTable="columnENTERED_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_UserColumnName="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_ColumnVarNameInTable="columnREMARKS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STATUS" msprop:Generator_UserColumnName="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnVarNameInTable="columnSTATUS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ADD_COMMISSION1" msprop:Generator_UserColumnName="ADD_COMMISSION1" msprop:Generator_ColumnPropNameInTable="ADD_COMMISSION1Column" msprop:Generator_ColumnPropNameInRow="ADD_COMMISSION1" msprop:Generator_ColumnVarNameInTable="columnADD_COMMISSION1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ADD_COMMISSION2" msprop:Generator_UserColumnName="ADD_COMMISSION2" msprop:Generator_ColumnPropNameInTable="ADD_COMMISSION2Column" msprop:Generator_ColumnPropNameInRow="ADD_COMMISSION2" msprop:Generator_ColumnVarNameInTable="columnADD_COMMISSION2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COMMISSION_FLAG" msprop:Generator_UserColumnName="COMMISSION_FLAG" msprop:Generator_ColumnPropNameInTable="COMMISSION_FLAGColumn" msprop:Generator_ColumnPropNameInRow="COMMISSION_FLAG" msprop:Generator_ColumnVarNameInTable="columnCOMMISSION_FLAG">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMMISSION_TYPE" msprop:Generator_UserColumnName="COMMISSION_TYPE" msprop:Generator_ColumnPropNameInTable="COMMISSION_TYPEColumn" msprop:Generator_ColumnPropNameInRow="COMMISSION_TYPE" msprop:Generator_ColumnVarNameInTable="columnCOMMISSION_TYPE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMMISSION_VALUE" msprop:Generator_UserColumnName="COMMISSION_VALUE" msprop:Generator_ColumnPropNameInTable="COMMISSION_VALUEColumn" msprop:Generator_ColumnPropNameInRow="COMMISSION_VALUE" msprop:Generator_ColumnVarNameInTable="columnCOMMISSION_VALUE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CUSTOMER_PRICE_DTLID" msprop:Generator_UserColumnName="CUSTOMER_PRICE_DTLID" msprop:Generator_ColumnPropNameInTable="CUSTOMER_PRICE_DTLIDColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_PRICE_DTLID" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_PRICE_DTLID" type="xs:decimal" />
+              <xs:element name="PRICE_FLAG" msprop:Generator_UserColumnName="PRICE_FLAG" msprop:Generator_ColumnPropNameInTable="PRICE_FLAGColumn" msprop:Generator_ColumnPropNameInRow="PRICE_FLAG" msprop:Generator_ColumnVarNameInTable="columnPRICE_FLAG">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_PRICE" msprop:Generator_UserColumnName="SKU_PRICE" msprop:Generator_ColumnPropNameInTable="SKU_PRICEColumn" msprop:Generator_ColumnPropNameInRow="SKU_PRICE" msprop:Generator_ColumnVarNameInTable="columnSKU_PRICE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EXPR1" msprop:Generator_UserColumnName="EXPR1" msprop:Generator_ColumnPropNameInTable="EXPR1Column" msprop:Generator_ColumnPropNameInRow="EXPR1" msprop:Generator_ColumnVarNameInTable="columnEXPR1">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMPANY_NAME" msprop:Generator_UserColumnName="COMPANY_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_NAMEColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_NAME" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_TYPE_NAME" msprop:Generator_ColumnPropNameInRow="CUSTOMER_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_TYPE_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_TYPE_NAME" msprop:Generator_UserColumnName="CUSTOMER_TYPE_NAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:CUSTOMER_PRICE_MSTID" />
+      <xs:field xpath="mstns:CUSTOMER_PRICE_DTLID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

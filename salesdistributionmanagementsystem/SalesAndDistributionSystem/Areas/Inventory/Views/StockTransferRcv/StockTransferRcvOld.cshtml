@@ -1,0 +1,179 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Inventory.DEPOT_STOCK_TRANS_RCV_MST
+@{
+    ViewData["Title"] = "Stock Transfer Receive";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/StockTransferRcv/List">Search</a></li>
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Stock Trans. Recv. Info</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (Model.MST_ID_ENCRYPTED == "0")
+                                    {
+                                        <select class="select2-single form-control" id="TRANSFER_NO" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'" *@
+                                                name="TRANSFER_NO" ng-model="model.TRANSFER_NO" style="width:100%" ng-change="LoadTransferDtlData()">
+
+                                            <option ng-repeat="item in TransferList" ng-selected="item.TRANSFER_NO == model.TRANSFER_NO" value="{{item.TRANSFER_NO}}">{{item.TRANSFER_NO}}</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <input id="TRANSFER_NO" type="text" class="form-control" required disabled
+                                               name="TRANSFER_NO" ng-model="model.TRANSFER_NO" placeholder="TRANSFER NO">
+                                    }
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TRANSFER_DATE" type="text" disabled class="form-control" required
+                                           name="TRANSFER_DATE" ng-model="model.TRANSFER_DATE" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer Receive No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TRANS_RCV_NO" type="text" class="form-control"
+                                           disabled name="TRANS_RCV_NO" ng-model="model.TRANS_RCV_NO" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer Receive Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+
+
+                                    <input type="text" class="form-control" ng-model="model.TRANS_RCV_DATE" value="" disabled id="oneYearView">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Transfer Unit</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <select class="select2-single form-control" id="TRANSFER_UNIT_ID" disabled
+                                            name="TRANSFER_UNIT_ID" ng-model="model.TRANSFER_UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.TRANSFER_UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Receive Unit</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <select class="select2-single form-control" id="TRANS_RCV_UNIT_ID"
+                                            name="TRANS_RCV_UNIT_ID" ng-model="model.TRANS_RCV_UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.TRANS_RCV_UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>*@
+
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Transfer Receive Detail</legend>
+
+                    <div class="row" style="margin:20px">
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scrpts {
+    <script src="~/ScriptsNg/Inventory/StockTransferRcv/Controller/StockTransferRcvCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/StockTransferRcv/Service/StockTransferRcvService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+}

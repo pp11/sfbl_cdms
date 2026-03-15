@@ -1,0 +1,227 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Inventory.DEPOT_STOCK_TRANSFER_MST
+@{
+    ViewData["Title"] = "Stock Transfer";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .ui-grid-header-cell .ui-grid-cell-contents {
+        height: 48px;
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: visible;
+    }
+
+    .ui-grid-footer-cell .ui-grid-cell-contents {
+        white-space: normal;
+        font-size: 11px; /* Adjust the font size value as needed */
+        font-family: 'Bahnschrift Condensed', sans-serif;
+    }
+
+    .ui-grid-cell input {
+        background-color: inherit;
+    }
+
+</style>
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/StockTransfer/List">Search</a></li>
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body p-0">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Stock Transfer Info</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer No</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input id="TRANSFER_NO" type="text" class="form-control" required disabled
+                                           name="TRANSFER_NO" ng-model="model.TRANSFER_NO" placeholder="Transfer No">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Transfer Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TRANSFER_DATE" type="text" disabled class="form-control" required
+                                           name="TRANSFER_DATE" ng-model="model.TRANSFER_DATE" autocomplete="off">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Ref No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REF_NO" type="text" class="form-control" required
+                                           name="REF_NO" ng-model="model.REF_NO" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Ref Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" ng-model="model.REF_DATE" value="" id="oneYearView">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Total Weight</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TOTAL_WEIGHT" type="number" class="form-control" required disabled
+                                           name="TOTAL_WEIGHT" ng-model="model.TOTAL_WEIGHT">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Total Volume</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="Total_Volume" type="number" class="form-control" required disabled
+                                           name="TOTAL_VOLUME" ng-model="model.TOTAL_VOLUME">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="UNIT_ID">Transfer Unit</label>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <select class="select2-single form-control" id="TRANSFER_UNIT_ID" disabled
+                                            name="TRANSFER_UNIT_ID" ng-model="model.TRANSFER_UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.TRANSFER_UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="UNIT_ID">Receive Unit</label>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <select class="select2-single form-control" id="TRANS_RCV_UNIT_ID"
+                                            name="TRANS_RCV_UNIT_ID" ng-model="model.TRANS_RCV_UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.TRANS_RCV_UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Stock Transfer Detail</legend>
+
+                    <div class="row m-1">
+                        <div class="col-lg-12 mb-4" style="height: 47vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 45vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/StockTransfer/Controller/StrockTransferCtr.js?v=3"></script>
+    <script src="~/ScriptsNg/Inventory/StockTransfer/Service/StockTransferService.js?v=3"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+}

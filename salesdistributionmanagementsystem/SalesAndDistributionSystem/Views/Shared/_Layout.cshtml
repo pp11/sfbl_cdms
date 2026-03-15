@@ -1,0 +1,232 @@
+﻿@using System.Text.Json
+@{
+    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+    sw.Start();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/design/img/logo/Logo.png" rel="icon">
+    <title>CDMS | @ViewData["Title"]</title>
+    <!-- Font Awesome Free 5.8.2 CSS -->
+    <link href="~/Design/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Bootstrap v4.3.1 -->
+    <link href="~/Design/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
+    <!-- Select2 -->
+    <link href="~/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap DatePicker -->
+    <link href="~/Design/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Sciactive PNotify Custom css-->
+    <link href="~/ContentNg/css/pnotify/pnotify.custom.min.css" rel="stylesheet" />
+    <!--Bootstrap FileUpload v2.3.0-j4 css-->
+    <link href="/ContentNg/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet" />
+    <!--------------------------------Confusion---------------------------------------------------------->
+    @*<link type="text/css" rel="stylesheet" href="/ContentNg/custom-css/webclient_extra.css">
+    <link type="text/css" rel="stylesheet" href="/ContentNg/custom-css/webclient_layout.css">
+    <link type="text/css" rel="stylesheet" href="/ContentNg/custom-css/webclient.css">*@
+    <link href="~/contentng/custom-css/bundle.min.css" rel="stylesheet" />
+    <!--------------------------------Confusion---------------------------------------------------------->
+    <!-- RuangAdmin CSS -->
+    <link href="~/Design/css/ruang-admin.min.css" rel="stylesheet">
+    <!--ui-grid - v4.12.4 css-->
+    <link href="~/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+    <!--Tree manue-->
+    <link href="~/listree-0.0.6/package/dist/listree.min.css" rel="stylesheet" />
+    <!--Custom  CSS-->
+    <link href="~/contentng/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <partial name="~/Views/Shared/_RefLinks.cshtml" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body id="page-top"  class="body_resize_show @(Context.Request.Cookies["page-top"] == "" ? "sidebar-toggled" : Context.Request.Cookies["page-top"])">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-light accordion nav_side_show @(Context.Request.Cookies["accordionSidebar"] == "" ? "toggled" : Context.Request.Cookies["accordionSidebar"])" id="accordionSidebar">
+            <partial name="~/Views/Shared/_SideMenuBar.cshtml" />
+        </ul>
+        <!-- Sidebar -->
+        <!--Body Part-->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <nav class="navbar navbar-expand navbar-light bg-navbar topbar static-top">
+                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="../Design/#" id="searchDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                 aria-labelledby="searchDropdown">
+                                <form class="navbar-search">
+
+                                    <div class="input-group">
+                                        <input type="text" autocomplete="off" id="txt_search" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                                               aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <ul id="searchResult" style="list-style:none"></ul>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="topbar-divider d-none d-sm-block"></li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="fw-500">Associated With : @User.Claims.FirstOrDefault(x => x.Type == "UnitName").Value</div>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="fw-500"> Role : @User.Claims.FirstOrDefault(x => x.Type == "RoleNames").Value</div>
+                            </a>
+                        </li>
+                        <li class="topbar-divider d-none d-sm-block"></li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <form name="formNotificationView">
+                                <a class="nav-link dropdown-toggle" href="../Design/#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw" style="height:2rem;"></i>
+                                    <span class="badge badge-primary badge-counter" id="Notification_Count" style="font-size:100% !important; background-color:black;">0</span>
+                                </a>
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="alertsDropdown">
+                                    <div id="Notification_body" style="height:300px;overflow-y:auto;font-size:12px">
+                                    </div>
+                                    <div class="row nomargin">
+                                        <div class="col-6">
+                                            <a class="dropdown-item text-center small @*text-gray-500*@" onclick="ViewedByUserId()">Clear All</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a class="dropdown-item text-center small @*text-gray-500*@" onclick="ViewAllByUserId()">See All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="../Design/#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle" src="/Design/img/boy.png" style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white" id="userName">@User.Claims.FirstOrDefault(x => x.Type == "UserName").Value</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="../Design/#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="../Design/#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="/Security/UserLog/activitylog">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/Security/Login/Logout">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- TopBar -->
+                @RenderBody()
+            </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-light">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            copyright &copy; <script>document.write(new Date().getFullYear());</script> - developed by
+                            <b><a href="#" target="_blank">Square InformatiX Ltd.</a></b> &emsp;&emsp;
+                        </span>
+                        <span>
+                            @{
+                                <strong class="text-bold font-black pull-right">Response: @(Math.Round(sw.Elapsed.TotalSeconds, 4))s </strong>
+                                sw.Stop();
+                            }
+                        </span>
+                        <span>
+                            &emsp;&emsp;
+                            <strong class="text-bold font-black pull-right">Version: 1.0.0</strong>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+        </div>
+    </div>
+    <!-- scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- jQuery v3.4.1-->
+    <script src="~/Design/vendor/jquery/jquery.min.js"></script>
+    <!--privious library <script src="/Scripts/jquery-3.3.1.min.js"></script>-->
+    <!-- Font Awesome Free 5.8.2 JS -->
+    <script src="~/design/vendor/fontawesome-free/js/all.min.js"></script>
+    <script src="~/Design/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="~/Design/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- RuangAdmin Javascript -->
+    <script src="~/Design/js/ruang-admin.js"></script>
+    <!-- Scrolling TO Up -->
+    <script src="~/Design/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/listree-0.0.6/package/dist/listree.umd.min.js"></script>
+    <!--AngularJS v1.8.2-->
+    <script src="~/angular/angular.min.js"></script>
+    <!--AngularJS file upload directives and services-->
+    <script src="~/angular-ui-grid/grunt-scripts/ng-file-upload.min.js"></script>
+    <!-- ui-grid - v4.12.4 JS-->
+    <script src="~/angular-ui-grid/ui-grid.min.js"></script>
+    <!--AngularJS module & Custom Directives -->
+    <script src="~/ScriptsNg/Module/app.js"></script>
+    <script src="~/ScriptsNg/Directives/select2.js"></script>
+    <script src="~/ScriptsNg/Directives/datepicker.js"></script>
+    <script src="~/ScriptsNg/Services/notificationService.js"></script>
+    <script src="~/ScriptsNg/Directives/enterpress.js"></script>
+    <script src="~/ScriptsNg/Directives/keyprss_focus_event.js"></script>
+    <script src="~/ScriptsNg/Directives/stringtonumber.js"></script>
+    <script src="~/ScriptsNg/Directives/disableButton.js?v=11"></script>
+    <!--------------------END------------------------->
+    <!--AngularJS module for touch events and helpers for touch-enabled devices.-->
+    <script src="~/angular-ui-grid/grunt-scripts/angular-touch.min.js"></script>
+    <!--ngAnimate module provides support for CSS-based animations (keyframes and transitions)-->
+    <script src="~/angular-ui-grid/grunt-scripts/angular-animate.min.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/angular-aria.min.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/csv.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/pdfmake.min.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/vfs_fonts.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/lodash.min.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/jszip.min.js"></script>
+    <script src="~/angular-ui-grid/grunt-scripts/excel-builder.dist.min.js"></script>
+    <!---Angular directives for Bootstrap--use in module as ui.bootstrap-->
+    <script src="~/ContentNg/js/ui-bootstrap/ui-bootstrap-tpls.js.js"></script>
+    <!-- Sciactive PNotify Custom JS-->
+    <script src="~/ContentNg/js/pnotify/pnotify.custom.js"></script>
+    <!-- both are same just color change<script src="~/Scripts/Custom-angular-js.js"></script>-->
+    <!-- Sciactive PNotify END-->
+    <!--Bootstrap FileUpload v2.3.0-j4 javascript-->
+    <script src="/ContentNg/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/site.js?v=ridwanSL1"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,295 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Order_Mst
+@{
+    ViewData["Title"] = "Sales Order";
+
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/SalesInvoice/InsertOrEdit">Back</a></li>
+
+
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.ORDER_MST_ID_ENCRYPTED')"></span>
+
+                <fieldset>
+                    <legend style="width:220px">Sales Invoice Entry</legend>
+
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Invoice Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="COMPANY_ID"
+                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" style="display:none">
+
+                                        <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                    </select>
+
+                                    <input id="UNIT_ID" ng-disabled="true" hidden type="text" class="form-control" required
+                                           name="UNIT_ID" ng-model="model.UNIT_ID">
+
+                                    <input id="UNIT_NAME" ng-disabled="true" type="text" class="form-control" required
+                                           name="UNIT_NAME" ng-model="model.UNIT_NAME">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_TYPE">Order Type</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="ORDER_TYPE" disabled
+                                            name="ORDER_TYPE" ng-model="model.ORDER_TYPE" style="width:100%">
+
+                                        <option ng-repeat="item in InvoiceTypes" value="{{item.INVOICE_TYPE_CODE}}" ng-selected="item.INVOICE_TYPE_NAME == model.ORDER_TYPE">{{item.INVOICE_TYPE_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_STATUS">Order Status</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="ORDER_STATUS" disabled
+                                            name="ORDER_STATUS" ng-model="model.ORDER_STATUS" style="width:100%">
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.REGION_AREA_MST_STATUS">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_NO">Order No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ORDER_NO" ng-disabled="true" type="text" class="form-control"
+                                           name="ORDER_NO" ng-model="model.ORDER_NO">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_DATE">Order Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ORDER_DATE" ng-disabled="true" type="text" class="form-control"
+                                           name="ORDER_DATE" value="" ng-model="model.ORDER_DATE">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">Delivery Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" disabled autocomplete="off" class="form-control" ng-model="model.DELIVERY_DATE" value="" id="DELIVERY_DATE">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_ID">Customer  </label>
+                                </div>
+                                <div class="col-md-10">
+                                    <select class="select2-single form-control" id="CUSTOMER_ID" disabled
+                                            name="CUSTOMER_ID" ng-model="model.CUSTOMER_ID" style="width:100%" ng-change="OnCustomerSelection()">
+
+                                        <option ng-repeat="item in Customers" ng-selected="item.CUSTOMER_ID == model.CUSTOMER_ID" value="{{item.CUSTOMER_ID}}">{{item.CUSTOMER_NAME}} | {{item.CUSTOMER_CODE}} </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_ADDRESS">Address</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_ADDRESS" ng-disabled="true" type="text" class="form-control" required
+                                           name="CUSTOMER_ADDRESS" ng-model="model.CUSTOMER_ADDRESS">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MARKET_NAME">Market</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="MARKET_NAME" ng-disabled="true" type="text" class="form-control" required
+                                           name="MARKET_NAME" ng-model="model.MARKET_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PAYMENT_MODE">Payment Mode</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PAYMENT_MODE" disabled
+                                            name="PAYMENT_MODE" ng-model="model.PAYMENT_MODE" style="width:100%">
+
+                                        <option ng-repeat="item in PaymentMode" ng-selected="item.PAYMENT_MODE == model.PAYMENT_MODE" value="{{item.PAYMENT_MODE}}">{{item.PAYMENT_MODE}} </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REGION_CODE">Rep Claim No.</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="REPLACE_CLAIM_NO"
+                                            name="REPLACE_CLAIM_NO" ng-model="model.REPLACE_CLAIM_NO" disabled style="width:100%">
+
+                                        <option ng-repeat="item in Regions" ng-selected="item.REPLACE_CLAIM_NO == model.REPLACE_CLAIM_NO" value="{{item.REPLACE_CLAIM_NO}}">{{item.REPLACE_CLAIM_NO}} </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="EFFECT_START_DATE">Order Amt</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <input id="ORDER_AMOUNT" ng-disabled="true" type="text" class="form-control" required
+                                           name="ORDER_AMOUNT" ng-model="model.ORDER_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="REMARKS" disabled type="text" class="form-control"
+                                           name="REMARKS" ng-model="model.REMARKS">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" style="height: 57vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body" ng-show="model.ORDER_MST_ID > 1 && model.ORDER_STATUS == 'Active' && gridOptionsListAdj.data.length>0">
+
+            <fieldset>
+                <legend style="width:240px">Adjustment List</legend>
+                <div class="row" style="height: 57vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListAdj" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+
+</div>
+@section Scripts {
+
+    <script src="~/ScriptsNg/SalesAndDistribution/RepClaim/Controller/InsertOrEditCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/RepClaim/Service/InsertOrEditServices.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Region/Service/RegionInfoServices.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Area/Service/AreaInfoServices.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/OrderAdjustment/Service/AdjustmentServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+
+             $(".select2-single").select2({
+               placeholder: "Select",
+
+           });
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,84 @@
+﻿@using SalesAndDistributionSystem.Domain.Models.ViewModels.SalesAndDistributionSystem
+@model SalesAndDistributionSystem.Domain.Common.ReportDataGenerator
+@{
+    Layout = null;
+    string ReportID = "";
+    ProductReportParameters reportParameters = new ProductReportParameters();
+    if (ViewBag.ReportParameters != null)
+    {
+        reportParameters = ViewBag.ReportParameters;
+        ReportID = ViewBag.ReportId;
+    }
+}
+<html>
+<head>
+    <link href="/css/ReportStyle.css" rel="stylesheet" />
+
+    <link href="/Design/img/logo/logo.png" rel="icon">
+    <link href="/Design/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/Design/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Design/css/ruang-admin.min.css" rel="stylesheet">
+    <link href="/Design/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!--Angular References-->
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <style>
+        body {
+            zoom: 67%;
+        }
+
+        table {
+            width: 98% !important;
+        }
+
+        .header {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent" style="width: 100%;
+    background-color: #dcdcfa;
+    padding: 10px;
+    height: 64px;">
+        <div id="hover-content" style="right:0;float:right;margin-right:20px">
+            <input style="display:none" id="COMPANY_ID" value="@reportParameters.BRAND_ID" />
+            <input style="display:none" id="BASE_PRODUCT_ID" value="@reportParameters.BASE_PRODUCT_ID" />
+            <input style="display:none" id="BRAND_ID" value="@reportParameters.BRAND_ID" />
+            <input style="display:none" id="CATEGORY_ID" value="@reportParameters.CATEGORY_ID" />
+            <input style="display:none" id="GROUP_ID" value="@reportParameters.GROUP_ID" />
+            <input style="display:none" id="PRIMARY_PRODUCT_ID" value="@reportParameters.PRIMARY_PRODUCT_ID" />
+            <input style="display:none" id="PRODUCT_SEASON_ID" value="@reportParameters.PRODUCT_SEASON_ID" />
+            <input style="display:none" id="PRODUCT_TYPE_ID" value="@reportParameters.PRODUCT_TYPE_ID" />
+            <input style="display:none" id="UNIT_ID" value="@reportParameters.UNIT_ID" />
+            <input style="display:none" id="reportIdEncryptedSelected" value="@ReportID" />
+            <input style="display:none" id="companyId" value="@ViewBag.companyId" />
+            <input style="display:none" id="IsLogoApplicable" value="@ViewBag.IsLogoApplicable" />
+            <input style="display:none" id="IsCompanyApplicable" value="@ViewBag.IsCompanyApplicable" />
+
+
+            <button onclick="GetPdfView()" style="margin-left:5px;font-size:20px" class="btn btn-sm btn-primary">PDF Report</button><button onclick="GetExcel()" style="margin-left:5px;font-size:20px" class="btn btn-sm btn-primary">Excel File</button>
+        </div>
+    </div>
+    @Html.Raw(Model.HtmlContentData)
+
+
+    <script>
+           function GetPdfView() {
+            debugger
+            var color = $('#ReportColor').val();
+            var IsLogoApplicable = $('#IsLogoApplicable').val();
+            var IsCompanyApplicable = $('#IsCompanyApplicable').val();
+            var href = "/SalesAndDistribution/Report/CreatePDF?ReportId=" + $('#reportIdEncryptedSelected').val() + "&Color=" +  $('#color').val()   + "&IsLogoApplicable=" +  $('#IsLogoApplicable').val()  + "&IsCompanyApplicable=" + $('#IsCompanyApplicable').val()  + "&BRAND_ID=" + $('#BRAND_ID').val()   + "&CATEGORY_ID=" + $('#CATEGORY_ID').val() + "&PRIMARY_PRODUCT_ID=" +  $('#PRIMARY_PRODUCT_ID').val() + "&BASE_PRODUCT_ID=" + $('#BASE_PRODUCT_ID').val() + "&PRODUCT_TYPE_ID=" +  $('#PRODUCT_TYPE_ID').val()  + "&UNIT_ID=" + $('#UNIT_ID').val() + "&PRODUCT_SEASON_ID=" +  $('#PRODUCT_SEASON_ID').val() + "&GROUP_ID=" + $('#GROUP_ID').val();
+            window.open(href, '_blank');
+        }
+          function GetExcel() {
+            var href = "/SalesAndDistribution/Report/ReportExcel?ReportId="  + $('#reportIdEncryptedSelected').val() + "&BRAND_ID=" + $('#BRAND_ID').val()   + "&CATEGORY_ID=" + $('#CATEGORY_ID').val() + "&PRIMARY_PRODUCT_ID=" +  $('#PRIMARY_PRODUCT_ID').val() + "&BASE_PRODUCT_ID=" + $('#BASE_PRODUCT_ID').val() + "&PRODUCT_TYPE_ID=" +  $('#PRODUCT_TYPE_ID').val()  + "&UNIT_ID=" + $('#UNIT_ID').val() + "&PRODUCT_SEASON_ID=" +  $('#PRODUCT_SEASON_ID').val() + "&GROUP_ID=" + $('#GROUP_ID').val();
+            window.open(href, '_blank');
+        }
+
+    </script>
+
+</body>
+</html>

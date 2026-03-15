@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DispatchChallanDataSet" targetNamespace="http://tempuri.org/DispatchChallanDataSet.xsd" xmlns:mstns="http://tempuri.org/DispatchChallanDataSet.xsd" xmlns="http://tempuri.org/DispatchChallanDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DispatchChallanDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DispatchChallanDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DispatchChallanDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="REQUISITION_UNIT" msprop:Generator_UserColumnName="REQUISITION_UNIT" msprop:Generator_ColumnPropNameInTable="REQUISITION_UNITColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_UNIT" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_UNIT" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_NO" msprop:Generator_UserColumnName="REQUISITION_NO" msprop:Generator_ColumnPropNameInTable="REQUISITION_NOColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_NO" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="MST_ID" msprop:Generator_UserColumnName="MST_ID" msprop:Generator_ColumnPropNameInTable="MST_IDColumn" msprop:Generator_ColumnPropNameInRow="MST_ID" msprop:Generator_ColumnVarNameInTable="columnMST_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DISPATCH_NO" msprop:Generator_UserColumnName="DISPATCH_NO" msprop:Generator_ColumnPropNameInTable="DISPATCH_NOColumn" msprop:Generator_ColumnPropNameInRow="DISPATCH_NO" msprop:Generator_ColumnVarNameInTable="columnDISPATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="DISPATCH_DATE" msprop:Generator_UserColumnName="DISPATCH_DATE" msprop:Generator_ColumnPropNameInTable="DISPATCH_DATEColumn" msprop:Generator_ColumnPropNameInRow="DISPATCH_DATE" msprop:Generator_ColumnVarNameInTable="columnDISPATCH_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="VECHILE_DESCRIPTION" msprop:Generator_UserColumnName="VECHILE_DESCRIPTION" msprop:Generator_ColumnPropNameInTable="VECHILE_DESCRIPTIONColumn" msprop:Generator_ColumnPropNameInRow="VECHILE_DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnVECHILE_DESCRIPTION" type="xs:string" minOccurs="0" />
+              <xs:element name="DRIVER_NAME" msprop:Generator_UserColumnName="DRIVER_NAME" msprop:Generator_ColumnPropNameInTable="DRIVER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="DRIVER_NAME" msprop:Generator_ColumnVarNameInTable="columnDRIVER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="DRIVER_MOBILE_NO" msprop:Generator_UserColumnName="DRIVER_MOBILE_NO" msprop:Generator_ColumnPropNameInTable="DRIVER_MOBILE_NOColumn" msprop:Generator_ColumnPropNameInRow="DRIVER_MOBILE_NO" msprop:Generator_ColumnVarNameInTable="columnDRIVER_MOBILE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="ISSUE_UNIT" msprop:Generator_UserColumnName="ISSUE_UNIT" msprop:Generator_ColumnPropNameInTable="ISSUE_UNITColumn" msprop:Generator_ColumnPropNameInRow="ISSUE_UNIT" msprop:Generator_ColumnVarNameInTable="columnISSUE_UNIT" type="xs:string" minOccurs="0" />
+              <xs:element name="DISPATCH_PRODUCT_ID" msprop:Generator_UserColumnName="DISPATCH_PRODUCT_ID" msprop:Generator_ColumnPropNameInTable="DISPATCH_PRODUCT_IDColumn" msprop:Generator_ColumnPropNameInRow="DISPATCH_PRODUCT_ID" msprop:Generator_ColumnVarNameInTable="columnDISPATCH_PRODUCT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DISPATCH_QTY" msprop:Generator_UserColumnName="DISPATCH_QTY" msprop:Generator_ColumnPropNameInTable="DISPATCH_QTYColumn" msprop:Generator_ColumnPropNameInRow="DISPATCH_QTY" msprop:Generator_ColumnVarNameInTable="columnDISPATCH_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DISPATCH_AMT" msprop:Generator_UserColumnName="DISPATCH_AMT" msprop:Generator_ColumnPropNameInTable="DISPATCH_AMTColumn" msprop:Generator_ColumnPropNameInRow="DISPATCH_AMT" msprop:Generator_ColumnVarNameInTable="columnDISPATCH_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QTY_BOX_PCS" msprop:Generator_UserColumnName="QTY_BOX_PCS" msprop:Generator_ColumnPropNameInTable="QTY_BOX_PCSColumn" msprop:Generator_ColumnPropNameInRow="QTY_BOX_PCS" msprop:Generator_ColumnVarNameInTable="columnQTY_BOX_PCS" type="xs:string" minOccurs="0" />
+              <xs:element name="ENTERED_BY" msprop:Generator_ColumnPropNameInRow="ENTERED_BY" msprop:Generator_ColumnPropNameInTable="ENTERED_BYColumn" msprop:Generator_ColumnVarNameInTable="columnENTERED_BY" msprop:Generator_UserColumnName="ENTERED_BY" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_DATE" msprop:Generator_ColumnPropNameInRow="REQUISITION_DATE" msprop:Generator_ColumnPropNameInTable="REQUISITION_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_DATE" msprop:Generator_UserColumnName="REQUISITION_DATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

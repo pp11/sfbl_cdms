@@ -1,0 +1,51 @@
+.listree-submenu-heading {
+    cursor: pointer
+}
+
+ul.listree {
+    list-style: none
+}
+
+ul.listree-submenu-items {
+    list-style: none;
+    border-left: 1px dashed black;
+    white-space: nowrap;
+    margin-right: 0px;
+    padding-left: 15px
+}
+
+div.listree-submenu-heading.collapsed:before {
+    content: "+";
+    margin-right: 2px
+}
+
+div.listree-submenu-heading.expanded:before {
+    content: "-";
+    margin-right: 2px;
+}
+div.listree-submenu-heading.expanded {
+    color: darkblue;
+    font-weight:600;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-width: 800px;
+    overflow-y: hidden
+}
+.listree{
+    padding-left:5px;
+}
+
+ul.listree-submenu-items a {
+    color: inherit;
+    list-style-type: square;
+}
+ul.listree-submenu-items a:hover {
+    color: blue;
+}
+
+ul.listree-submenu-items a.active  {
+    color: darkblue;
+    font-weight:600;
+}

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockTransferSubDataSet" targetNamespace="http://tempuri.org/StockTransferSubDataSet.xsd" xmlns:mstns="http://tempuri.org/StockTransferSubDataSet.xsd" xmlns="http://tempuri.org/StockTransferSubDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockTransferSubDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="StockTransferSubDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StockTransferSubDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DEPOT_STOCK_TRANSFER_BATCH" msprop:Generator_RowClassName="DEPOT_STOCK_TRANSFER_BATCHRow" msprop:Generator_RowEvHandlerName="DEPOT_STOCK_TRANSFER_BATCHRowChangeEventHandler" msprop:Generator_RowDeletedName="DEPOT_STOCK_TRANSFER_BATCHRowDeleted" msprop:Generator_RowDeletingName="DEPOT_STOCK_TRANSFER_BATCHRowDeleting" msprop:Generator_RowEvArgName="DEPOT_STOCK_TRANSFER_BATCHRowChangeEvent" msprop:Generator_TablePropName="DEPOT_STOCK_TRANSFER_BATCH" msprop:Generator_RowChangedName="DEPOT_STOCK_TRANSFER_BATCHRowChanged" msprop:Generator_UserTableName="DEPOT_STOCK_TRANSFER_BATCH" msprop:Generator_RowChangingName="DEPOT_STOCK_TRANSFER_BATCHRowChanging" msprop:Generator_TableClassName="DEPOT_STOCK_TRANSFER_BATCHDataTable" msprop:Generator_TableVarName="tableDEPOT_STOCK_TRANSFER_BATCH">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BATCH_ID" msprop:Generator_UserColumnName="BATCH_ID" msprop:Generator_ColumnPropNameInTable="BATCH_IDColumn" msprop:Generator_ColumnPropNameInRow="BATCH_ID" msprop:Generator_ColumnVarNameInTable="columnBATCH_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MRP" msprop:Generator_UserColumnName="MRP" msprop:Generator_ColumnPropNameInTable="MRPColumn" msprop:Generator_ColumnPropNameInRow="MRP" msprop:Generator_ColumnVarNameInTable="columnMRP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BATCH_TRANSFER_QTY" msprop:Generator_UserColumnName="BATCH_TRANSFER_QTY" msprop:Generator_ColumnPropNameInTable="BATCH_TRANSFER_QTYColumn" msprop:Generator_ColumnPropNameInRow="BATCH_TRANSFER_QTY" msprop:Generator_ColumnVarNameInTable="columnBATCH_TRANSFER_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BATCH_QTY_BOX_PCS" msprop:Generator_UserColumnName="BATCH_QTY_BOX_PCS" msprop:Generator_ColumnPropNameInTable="BATCH_QTY_BOX_PCSColumn" msprop:Generator_ColumnPropNameInRow="BATCH_QTY_BOX_PCS" msprop:Generator_ColumnVarNameInTable="columnBATCH_QTY_BOX_PCS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

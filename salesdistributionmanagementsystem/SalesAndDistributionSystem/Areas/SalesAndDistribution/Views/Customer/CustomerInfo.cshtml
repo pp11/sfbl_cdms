@@ -1,0 +1,548 @@
+﻿@{
+    ViewData["Title"] = "Customer Info";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<style>
+    sup {
+        color: red;
+    }
+
+    /* input.ng-valid {
+            background-color: lightgreen;
+        }*/
+
+    /*  input.ng-invalid.ng-touched {
+            background-color: solid-red;
+        }*/
+
+    /* input.ng-invalid {
+            background-color: darkred;
+        }
+
+        form.input.ng-pristine {
+            background-color: lightblue;
+        }*/
+
+    /* form.input.ng-dirty {
+            background-color: pink;
+        }
+        form.input.ng-touched {
+            background-color: pink;
+        }
+    */
+</style>
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-danger mb-1" href="~/SalesAndDistribution/CustomerMarketRelation/InsertOrEdit">Customer Market Relation</a></li>
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:220px">Customer Entry</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                           name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                    <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                           name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Plant/Depot<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="UNIT_ID" ng-disabled="model.CUSTOMER_ID>0"
+                                            name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%" required>
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="STATUS">Status<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="CUSTOMER_STATUS"
+                                            name="CUSTOMER_STATUS" ng-model="model.CUSTOMER_STATUS" style="width:100%" required>
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.CUSTOMER_STATUS">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_CODE">Customer Code<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_CODE" type="text" class="form-control" required
+                                           name="CUSTOMER_CODE" ng-model="model.CUSTOMER_CODE">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_NAME">Customer Name<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="CUSTOMER_NAME" type="text" class="form-control" required
+                                           name="CUSTOMER_NAME" ng-model="model.CUSTOMER_NAME">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="TDS_FLAG">Is TDS Applicable<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="TDS_FLAG"
+                                            name="TDS_FLAG" ng-model="model.TDS_FLAG" style="width:100%" required>
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.TDS_FLAG">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_NAME_BANGLA">Customer (Bangla)</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="CUSTOMER_NAME_BANGLA" type="text" class="form-control"
+                                           name="CUSTOMER_NAME_BANGLA" ng-model="model.CUSTOMER_NAME_BANGLA">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PRICE_TYPE_ID">Price Type<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PRICE_TYPE_ID"
+                                            name="PRICE_TYPE_ID" ng-model="model.PRICE_TYPE_ID" style="width:100%" required>
+
+                                        <option ng-repeat="item in PriceType" value="{{item.PRICE_TYPE_ID}}" ng-selected="item.PRICE_TYPE_ID == model.PRICE_TYPE_ID">{{item.PRICE_TYPE_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_ADDRESS">Address<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="CUSTOMER_ADDRESS" type="text" class="form-control"
+                                           name="CUSTOMER_ADDRESS" ng-model="model.CUSTOMER_ADDRESS" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PROPRIETOR_NAME">Owner's Name<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="PROPRIETOR_NAME" type="text" class="form-control"
+                                           name="PROPRIETOR_NAME" ng-model="model.PROPRIETOR_NAME" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_ADDRESS_BANGLA">Address (Bangla)</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="CUSTOMER_ADDRESS_BANGLA" type="text" class="form-control"
+                                           name="CUSTOMER_ADDRESS_BANGLA" ng-model="model.CUSTOMER_ADDRESS_BANGLA">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="TRADE_LICENSE_NO">Trade License No<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TRADE_LICENSE_NO" type="text" class="form-control"
+                                           name="TRADE_LICENSE_NO" ng-model="model.TRADE_LICENSE_NO" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BIN_NO">BIN<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="BIN_NO" type="text" class="form-control"
+                                           name="BIN_NO" ng-model="model.BIN_NO" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="TIN_NO">TIN<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TIN_NO" type="text" class="form-control"
+                                           name="TIN_NO" ng-model="model.TIN_NO" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_EMAIL">Email</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_EMAIL" type="text" class="form-control"
+                                           name="CUSTOMER_EMAIL" ng-model="model.CUSTOMER_EMAIL">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_CONTACT">Contact<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_CONTACT" type="text" class="form-control" ng-model="model.CUSTOMER_CONTACT" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_TYPE_ID">Customer Type<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="CUSTOMER_TYPE_ID"
+                                            name="CUSTOMER_TYPE_ID" ng-model="model.CUSTOMER_TYPE_ID" style="width:100%" required>
+
+                                        <option ng-repeat="item in CustomerType" value="{{item.CUSTOMER_TYPE_ID}}" ng-selected="item.CUSTOMER_TYPE_ID == model.CUSTOMER_TYPE_ID">{{item.CUSTOMER_TYPE_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CONTACT_PERSON_NAME">Contact Person Name </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CONTACT_PERSON_NAME" type="text" class="form-control"
+                                           name="CONTACT_PERSON_NAME" ng-model="model.CONTACT_PERSON_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CONTACT_PERSON_NO">Contact Person's No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CONTACT_PERSON_NO" type="text" class="form-control"
+                                           name="CONTACT_PERSON_NO" ng-model="model.CONTACT_PERSON_NO">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SECURITY_MONEY">Security Money</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="SECURITY_MONEY" type="number" class="form-control"
+                                           name="SECURITY_MONEY" ng-model="model.SECURITY_MONEY">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DB_LOCATION_NAME">DB Location<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="DB_LOCATION_NAME" type="text" class="form-control"
+                                           name="DB_LOCATION_NAME" ng-model="model.DB_LOCATION_NAME" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VAT_REG_NO">Vat Reg No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="VAT_REG_NO" type="text" class="form-control"
+                                           name="VAT_REG_NO" ng-model="model.VAT_REG_NO">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_ADDRESS">Delivery Address<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="DELIVERY_ADDRESS" type="text" class="form-control"
+                                           name="DELIVERY_ADDRESS" ng-model="model.DELIVERY_ADDRESS" required>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <input title="Same as billing address" ng-init="model.isChecked=false" class="form-control" type="checkbox" ng-model="model.isChecked" id="isChecked" name="isChecked" ng-click="stopPropagation()" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_ADDRESS_BANGLA">Delivery Address (Bangla)</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="DELIVERY_ADDRESS_BANGLA" type="text" class="form-control"
+                                           name="DELIVERY_ADDRESS_BANGLA" ng-model="model.DELIVERY_ADDRESS_BANGLA">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_REMARKS" type="text" class="form-control"
+                                           name="CUSTOMER_REMARKS" ng-model="model.CUSTOMER_REMARKS">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID" style="">Distributor Product Type<sup>*</sup></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>{{model.DISTRIBUTOR_PRODUCT_TYPE}}</label>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" ng-disabled="model.CUSTOMER_ID==0" data-target="#exampleModalScrollable">Click here</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SUGGEST_PERCENT">Suggest Percent </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="SUGGEST_PERCENT" type="number" class="form-control"
+                                           name="SUGGEST_PERCENT" ng-model="model.SUGGEST_PERCENT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MAXIMUM_PERCENT">Maximum Pergentage</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="MAXIMUM_PERCENT" type="number" class="form-control"
+                                           name="MAXIMUM_PERCENT" ng-model="model.MAXIMUM_PERCENT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MINIMUM_PERCENT">Minimum Pergentage</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="MINIMUM_PERCENT" type="number" class="form-control"
+                                           name="MINIMUM_PERCENT" ng-model="model.MINIMUM_PERCENT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 50vh; margin-bottom: 10px;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="routeGridList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 45vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:600px">
+                        <div class="modal-content" style="height:200px !important">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Distributor Product Type</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="height: 10vh;">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                                            <select class="form-control select2-single" id="DISTRIBUTOR_PRODUCT_TYPE" multiple @*ng-disabled="model.USER_TYPE != 'SuperAdmin'"*@ 
+                                                    name="DISTRIBUTOR_PRODUCT_TYPE" ng-model="model.DISTRIBUTOR_PRODUCT_TYPE" style="width:100%">
+                                                <option ng-repeat="item in DistributorProductRelations" value="{{item.DISTRIBUTOR_PRODUCT_TYPE}}" ng-selected="item.DISTRIBUTOR_PRODUCT_TYPE == model.DISTRIBUTOR_PRODUCT_TYPE">{{item.DISTRIBUTOR_PRODUCT_TYPE}}</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-success" ng-show="model.CUSTOMER_ID>1" ng-click="AddOrUpdate_Dist_Prod_Type(model)" data-dismiss="modal">Save</button>
+
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                @*                  <button type="button" class="btn btn-primary">Save changes</button>
+                                *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset style="overflow:hidden;">
+                <legend style="width:190px">Customer List</legend>
+                <div class="row" style="background-color:#eaecf4;margin-top:5px;padding:5px">
+                    <div class="col-md-8"><h5 style="margin-left:10px;margin-top:7px;font-weight:700;color:blueviolet"><sup>*</sup>Please Click on CheckBox of All, Active and InActive to view Status filtered Data</h5></div>
+                    <div class="col-md-1" style="display:flex;font-weight:700;color:blueviolet;style=" justify-content:left"">
+                        <input id="AllCustomer" type="checkbox" style="height:30px" class="form-control"
+                               name="AllCustomer" ng-checked="ActiveCustomer == false && InActiveCustomer == false && AllCustomer == true" ng-model="AllCustomer" ng-change="LoadStatusFilteredDataAll()"><label>All</label>
+                    </div>
+                    <div class="col-md-1" style="display:flex">
+                        <input id="ActiveCustomer" type="checkbox" class="form-control" style="height:30px"
+                               name="ActiveCustomer" ng-model="ActiveCustomer" ng-checked="ActiveCustomer == true && InActiveCustomer == false && AllCustomer == false" ng-change="LoadStatusFilteredDataActive()"><label>Active</label>
+                    </div>
+                    <div class="col-md-1" style="display:flex">
+                        <input id="InActiveCustomer" type="checkbox" class="form-control" style="height:30px"
+                               name="InActiveCustomer" ng-model="InActiveCustomer" ng-checked="ActiveCustomer == false && InActiveCustomer == true && AllCustomer == false" ng-change="LoadStatusFilteredDataInActive()"><label>InActive</label>
+                    </div>
+
+                </div>
+                <div class="row" style="height: 55vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+
+</div>
+
+@section Scripts{
+    <script src="~/ScriptsNg/SalesAndDistribution/Customer/Controller/CustomerInfoCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Customer/Service/CustomerInfoServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+            });
+
+        });
+
+    </script>
+}

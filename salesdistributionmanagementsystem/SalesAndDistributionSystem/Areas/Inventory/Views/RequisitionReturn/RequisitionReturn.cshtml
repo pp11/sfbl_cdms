@@ -1,0 +1,166 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Inventory.DEPOT_REQUISITION_RETURN_MST
+@{
+    ViewData["Title"] = "Requisition Return";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/RequisitionReturn/List">Search</a></li>
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Return Info</legend>
+
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Return Type</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-selected=" model.RETURN_TYPE" class="select2-single form-control" id="RETURN_TYPE" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'"*@
+                                            name="RETURN_TYPE" ng-model="model.RETURN_TYPE" style="width:100%" @*ng-change="LoadRequisitionDtlData()"*@>
+
+                                        <option value="Full">Full</option>
+                                        <option value="Partial">Partial</option>
+                                    </select>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Requisition No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (Model.MST_ID_ENCRYPTED == "0")
+                                    {
+                                        <select class="select2-single form-control" id="REQUISITION_NO" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'"*@
+                                                name="REQUISITION_NO" ng-model="model.REQUISITION_NO" style="width:100%" ng-change="LoadRequisitionDtlData()">
+
+                                            <option ng-repeat="item in RequisitionList" ng-selected="item.REQUISITION_NO == model.REQUISITION_NO" value="{{item.REQUISITION_NO}}">{{item.REQUISITION_NO}}</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <input id="REQUISITION_NO" type="text" class="form-control" required disabled
+                                               name="REQUISITION_NO" ng-model="model.REQUISITION_NO" placeholder="REQUISITION NO">
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Receive Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REQUISITION_DATE" type="text" disabled class="form-control" required
+                                           name="REQUISITION_DATE" ng-model="model.RECEIVE_DATE" placeholder="">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Return No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RETURN_NO" type="text" disabled class="form-control" required
+                                           name="RETURN_NO" ng-model="model.RETURN_NO" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Return Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RETURN_DATE" type="text" disabled class="form-control" required
+                                           name="RETURN_DATE" ng-model="model.RETURN_DATE" placeholder="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Return Receive Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="RETURN_RCV_UNIT_NAME" type="text" disabled class="form-control" required
+                                           name="RETURN_RCV_UNIT_NAME" ng-model="model.RETURN_RCV_UNIT_NAME" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Return Detail</legend>
+
+                    <div class="row" style="margin:20px">
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/RequisitionReturn/Controller/RequisitionReturnCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/RequisitionReturn/Service/RequisitionReturnService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+}

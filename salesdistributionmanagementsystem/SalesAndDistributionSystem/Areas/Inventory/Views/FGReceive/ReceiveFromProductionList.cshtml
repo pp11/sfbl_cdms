@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "FG Receive from Production List";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"> <partial name="_SearchFilter" /></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/FGReceive/ReceiveFromProduction">Entry</a></li>
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Refresh</button></li>
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:290px">FG Receive From Production List</legend>
+                <div class="row" style="height: 60vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 58vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+                        <div class="modal-content" style="height:1000px !important">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Modal scrollable title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="height: 75vh;">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                @*                  <button type="button" class="btn btn-primary">Save changes</button>
+                                *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/FGReceive/Controller/ReceiveFromProductionListCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/FGReceive/Service/ReceiveFromProductionServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select"
+            });
+
+        });
+    </script>
+}

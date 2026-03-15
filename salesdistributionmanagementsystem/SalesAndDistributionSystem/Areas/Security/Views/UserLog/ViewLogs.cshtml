@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Logs";
+}
+<link href="/css/site.css" rel="stylesheet">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl" >
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SearchData(model)">Search</button></li>
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:150px">Search in Logs</legend>
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="USER_ID">User</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="USER_ID" style="width:100%"
+                                            name="USER_ID" ng-model="model.USER_ID" ng-change="SearchData(model)">
+
+                                        <option ng-repeat="item in Users" value="{{item.USER_ID}}" ng-selected="item.USER_ID == model.USER_ID">{{item.USER_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="FROM_DATE">From Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" ng-model="model.FROM_DATE" value="" ng-change="SearchData(model)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="TO_DATE">To Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" ng-model="model.TO_DATE" value="" ng-change="SearchData(model)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <fieldset style="overflow:hidden;">
+                <legend style="width:120px">Logs</legend>
+                <div class="row" style="height: 45vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 40vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    @*<partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader" />*@
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Security/UserLog/Controller/UserLogCtr.js"></script>
+    <script src="~/ScriptsNg/Security/UserLog/Service/UserLogService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}

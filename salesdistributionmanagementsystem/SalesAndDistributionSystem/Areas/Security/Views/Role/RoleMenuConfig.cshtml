@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Role Menu Config";
+}
+<link href="/css/site.css" rel="stylesheet">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-body p-1">
+                    <form name="formMenuCategoryAdd">
+                        <fieldset>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-md-12 h5 mb-0 text-gray-600" ng-disabled="model.USER_TYPE != 'SuperAdmin'">
+                                        <div class="row d-none">
+                                            <div class="col-md-2">
+                                                <label style="margin-top:5px" for="Role_Id">Select Company :</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%">
+
+                                                    <option ng-repeat="item in Companies" value="{{item.COMPANY_ID}}" ng-selected="model.COMPANY_ID==item.COMPANY_ID">{{item.COMPANY_NAME}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a style="height: 100%;" type="button" class="form-control btn btn-danger" ng-show="model.LIST_VIEW == 'Active'" pe="button" name="btnSubmit" ng-disabled="model.ROLE_ID == null || model.ROLE_ID < 1" href="/security/Role/RoleMenuConfig"> Refresh</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Role_Id">Select Role</label>
+                                        <div class="typeaheadcontainer">
+                                            <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                                   ng-model="model.ROLE_NAME"
+                                                   uib-typeahead="Role as Role.ROLE_NAME for Role in AutoCompleteDataLoadForRole($viewValue)| limitTo:5"
+                                                   typeahead-append-to-body="true"
+                                                   placeholder="Enter (Role Name) minimum 3 character"
+                                                   typeahead-editable="false"
+                                                   typeahead-on-select="typeaheadSelectedRole(row.entity, $item)" />
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="row" style="margin-top:5px">
+                                            <div class="col-md-6">
+                                                <label for="select2Multiple"></label>
+                                                <button type="button" class="form-control btn btn-secondary" ng-disabled="model.ROLE_ID<=0" ng-show="model.LIST_VIEW == 'Active'" style="margin-top:5px" pe="button" name="btnSubmit" ng-click="RoleMenuConfigSelectionList()"> Load</button>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="select2Multiple"></label>
+                                                <button type="button" class="form-control btn btn-success" ng-show="model.ADD_PERMISSION == 'Active'" style="margin-top:5px" pe="button" name="btnSubmit" ng-disabled="model.ROLE_ID == null || model.ROLE_ID < 1" ng-click="SaveData(model)"> Submit</button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <fieldset>
+                        <legend style="width:190px">Manu List</legend>
+                        <div ng-show="model.LIST_VIEW == 'Active'">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="color: #252222;height: 60vh " class="grid m-2">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/Security/Role/Controller/RoleMenuConfigCtr.js"></script>
+    <script src="~/ScriptsNg/Security/Role/Service/RolesServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}
+
+

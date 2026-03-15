@@ -1,0 +1,494 @@
+﻿*
+{
+	margin:0 auto;
+}
+/*body 
+{
+	margin: 0;
+	padding: 0 0 20px;
+	font-family: verdana,arial,helvetica,lucida,sans-serif;
+	font-size: 12px;
+	text-align: center;
+	color: #555;	
+}*/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+  /*line-height: 18px;*/
+  /*font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  color: #555;
+  /*overflow-x: hidden;*/
+}
+
+
+#wrapper {
+	width: 950px;
+	margin: 0 auto;
+	text-align: left;
+}
+#page {
+	position: relative;
+}
+.nowrap
+{
+	white-space:nowrap;
+}
+
+/* Page Header 
+-------------------------------------------------------------------- */
+
+#header 
+{
+	padding-top: 0px;
+	position: relative;
+	height: 80px;
+	padding-bottom: 20px;
+	top: 0px;
+	left: 0px;
+}
+
+
+/*  Updated By Shafiq_Hati
+Page Header for money receipt
+-------------------------------------------------------------------- */
+
+#headermr 
+{
+	padding-top: 0px;
+	position: relative;
+	height: 80px;
+	padding-bottom: 5px;
+	top: 0px;
+	left: 0px;
+}
+.LevelMRbg
+{
+   font-weight:bold;
+   font-size:15px;
+   background-color:#000000;
+   color:White;
+}
+
+.LevelAmount
+{
+
+   padding-left:2px;
+   padding-right:2px;
+   
+}
+
+/*   END Updated By Shafiq_Hati
+
+
+
+
+Footer 
+-------------------------------------------------------------------- */
+
+#footer {
+	text-align: center;
+	line-height: 2em;
+	font-size: 10px;
+	color: #555;
+}
+#footer a {
+	margin-left: 20px;
+	color: #fff;
+}
+
+/* Main Content
+-------------------------------------------------------------------- */
+
+.content {
+	margin: 0 1px;
+	line-height: 1.2em;
+}
+.entry {	
+	width: 680px;
+	padding-left: 40px;
+	padding-top: 6px;
+	float: left;
+}
+.side {
+	width: 300px;
+	margin-right: 20px;
+	padding-top: 4px;
+	float: right;
+}
+.side form {
+	margin: 0;
+}
+/* Blog Entry
+-------------------------------------------------------------------- */
+
+.blog {	
+	/*background: #fff url('bkg-blog-title.gif') repeat-x bottom;*/	
+	border: 1px solid #ccc;
+	/*padding-bottom: 80px;
+	margin-bottom: 20px;*/
+	
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+.blog.blog-last {
+	padding-bottom: 0;
+}
+.blog .title {
+	position: relative;
+	/*background: url('bkg-blog-title.gif') repeat-x 50% top;*/
+	/*height: 92px;
+	padding: 27px 40px 0;
+	margin-bottom: 15px;*/
+	top: 0px;
+	left: 0px;
+}
+.title h2 {
+	margin: 0 350px 10px 0;
+	cursor: default;
+	/*text-shadow: 0 1px 0 #fff;*/
+}
+.title h2 a {
+	text-decoration: none;
+	color: #000;
+}
+.title h2 a:hover {
+	color: #3e3e3e;
+}
+.title .info {	
+	font-size: 9px;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+	color: #909090;
+}
+.title .info a {
+	margin-left: 10px;
+	color: #000;
+}
+.title .da {
+	position: absolute;
+	bottom: 0;
+	left: 40px;
+	background: url('bkg-blog-title-arrow.gif') no-repeat bottom left;
+	width: 31px;
+	height: 16px;
+}
+.cc {
+	margin-left: 10px;
+}
+
+.textField {margin: 1px 0 10px 0;}
+
+
+.FlatButton
+{
+    border-right: 1px gray solid;
+    border-bottom: 1px gray solid;
+    border-left: 1px ghostwhite solid;
+    border-top: 1px ghostwhite solid;
+    background-color: buttonface;
+    
+}
+.From_Contain
+{
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-style:solid; 
+	border-width:1px; 
+	border-color:Red;
+}
+.Headline
+{
+	font-family:Verdana;
+	font-weight:bold;
+	font-style:normal;
+	color:#A0A2A4;
+	font-size:12px;
+}
+.LevelText
+{
+	font-family:Verdana;
+	font-weight:normal;
+	font-style:normal;
+	color:#000000;
+	font-size:11px;
+}
+.GVText
+{
+	font-family:Verdana;
+	font-weight:normal;
+	font-style:normal;
+	color:#000000;
+	font-size:10px;
+}
+.GVHeader
+{
+	font-family:Verdana;
+	font-weight:normal;
+	font-style:normal;
+	color:#000000;
+	font-size:11px;
+	background-color:#DDDDDD;
+}
+
+.TextBox
+{
+    border-left: 1px gray solid;
+    border-top: 1px gray solid;
+    border-right: 1px gray solid;
+    border-bottom: 1px gray solid;
+}
+
+/* Added By Mehedi
+-------------------------------------------------------------------- */
+
+.viewed
+ {
+   font-size:13px;
+   color:#000;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+.notviewed
+ {
+   font-size:14px;
+   color:#000;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+.viewed:hover
+ {
+   font-size:13px;
+   color:#e68a00;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+
+.notviewed:hover
+ {
+   font-size:14px;
+   color:#e68a00;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+ 
+.vieweds
+ {
+   font-size:10px;
+   color:#000;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+.notvieweds
+ {
+   font-size:11px;
+   color:#000;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+.vieweds:hover
+ {
+   font-size:10px;
+   color:#e68a00;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+
+.notvieweds:hover
+ {
+   font-size:11px;
+   color:#e68a00;
+   cursor:pointer;
+   text-decoration:none;
+   font-weight:bold;
+ }
+.LeftBorder
+{
+	width:100%;
+	border-top:solid 1px Black;
+	border-left:solid 1px Black;
+}
+.RigntBorder
+{
+	width:100%;
+	border-top:solid 1px Black;
+	border-right:solid 1px Black;
+}
+.TriBorder
+{
+	width:100%;
+	border-top:solid 1px Black;
+	border-right:solid 1px Black;
+	border-bottom:solid 1px Black;
+}
+.TriBorderL
+{
+	width:100%;
+	border-top:solid 1px Black;
+	border-left:solid 1px Black;
+	border-bottom:solid 1px Black;
+}
+
+/* Added By Mehedi
+----------------For Potrait & Land Scape--------------------------- */
+.Potrait
+{
+	width:810px;
+	/* height:1123px; */
+}
+
+.Potrait1
+{
+	width:900px;
+	/* height:1123px; */
+}
+
+.Landscape
+{
+	width:1123px;
+	/* height:794px; */
+}
+.NetAmount
+{
+	color:Black;
+	font-weight:bold;
+	border-top:1px solid;
+	border-bottom-style:double;
+}
+      .message-center {
+            position: fixed;
+            top: 40%;
+            left: 43%;
+            width: 240px;
+            height: 55px;
+            z-index: 2147483648;
+        }
+
+        #inner-message {
+            margin: 0 auto;
+        }
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.nopadding-left {
+    padding: 5px 5px 0 0 !important;
+}
+.nopadding-right {
+    padding: 5px 0 0 5px !important;
+}
+.nomargin {
+    margin: 0 !important;
+}
+
+.nomargin-left {
+    padding: 5px 5px 0 0 !important;
+}
+
+.nomargin-right {
+    padding: 5px 0 0 5px !important;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.table-noborder {
+    border: 0 !important;
+}
+.table-noborder tr{
+    border: 0 !important;
+}
+.table-noborder td{
+    border: 0 !important;
+}
+
+@media (min-width: 786px) {
+    .pull-right-sm {
+        float: right !important;
+    }
+
+    .tex-right-sm {
+        text-align: right !important;
+    }
+
+    .nopadding-left-sm {
+        padding: 5px 5px 0 0 !important;
+    }
+
+    .nopadding-sm {
+        padding: 0 !important;
+    }
+
+    .padding-right-sm {
+        padding: 0 15px 0 0 !important;
+    }
+}
+@media (min-width: 992px) {
+    .pull-right-md {
+        float: right !important;
+    }
+
+    .tex-right-md {
+        text-align: right !important;
+    }
+
+    .nopadding-left-md {
+        padding: 5px 5px 0 0 !important;
+    }
+
+    .nopadding-md {
+        padding: 0 !important;
+    }
+}
+@media (min-width: 1200px) {
+    .pull-right-lg {
+        float: right !important;
+    }
+
+    .tex-right-lg {
+        text-align: right !important;
+    }
+
+    .nopadding-left-lg {
+        padding: 5px 5px 0 0 !important;
+    }
+
+    .nopadding-lg {
+        padding: 0 !important;
+    }
+}
+#loadingcover {
+    background: url("../assets/img/preloader.gif") no-repeat scroll center center #FFF;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+    top: 0;
+    right: 0;
+}
+.loadingcover {
+    background: url("../assets/img/preloader.gif") no-repeat scroll center center #FFF;
+    top: 0;
+    right: 0;
+    opacity: 0.09;
+    color: white;
+    text-align: center;
+    z-index: -9999999;
+}
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+}

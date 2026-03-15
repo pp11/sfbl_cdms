@@ -1,0 +1,349 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Invoice_Mst
+
+@{
+    ViewData["Title"] = "Sales Invoice";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/SalesOrder/InsertOrEdit">Entry</a></li>
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body" style="height:1450px;">
+            <span ng-init="GetInvoiceDetails('@Model.MST_ID_ENCRYPTED')"></span>
+
+            <fieldset style="height:1450px;">
+                <legend style="width:150px">Sales Invoice</legend>
+                <div class="row" style="margin:20px">
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="COMPANY_ID">Invoice No</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="COMPANY_ID"
+                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="display:none">
+
+                                    <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                </select>
+
+                                <input id="UNIT_ID" ng-disabled="true" hidden type="text" class="form-control" required
+                                       name="UNIT_ID" ng-model="model.UNIT_ID">
+
+                                <input id="UNIT_NAME" ng-disabled="true" hidden type="text" class="form-control" required
+                                       name="UNIT_NAME" ng-model="model.UNIT_NAME">
+                                <input id="INVOICE_NO" ng-disabled="true" type="text" class="form-control"
+                                       name="INVOICE_NO" ng-model="model.INVOICE_NO">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="INVOICE_TYPE_NAME">Invoice Type</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="INVOICE_TYPE_NAME" ng-disabled="true" type="text" class="form-control"
+                                       name="INVOICE_TYPE_NAME" ng-model="model.INVOICE_TYPE_NAME">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="INVOICE_DATE">Invoice Date</label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" required ng-disabled="true" autocomplete="off" class="form-control" ng-model="model.INVOICE_DATE" value="" id="INVOICE_DATE">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="DELIVERY_DATE">Delivery Date</label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" ng-disabled="true" required autocomplete="off" class="form-control" ng-model="model.DELIVERY_DATE" value="" id="DELIVERY_DATE">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 space-bottom">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="CUSTOMER_ID">Customer  </label>
+                            </div>
+                            <div class="col-md-10">
+                                <input id="CUSTOMER_NAME_CODE" ng-disabled="true" type="text" class="form-control" required
+                                       name="CUSTOMER_NAME_CODE" ng-model="model.CUSTOMER_NAME_CODE">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="INVOICE_TYPE_NAME">Order No </label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="ORDER_NO" ng-disabled="true" type="text" class="form-control"
+                                       name="ORDER_NO" ng-model="model.ORDER_NO">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 space-bottom">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="DELIVERY_DATE">Order Date</label>
+                            </div>
+                            <div class="col-md-8 simple-date2">
+                                <div class="input-group date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    </div>
+                                    <input type="text" ng-disabled="true" required autocomplete="off" class="form-control" ng-model="model.ORDER_DATE" value="" id="ORDER_DATE">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="height: 30vh;">
+                    <div style="margin-left:20px;justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-11">
+                        Invoice SKU's
+                    </div>
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListDtls" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 28vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left:20px;justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-6">
+                        Bonus
+                    </div>
+                    <div style="justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-5">
+                        Issue
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListBonus" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 25vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListIssue" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 25vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left:20px;justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-6">
+                        Combo Gift
+                    </div>
+                    <div style="justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-5">
+                        Combo Bonus
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListComboGift" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 25vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListComboBonus" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 25vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left:20px;justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-6">
+                        Gift
+                    </div>
+                    <div style="justify-content:center;text-align:left;font-size:large;font-weight:700;color:black" class="mb-0 text-gray-600 col-lg-5">
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsListGift" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4 row">
+
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="INVOICE_DATE">Total Amt</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="TOTAL_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="TOTAL_AMOUNT" ng-model="model.TOTAL_AMOUNT">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="CUSTOMER_DISC_AMOUNT">Cust. Disc. Amt</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input id="CUSTOMER_DISC_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="CUSTOMER_DISC_AMOUNT" ng-model="model.CUSTOMER_DISC_AMOUNT">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input id="CUSTOMER_ADD_DISC_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="CUSTOMER_ADD_DISC_AMOUNT" ng-model="model.CUSTOMER_ADD_DISC_AMOUNT">
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input id="CUSTOMER_PRODUCT_DISC_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="CUSTOMER_PRODUCT_DISC_AMOUNT" ng-model="model.CUSTOMER_PRODUCT_DISC_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">Bonus Disc Amt</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="BONUS_DISC_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="BONUS_DISC_AMOUNT" ng-model="model.BONUS_DISC_AMOUNT">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="LOADING_CHARGE_AMOUNT">Loading  Charge Amt</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="LOADING_CHARGE_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="LOADING_CHARGE_AMOUNT" ng-model="model.LOADING_CHARGE_AMOUNT">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">Inv Adjustment</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="INVOICE_ADJUSTMENT_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="INVOICE_ADJUSTMENT_AMOUNT" ng-model="model.INVOICE_ADJUSTMENT_AMOUNT">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">Inv  Discount</label>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <input id="INVOICE_DISCOUNT_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="INVOICE_DISCOUNT_AMOUNT" ng-model="model.INVOICE_DISCOUNT_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">Net Inv  Amt</label>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <input id="NET_INVOICE_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="NET_INVOICE_AMOUNT" ng-model="model.NET_INVOICE_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="DELIVERY_DATE">TDS  Amt</label>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <input id="TDS_AMOUNT" ng-disabled="true" type="text" class="form-control"
+                                           name="TDS_AMOUNT" ng-model="model.TDS_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/SalesInvoice/Controller/InvoiceDetailsCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/SalesInvoice/Service/InsertOrEditServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+}

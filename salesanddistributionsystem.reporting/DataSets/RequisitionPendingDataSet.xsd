@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RequisitionPendingDataSet" targetNamespace="http://tempuri.org/RequisitionPendingDataSet.xsd" xmlns:mstns="http://tempuri.org/RequisitionPendingDataSet.xsd" xmlns="http://tempuri.org/RequisitionPendingDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RequisitionPendingDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RequisitionPendingDataSet" msprop:Generator_UserDSName="RequisitionPendingDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RequisitionPending" msprop:Generator_TableClassName="RequisitionPendingDataTable" msprop:Generator_TableVarName="tableRequisitionPending" msprop:Generator_RowChangedName="RequisitionPendingRowChanged" msprop:Generator_TablePropName="RequisitionPending" msprop:Generator_RowDeletingName="RequisitionPendingRowDeleting" msprop:Generator_RowChangingName="RequisitionPendingRowChanging" msprop:Generator_RowEvHandlerName="RequisitionPendingRowChangeEventHandler" msprop:Generator_RowDeletedName="RequisitionPendingRowDeleted" msprop:Generator_RowClassName="RequisitionPendingRow" msprop:Generator_UserTableName="RequisitionPending" msprop:Generator_RowEvArgName="RequisitionPendingRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ISSUE_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnISSUE_UNIT_ID" msprop:Generator_ColumnPropNameInRow="ISSUE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="ISSUE_UNIT_IDColumn" msprop:Generator_UserColumnName="ISSUE_UNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="ISSUE_UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnISSUE_UNIT_NAME" msprop:Generator_ColumnPropNameInRow="ISSUE_UNIT_NAME" msprop:Generator_ColumnPropNameInTable="ISSUE_UNIT_NAMEColumn" msprop:Generator_UserColumnName="ISSUE_UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_NO" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_NO" msprop:Generator_ColumnPropNameInRow="REQUISITION_NO" msprop:Generator_ColumnPropNameInTable="REQUISITION_NOColumn" msprop:Generator_UserColumnName="REQUISITION_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_DATE" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_DATE" msprop:Generator_ColumnPropNameInRow="REQUISITION_DATE" msprop:Generator_ColumnPropNameInTable="REQUISITION_DATEColumn" msprop:Generator_UserColumnName="REQUISITION_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_AMOUNT" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_AMOUNT" msprop:Generator_ColumnPropNameInRow="REQUISITION_AMOUNT" msprop:Generator_ColumnPropNameInTable="REQUISITION_AMOUNTColumn" msprop:Generator_UserColumnName="REQUISITION_AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_RAISE_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_RAISE_UNIT_ID" msprop:Generator_ColumnPropNameInRow="REQUISITION_RAISE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="REQUISITION_RAISE_UNIT_IDColumn" msprop:Generator_UserColumnName="REQUISITION_RAISE_UNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_RASIE_UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_RASIE_UNIT_NAME" msprop:Generator_ColumnPropNameInRow="REQUISITION_RASIE_UNIT_NAME" msprop:Generator_ColumnPropNameInTable="REQUISITION_RASIE_UNIT_NAMEColumn" msprop:Generator_UserColumnName="REQUISITION_RASIE_UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_RAISE_BY" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_RAISE_BY" msprop:Generator_ColumnPropNameInRow="REQUISITION_RAISE_BY" msprop:Generator_ColumnPropNameInTable="REQUISITION_RAISE_BYColumn" msprop:Generator_UserColumnName="REQUISITION_RAISE_BY" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_RAISE_BY_EMP_ID" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_RAISE_BY_EMP_ID" msprop:Generator_ColumnPropNameInRow="REQUISITION_RAISE_BY_EMP_ID" msprop:Generator_ColumnPropNameInTable="REQUISITION_RAISE_BY_EMP_IDColumn" msprop:Generator_UserColumnName="REQUISITION_RAISE_BY_EMP_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="REQUISITION_RAISE_BY_NAME" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_RAISE_BY_NAME" msprop:Generator_ColumnPropNameInRow="REQUISITION_RAISE_BY_NAME" msprop:Generator_ColumnPropNameInTable="REQUISITION_RAISE_BY_NAMEColumn" msprop:Generator_UserColumnName="REQUISITION_RAISE_BY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SL" msprop:Generator_ColumnVarNameInTable="columnSL" msprop:Generator_ColumnPropNameInRow="SL" msprop:Generator_ColumnPropNameInTable="SLColumn" msprop:Generator_UserColumnName="SL" type="xs:string" minOccurs="0" />
+              <xs:element name="ISSUE_NO" msprop:Generator_ColumnVarNameInTable="columnISSUE_NO" msprop:Generator_ColumnPropNameInRow="ISSUE_NO" msprop:Generator_ColumnPropNameInTable="ISSUE_NOColumn" msprop:Generator_UserColumnName="ISSUE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="ISSUE_DATE" msprop:Generator_ColumnVarNameInTable="columnISSUE_DATE" msprop:Generator_ColumnPropNameInRow="ISSUE_DATE" msprop:Generator_ColumnPropNameInTable="ISSUE_DATEColumn" msprop:Generator_UserColumnName="ISSUE_DATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,271 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Depot_Requisition_Raise_Mst
+@{
+    ViewData["Title"] = "Requisition Raise";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/Requisition/List">Search</a></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Inventory/Requisition/PendingList">Pending</a></li>
+            @if (Model.MST_ID_ENCRYPTED != "0")
+            {
+                <li class="breadcrumb-item">
+                    <button class="btn btn-outline-info mb-1" ng-click="PrintRequisition()"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+                </li>
+            }
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">Requisition Raise</legend>
+
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Requisition No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REQUISITION_NO" type="text" disabled class="form-control" required
+                                           name="REQUISITION_NO" ng-model="model.REQUISITION_NO">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Requisition Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REQUISITION_DATE" type="text" disabled class="form-control" required
+                                           name="REQUISITION_DATE" ng-model="model.REQUISITION_DATE">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="CUSTOMER_CODE" type="number" class="form-control" required disabled
+                                           name="REQUISITION_AMOUNT" ng-model="model.REQUISITION_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Total Weight</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TOTAL_WEIGHT" type="number" class="form-control" required disabled
+                                           name="TOTAL_WEIGHT" ng-model="model.TOTAL_WEIGHT">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MRP">Total Volume</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="TOTAL_VOLUME" type="number" class="form-control" required disabled
+                                           name="TOTAL_VOLUME" ng-model="model.TOTAL_VOLUME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="Raise Unit">Raise Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="UNIT_NAME" ng-disabled="true" type="text" class="form-control" required
+                                           name="UNIT_NAME" ng-model="model.UNIT_NAME">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Issue Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="UNIT_ID" required
+                                            name="ISSUE_UNIT_ID" ng-model="model.ISSUE_UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Unit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*   <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SPECIAL_PRICE">Status</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <select class="form-control" id="STATUS" name="STATUS" ng-model="model.STATUS" style="width:100%">
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}">{{ item.STATUS }}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>*@
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label for="PRICE_EFFECT_DATE">Remarks</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input id="REMARKS" type="text" style="margin-left:33px;width:97%" class="form-control"
+                                           name="REMARKS" ng-model="model.REMARKS">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:10px;">
+                    <legend style="width:220px">Requisition Detail</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Group</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" multiple id="GROUP_ID"
+                                            name="GROUP_ID" ng-model="model.GROUP_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Groups | orderBy : 'GROUP_NAME'" value="{{item.GROUP_ID}}" ng-selected="item.GROUP_ID == model.GROUP_ID">{{item.GROUP_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Brand</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" multiple id="BRAND_ID"
+                                            name="BRAND_ID" ng-model="model.BRAND_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Brands | orderBy : 'BRAND_NAME'" value="{{item.BRAND_ID}}" ng-selected="item.BRAND_ID == model.BRAND_ID">{{item.BRAND_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Category</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" multiple id="CATEGORY_ID"
+                                            name="CATEGORY_ID" ng-model="model.CATEGORY_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Categories | orderBy : 'CATEGORY_NAME'" value="{{item.CATEGORY_ID}}" ng-selected="item.CATEGORY_ID == model.CATEGORY_ID">{{item.CATEGORY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-success" ng-click="LoadProductsDataFiltered()">Load Products</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button style="width:100%" class="btn  btn-danger" ng-click="ReleaseProductsDataFiltered()">Reset Products</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-12 mb-4" style="height: 37vh;">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'">
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+            </form>
+
+
+        </div>
+
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts{
+    <script src="~/ScriptsNg/Inventory/Requisition/Controller/RequisitionCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/Requisition/Service/RequisitionService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Security/Notification/Service/LiveNotificationServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+        });
+    </script>
+}

@@ -1,0 +1,1676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\salesdistributionmanagementsystem\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\salesdistributionmanagementsystem\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
+  <Import Project="..\SalesAndDistributionSystem\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\SalesAndDistributionSystem\packages\NUnit.3.13.3\build\NUnit.props')" />
+  <Import Project="..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="..\SalesAndDistributionSystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\SalesAndDistributionSystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26D45FCA-FCF3-4E51-9A76-9472F1CD95F9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SalesAndDistributionSystem.Reporting</RootNamespace>
+    <AssemblyName>SalesAndDistributionSystem.Reporting</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44387</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Azure.Core.1.6.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.3.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Azure.Identity.1.3.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.SqlClient, Version=3.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.Data.SqlClient.3.0.0\lib\net461\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.22.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.Identity.Client.4.22.0\lib\net461\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=2.16.5.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.Identity.Client.Extensions.Msal.2.16.5\lib\net45\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.IdentityModel.JsonWebTokens.6.8.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.IdentityModel.Logging.6.8.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.IdentityModel.Protocols.6.8.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.8.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.IdentityModel.Tokens.6.8.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\Oracle.ManagedDataAccess.21.7.0\lib\net462\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.IdentityModel.Tokens.Jwt.6.8.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Security.Cryptography.ProtectedData.4.5.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\salesdistributionmanagementsystem\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Text.Json.6.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\SalesAndDistributionSystem\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\SalesAndDistributionSystem\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSets\AccountsDateWiseSalesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountsDateWiseSalesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Inventory\Controllers\DistributionReportController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\FGReceiveReportController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\GiftItemReportController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\StockReportController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\StockTransferReportController.cs" />
+    <Compile Include="Areas\Inventory\Data\DistributionReport.cs" />
+    <Compile Include="Areas\Inventory\Data\FGReceive.cs" />
+    <Compile Include="Areas\Inventory\Data\GiftItemReport.cs" />
+    <Compile Include="Areas\Inventory\Data\StockReport.cs" />
+    <Compile Include="Areas\Inventory\Data\StockTransferReport.cs" />
+    <Compile Include="Areas\Inventory\InventoryAreaRegistration.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Controllers\InvoiceReportController.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Controllers\MasterReportController.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Controllers\SalesAndCollectionController.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Data\InvoiceReport.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Data\MasterReport.cs" />
+    <Compile Include="Areas\SalesAndDistribution\Data\SalesAndCollectionReport.cs" />
+    <Compile Include="Areas\SalesAndDistribution\SalesAndDistributionAreaRegistration.cs" />
+    <Compile Include="Areas\Target\Controllers\MarketTargetReportController.cs" />
+    <Compile Include="Areas\Target\Data\TargetReport.cs" />
+    <Compile Include="Areas\Target\TargetAreaRegistration.cs" />
+    <Compile Include="DataSets\BatchFreezingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BatchFreezingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\BatchSizeVsReceivingQtyDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BatchSizeVsReceivingQtyDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\BatchWiseStockDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BatchWiseStockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\BatchWiseStockV2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BatchWiseStockV2DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ComboBonusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComboBonusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataSets\CustomerCollectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerCollectionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustOutstandingDtlDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustOutstandingDtlDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustWiseRemBonusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustWiseRemBonusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustWiseSalesCollDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustWiseSalesCollDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DailyBatchRcvRegisterDataSet.cs">
+      <DependentUpon>DailyBatchRcvRegisterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DailyBatchRcvRegisterDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyBatchRcvRegisterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateWiseConsumptionRegiDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateWiseConsumptionRegiDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateWiseDeliveryListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateWiseDeliveryListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateWiseFgRcvFromOtherRegDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateWiseFgRcvFromOtherRegDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateWiseMiscellaneousRegDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateWiseMiscellaneousRegDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateWiseReceivingRegisterDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateWiseReceivingRegisterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DispatchChallanDataSet.cs">
+      <DependentUpon>DispatchChallanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DispatchChallanDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DispatchChallanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\GoodsHoldingTimeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoodsHoldingTimeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InvoiceStatusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InvoiceSubRptDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceSubRptDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InvoiceWisePendingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceWisePendingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="DataSets\MonthWiseSalesCollRetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthWiseSalesCollRetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\OrderVsInvoiceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderVsInvoiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ProductBonusLineDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductBonusLineDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\RefurbishmentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefurbishmentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\RefurbishmentFinalizingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefurbishmentFinalizingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\SalesRegisterDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesRegisterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\SalesReturnDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesReturnDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\SalesTrendAnalysisDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesTrendAnalysisDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Common\ConvertService.cs" />
+    <Compile Include="DataSets\CreditPolicyDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditPolicyDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerInfoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerInfoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerInfoOnlyDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerInfoOnlyDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerOutstandingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerOutstandingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerOutstandingWithInvoiceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerOutstandingWithInvoiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerPriceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerPriceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\CustomerRelationDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerRelationDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DailyCollectionRegisterDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyCollectionRegisterDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DailyStockDataSet.cs">
+      <DependentUpon>DailyStockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DailyStockDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyStockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DataSet00001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet00001.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DataSet00002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet00002.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DataSet1012.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1012.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DateRangeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DateRangeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DeliverySlip2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliverySlip2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\Dispatch.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dispatch.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DistributionDeliveryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DistributionDeliveryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\DistributorLadgerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DistributorLadgerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\FGReceiveDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FGReceiveDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\GiftStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GiftStock.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InMarketSalesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InMarketSalesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InvoiceDataSet.cs">
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\InvoiceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QueryPattern.cs" />
+    <Compile Include="Models\ReportParams.cs" />
+    <Compile Include="DataSets\OverallRequisitionStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OverallRequisitionStatus.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\PendingInvoicesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PendingInvoicesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ProductBonusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductBonusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ProductPriceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductPriceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataSets\ReceiveRegister.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiveRegister.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReportConst\ProjectConstants.cs" />
+    <Compile Include="DataSets\ReqIssueDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReqIssueDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ReqRaiseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReqRaiseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ReqReceivedDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReqReceivedDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ReqReturnDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReqReturnDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ReqReturnReceivedDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReqReturnReceivedDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\RequisitionPendingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequisitionPendingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ReturnDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReturnDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\SalesAndCollectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesAndCollectionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Common\CommonServices.cs" />
+    <Compile Include="Services\Common\ICommonServices.cs" />
+    <Compile Include="Services\Common\RandomStringGenerator.cs" />
+    <Compile Include="DataSets\SkuWisePendingInvoicesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkuWisePendingInvoicesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\StockAdjustmentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockAdjustmentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\StockConsuptionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockConsuptionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\StockTransferDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockTransferDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\StockTransferSubDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockTransferSubDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TargetReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TargetSummaryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TargetSummaryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TransferVsRcv.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransferVsRcv.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\SalesAndDistribution\Views\web.config" />
+    <Content Include="DataSets\DataSet1012.xsc">
+      <DependentUpon>DataSet1012.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Inventory\Views\web.config" />
+    <Content Include="DataSets\DataSet00001.xsc">
+      <DependentUpon>DataSet00001.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DailyStockDataSet.xsc">
+      <DependentUpon>DailyStockDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\BatchWiseStockDataSet.xsc">
+      <DependentUpon>BatchWiseStockDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\BatchFreezingDataSet.xsc">
+      <DependentUpon>BatchFreezingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Target\Views\web.config" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <Content Include="DataSets\AccountsDateWiseSalesDataSet.xsc">
+      <DependentUpon>AccountsDateWiseSalesDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include=".original" />
+    <None Include="DataSets\AccountsDateWiseSalesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AccountsDateWiseSalesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\AccountsDateWiseSalesDataSet.xss">
+      <DependentUpon>AccountsDateWiseSalesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\BatchFreezingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BatchFreezingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\BatchFreezingDataSet.xss">
+      <DependentUpon>BatchFreezingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\BatchSizeVsReceivingQtyDataSet.xsc">
+      <DependentUpon>BatchSizeVsReceivingQtyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\BatchSizeVsReceivingQtyDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BatchSizeVsReceivingQtyDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\BatchSizeVsReceivingQtyDataSet.xss">
+      <DependentUpon>BatchSizeVsReceivingQtyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\BatchWiseStockDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BatchWiseStockDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\BatchWiseStockDataSet.xss">
+      <DependentUpon>BatchWiseStockDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ComboBonusDataSet.xsc">
+      <DependentUpon>ComboBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\BatchWiseStockV2DataSet.xsc">
+      <DependentUpon>BatchWiseStockV2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\BatchWiseStockV2DataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BatchWiseStockV2DataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\BatchWiseStockV2DataSet.xss">
+      <DependentUpon>BatchWiseStockV2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ComboBonusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComboBonusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ComboBonusDataSet.xss">
+      <DependentUpon>ComboBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerInfoDataSet.xsc">
+      <DependentUpon>CustomerInfoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CreditPolicyDataSet.xsc">
+      <DependentUpon>CreditPolicyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CreditPolicyDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CreditPolicyDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CreditPolicyDataSet.xss">
+      <DependentUpon>CreditPolicyDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerCollectionDataSet.xsc">
+      <DependentUpon>CustomerCollectionDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerCollectionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerCollectionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerCollectionDataSet.xss">
+      <DependentUpon>CustomerCollectionDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerInfoDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerInfoDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerInfoDataSet.xss">
+      <DependentUpon>CustomerInfoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerPriceDataSet.xsc">
+      <DependentUpon>CustomerPriceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerInfoOnlyDataSet.xsc">
+      <DependentUpon>CustomerInfoOnlyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerInfoOnlyDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerInfoOnlyDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerInfoOnlyDataSet.xss">
+      <DependentUpon>CustomerInfoOnlyDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerOutstandingDataSet.xsc">
+      <DependentUpon>CustomerOutstandingDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerOutstandingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerOutstandingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerOutstandingDataSet.xss">
+      <DependentUpon>CustomerOutstandingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerOutstandingWithInvoiceDataSet.xsc">
+      <DependentUpon>CustomerOutstandingWithInvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerOutstandingWithInvoiceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerOutstandingWithInvoiceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerOutstandingWithInvoiceDataSet.xss">
+      <DependentUpon>CustomerOutstandingWithInvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerPriceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerPriceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerPriceDataSet.xss">
+      <DependentUpon>CustomerPriceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustomerRelationDataSet.xsc">
+      <DependentUpon>CustomerRelationDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustomerRelationDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerRelationDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustomerRelationDataSet.xss">
+      <DependentUpon>CustomerRelationDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DailyCollectionRegisterDataSet.xsc">
+      <DependentUpon>DailyCollectionRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustWiseSalesCollDataSet.xsc">
+      <DependentUpon>CustWiseSalesCollDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustOutstandingDtlDataSet.xsc">
+      <DependentUpon>CustOutstandingDtlDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustOutstandingDtlDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustOutstandingDtlDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustOutstandingDtlDataSet.xss">
+      <DependentUpon>CustOutstandingDtlDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\CustWiseRemBonusDataSet.xsc">
+      <DependentUpon>CustWiseRemBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustWiseRemBonusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustWiseRemBonusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustWiseRemBonusDataSet.xss">
+      <DependentUpon>CustWiseRemBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\CustWiseSalesCollDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustWiseSalesCollDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\CustWiseSalesCollDataSet.xss">
+      <DependentUpon>CustWiseSalesCollDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DailyBatchRcvRegisterDataSet.xsc">
+      <DependentUpon>DailyBatchRcvRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DailyBatchRcvRegisterDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DailyBatchRcvRegisterDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\DailyBatchRcvRegisterDataSet.xss">
+      <DependentUpon>DailyBatchRcvRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DailyCollectionRegisterDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DailyCollectionRegisterDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DailyCollectionRegisterDataSet.xss">
+      <DependentUpon>DailyCollectionRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DailyStockDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DailyStockDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DailyStockDataSet.xss">
+      <DependentUpon>DailyStockDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DataSet00001.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet00001.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\DataSet00001.xss">
+      <DependentUpon>DataSet00001.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DataSet00002.xsc">
+      <DependentUpon>DataSet00002.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DataSet00002.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet00002.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\DataSet00002.xss">
+      <DependentUpon>DataSet00002.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DataSet1012.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1012.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\DataSet1012.xss">
+      <DependentUpon>DataSet1012.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\InvoiceDataSet.xsc">
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DeliverySlip2.xsc">
+      <DependentUpon>DeliverySlip2.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateRangeDataSet.xsc">
+      <DependentUpon>DateRangeDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateRangeDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateRangeDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateRangeDataSet.xss">
+      <DependentUpon>DateRangeDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateWiseDeliveryListDataSet.xsc">
+      <DependentUpon>DateWiseDeliveryListDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateWiseConsumptionRegiDataSet.xsc">
+      <DependentUpon>DateWiseConsumptionRegiDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateWiseConsumptionRegiDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateWiseConsumptionRegiDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateWiseConsumptionRegiDataSet.xss">
+      <DependentUpon>DateWiseConsumptionRegiDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateWiseDeliveryListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateWiseDeliveryListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateWiseDeliveryListDataSet.xss">
+      <DependentUpon>DateWiseDeliveryListDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateWiseFgRcvFromOtherRegDataSet.xsc">
+      <DependentUpon>DateWiseFgRcvFromOtherRegDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateWiseFgRcvFromOtherRegDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateWiseFgRcvFromOtherRegDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateWiseFgRcvFromOtherRegDataSet.xss">
+      <DependentUpon>DateWiseFgRcvFromOtherRegDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateWiseMiscellaneousRegDataSet.xsc">
+      <DependentUpon>DateWiseMiscellaneousRegDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateWiseMiscellaneousRegDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateWiseMiscellaneousRegDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateWiseMiscellaneousRegDataSet.xss">
+      <DependentUpon>DateWiseMiscellaneousRegDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DateWiseReceivingRegisterDataSet.xsc">
+      <DependentUpon>DateWiseReceivingRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DateWiseReceivingRegisterDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DateWiseReceivingRegisterDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DateWiseReceivingRegisterDataSet.xss">
+      <DependentUpon>DateWiseReceivingRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DeliverySlip2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DeliverySlip2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\DeliverySlip2.xss">
+      <DependentUpon>DeliverySlip2.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DistributorLadgerDataSet.xsc">
+      <DependentUpon>DistributorLadgerDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\Dispatch.xsc">
+      <DependentUpon>Dispatch.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\Dispatch.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Dispatch.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\Dispatch.xss">
+      <DependentUpon>Dispatch.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DistributionDeliveryDataSet.xsc">
+      <DependentUpon>DistributionDeliveryDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\DispatchChallanDataSet.xsc">
+      <DependentUpon>DispatchChallanDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DispatchChallanDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DispatchChallanDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DispatchChallanDataSet.xss">
+      <DependentUpon>DispatchChallanDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DistributionDeliveryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DistributionDeliveryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DistributionDeliveryDataSet.xss">
+      <DependentUpon>DistributionDeliveryDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\DistributorLadgerDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DistributorLadgerDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\DistributorLadgerDataSet.xss">
+      <DependentUpon>DistributorLadgerDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\FGReceiveDataSet.xsc">
+      <DependentUpon>FGReceiveDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Dockerfile" />
+    <Content Include="Dockerfile.original" />
+    <None Include="DataSets\FGReceiveDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FGReceiveDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\FGReceiveDataSet.xss">
+      <DependentUpon>FGReceiveDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\GiftStock.xsc">
+      <DependentUpon>GiftStock.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\GiftStock.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GiftStock.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\GiftStock.xss">
+      <DependentUpon>GiftStock.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\InMarketSalesDataSet.xsc">
+      <DependentUpon>InMarketSalesDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\GoodsHoldingTimeDataSet.xsc">
+      <DependentUpon>GoodsHoldingTimeDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\GoodsHoldingTimeDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GoodsHoldingTimeDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\GoodsHoldingTimeDataSet.xss">
+      <DependentUpon>GoodsHoldingTimeDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\InMarketSalesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InMarketSalesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\InMarketSalesDataSet.xss">
+      <DependentUpon>InMarketSalesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\InvoiceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\InvoiceDataSet.xss">
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\InvoiceWisePendingDataSet.xsc">
+      <DependentUpon>InvoiceWisePendingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\InvoiceSubRptDataSet.xsc">
+      <DependentUpon>InvoiceSubRptDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\InvoiceStatusDataSet.xsc">
+      <DependentUpon>InvoiceStatusDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\InvoiceStatusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceStatusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\InvoiceStatusDataSet.xss">
+      <DependentUpon>InvoiceStatusDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\InvoiceSubRptDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceSubRptDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\InvoiceSubRptDataSet.xss">
+      <DependentUpon>InvoiceSubRptDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\InvoiceWisePendingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceWisePendingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\InvoiceWisePendingDataSet.xss">
+      <DependentUpon>InvoiceWisePendingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\MonthWiseSalesCollRetDataSet.xsc">
+      <DependentUpon>MonthWiseSalesCollRetDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\MonthWiseSalesCollRetDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MonthWiseSalesCollRetDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\MonthWiseSalesCollRetDataSet.xss">
+      <DependentUpon>MonthWiseSalesCollRetDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Oracle.ManagedDataAccess.Client.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\ReqRaiseDataSet.xsc">
+      <DependentUpon>ReqRaiseDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReqIssueDataSet.xsc">
+      <DependentUpon>ReqIssueDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReceiveRegister.xsc">
+      <DependentUpon>ReceiveRegister.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ProductBonusDataSet.xsc">
+      <DependentUpon>ProductBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\OverallRequisitionStatus.xsc">
+      <DependentUpon>OverallRequisitionStatus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\OrderVsInvoiceDataSet.xsc">
+      <DependentUpon>OrderVsInvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\OrderVsInvoiceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderVsInvoiceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\OrderVsInvoiceDataSet.xss">
+      <DependentUpon>OrderVsInvoiceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\OverallRequisitionStatus.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OverallRequisitionStatus.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\OverallRequisitionStatus.xss">
+      <DependentUpon>OverallRequisitionStatus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\PendingInvoicesDataSet.xsc">
+      <DependentUpon>PendingInvoicesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\PendingInvoicesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PendingInvoicesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\PendingInvoicesDataSet.xss">
+      <DependentUpon>PendingInvoicesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ProductBonusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductBonusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ProductBonusDataSet.xss">
+      <DependentUpon>ProductBonusDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ProductPriceDataSet.xsc">
+      <DependentUpon>ProductPriceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ProductBonusLineDataSet.xsc">
+      <DependentUpon>ProductBonusLineDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ProductBonusLineDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductBonusLineDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ProductBonusLineDataSet.xss">
+      <DependentUpon>ProductBonusLineDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ProductPriceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductPriceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ProductPriceDataSet.xss">
+      <DependentUpon>ProductPriceDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="README.md" />
+    <None Include="DataSets\ReceiveRegister.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReceiveRegister.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReceiveRegister.xss">
+      <DependentUpon>ReceiveRegister.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\RefurbishmentDataSet.xsc">
+      <DependentUpon>RefurbishmentDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\RefurbishmentDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RefurbishmentDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\RefurbishmentDataSet.xss">
+      <DependentUpon>RefurbishmentDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\RefurbishmentFinalizingDataSet.xsc">
+      <DependentUpon>RefurbishmentFinalizingDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\RefurbishmentFinalizingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RefurbishmentFinalizingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\RefurbishmentFinalizingDataSet.xss">
+      <DependentUpon>RefurbishmentFinalizingDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReqIssueDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReqIssueDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReqIssueDataSet.xss">
+      <DependentUpon>ReqIssueDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReqRaiseDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReqRaiseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReqRaiseDataSet.xss">
+      <DependentUpon>ReqRaiseDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReqReceivedDataSet.xsc">
+      <DependentUpon>ReqReceivedDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReqReceivedDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReqReceivedDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReqReceivedDataSet.xss">
+      <DependentUpon>ReqReceivedDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReqReturnDataSet.xsc">
+      <DependentUpon>ReqReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReqReturnDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReqReturnDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReqReturnDataSet.xss">
+      <DependentUpon>ReqReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReqReturnReceivedDataSet.xsc">
+      <DependentUpon>ReqReturnReceivedDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReqReturnReceivedDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReqReturnReceivedDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReqReturnReceivedDataSet.xss">
+      <DependentUpon>ReqReturnReceivedDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\RequisitionPendingDataSet.xsc">
+      <DependentUpon>RequisitionPendingDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\RequisitionPendingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RequisitionPendingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\RequisitionPendingDataSet.xss">
+      <DependentUpon>RequisitionPendingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\SalesAndCollectionDataSet.xsc">
+      <DependentUpon>SalesAndCollectionDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\ReturnDataSet.xsc">
+      <DependentUpon>ReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReturnDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReturnDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReturnDataSet.xss">
+      <DependentUpon>ReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\SalesAndCollectionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesAndCollectionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\SalesAndCollectionDataSet.xss">
+      <DependentUpon>SalesAndCollectionDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\SalesRegisterDataSet.xsc">
+      <DependentUpon>SalesRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\SalesRegisterDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesRegisterDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\SalesRegisterDataSet.xss">
+      <DependentUpon>SalesRegisterDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\SalesReturnDataSet.xsc">
+      <DependentUpon>SalesReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\SalesReturnDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesReturnDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\SalesReturnDataSet.xss">
+      <DependentUpon>SalesReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\SalesTrendAnalysisDataSet.xsc">
+      <DependentUpon>SalesTrendAnalysisDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\SalesTrendAnalysisDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesTrendAnalysisDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\SalesTrendAnalysisDataSet.xss">
+      <DependentUpon>SalesTrendAnalysisDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="DataSets\StockConsuptionDataSet.xsc">
+      <DependentUpon>StockConsuptionDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\StockAdjustmentDataSet.xsc">
+      <DependentUpon>StockAdjustmentDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\SkuWisePendingInvoicesDataSet.xsc">
+      <DependentUpon>SkuWisePendingInvoicesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\SkuWisePendingInvoicesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SkuWisePendingInvoicesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\SkuWisePendingInvoicesDataSet.xss">
+      <DependentUpon>SkuWisePendingInvoicesDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\StockAdjustmentDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockAdjustmentDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\StockAdjustmentDataSet.xss">
+      <DependentUpon>StockAdjustmentDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\StockConsuptionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockConsuptionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\StockConsuptionDataSet.xss">
+      <DependentUpon>StockConsuptionDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\StockTransferDataSet.xsc">
+      <DependentUpon>StockTransferDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\StockTransferDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockTransferDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\StockTransferDataSet.xss">
+      <DependentUpon>StockTransferDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\TargetReportDataSet.xsc">
+      <DependentUpon>TargetReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\StockTransferSubDataSet.xsc">
+      <DependentUpon>StockTransferSubDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\StockTransferSubDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockTransferSubDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\StockTransferSubDataSet.xss">
+      <DependentUpon>StockTransferSubDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\TargetReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TargetReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\TargetReportDataSet.xss">
+      <DependentUpon>TargetReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\TargetSummaryDataSet.xsc">
+      <DependentUpon>TargetSummaryDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\TargetSummaryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TargetSummaryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\TargetSummaryDataSet.xss">
+      <DependentUpon>TargetSummaryDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\TransferVsRcv.xsc">
+      <DependentUpon>TransferVsRcv.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\TransferVsRcv.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TransferVsRcv.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\TransferVsRcv.xss">
+      <DependentUpon>TransferVsRcv.xsd</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Inventory\Views\DistributionReport\" />
+    <Folder Include="Areas\Inventory\Views\FGReceiveReport\" />
+    <Folder Include="Areas\Inventory\Views\GiftItemReport\" />
+    <Folder Include="Areas\Inventory\Views\Shared\" />
+    <Folder Include="Areas\Inventory\Views\StockReport\" />
+    <Folder Include="Areas\SalesAndDistribution\Views\ProductReport\" />
+    <Folder Include="Areas\SalesAndDistribution\Views\SalesAndCollection\" />
+    <Folder Include="Areas\SalesAndDistribution\Views\Shared\" />
+    <Folder Include="Areas\Target\Views\MarketTarget\" />
+    <Folder Include="Areas\Target\Views\Shared\" />
+    <Folder Include="Services\SalesAndDistribution\" />
+    <Folder Include="Views\Inventory\" />
+    <Folder Include="Views\Target\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\HelperChallanRpt.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\PickerChallanRpt.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DeliveryChallanRpt.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\InvoiceStatus.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DateWiseDeliveryList.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DateWisePendingDelivery.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DeliveryChallanV2.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DispatchChallanV2.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\InvoiceWisePendingDelivery.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DeliveryChallan.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DeliveryChallanProduct.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DispatchChallan.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\PendingGiftSubReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\PendingInvoices.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\RefurbishmentFinalizingRpt.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\RefurbishmentReceivingRpt.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\DeliveryChallanRptV2.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\SkuWisePendingDelivery.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\Distribution\TransferSubReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\DateWiseFgRcvFromOtherRegisterReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\DateWiseConsumptionRegiReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\DateWiseReceivingRegisterReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\DateWiseMiscellaneousRegisterReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\DailyBatchRcvRegisterReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\OverallRequisitionStatusDetailsReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\OverallRequisitionStatusReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\RequisitionPendingForReceive.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\RequisitionPendingForDispatch.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\BatchSizeVsReceivingQtyReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\TransferVsReceiveReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\GiftItemReport\GiftItemReceive.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\FGReceiveFromOthers.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\FGReceiveFromProduction.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\GiftItemReport\GiftStockReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\GiftItemReport\GiftReceiveRegister.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\RequisitionPending.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\ReceiveRegisterProductWise.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\FGReceiveReport\ReceiveRegister.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\BatchFreezingTransectionReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\BatchFreezingReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\CurrentBatchFreeezReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\FinishedGoodsHoldingTimeReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\BatchWiseStockV2Report.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\BatchWiseStockV2ReportDep.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\SKULedgerReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\DateWiseStockReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\DailyStockReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\BatchWiseStockReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\StockAdjustmentReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\StockConsumptionV3.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\DateWiseStockRegister.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockTransferReport\StockTransferReceiveReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockTransferReport\StockTransferReportV3.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockTransferReport\StockTransferReportV2.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockTransferReport\StockTransferReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockTransferReport\TransferSubReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\CustomerOutstandingReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\CustOutstandingTillDateReportCHK.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DeliverySlipInvoiceWiseReportOld.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DeliverySlipReportOld.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\InvoiceReportLetter.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\OrderVsInvoiceReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\UnitWiseDistributorLadgerReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DistributorLadgerReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\InvoiceWiseOutstandingReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\CustOutstandingTillDateReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DeliverySlipInvoiceWiseReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\InvoiceReportLetterOld.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\SalesRegisterReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\TpWiseInvoiceLetterReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\TpWiseInvoiceReportCopy.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\InvoiceSubRpt.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\TpWiseInvoiceReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\UnitWiseDistributorLadgerReport_Old_version.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DistributorLadgerReport_Old_version.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\OrderReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\InvoiceReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\InvoiceReport\DeliverySlipReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\RequisitionReport\RequisitionReturnReceivedReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\RequisitionReport\RequisitionReturnReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\RequisitionReport\RequisitionReceivedReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\RequisitionReport\RequisitionIssueReport.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\StockReport\StockConsumption.rdlc" />
+    <EmbeddedResource Include="Areas\Inventory\Reports\RequisitionReport\RequisitionRaiseReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ComboBonusReportTest.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ComboBonusReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\CustomerInfoReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\CustomerPriceReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ProductBonusLineWhUnitReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\LocationReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ProductBonusLineReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ProductPriceInformationReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\ProductBonusReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\CustomerRelationReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\MasterReport\CreditPolicyReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\ProductReport\ProductReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\ProductReport\rpt_contructual_receive.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\AccountsDateWiseSalesReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\CustWiseRemainingBnsRpt.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\MonthWiseSalesCollRtnSmryReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\CustomerCollectionReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\SalesReturnReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\SalesTrendAnalysisReportReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\SkuWiseSalesReturnReport.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\DateWiseReturn.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\InvoiceWiseReturn.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\DailySalesRegister.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\DailyCollectionRegister.rdlc" />
+    <EmbeddedResource Include="Areas\SalesAndDistribution\Reports\SalesAndCollectionReport\CustWiseSalesCollRetStmtReport.rdlc" />
+    <EmbeddedResource Include="Areas\Target\Report\CustomerTargetReport.rdlc" />
+    <EmbeddedResource Include="Areas\Target\Report\InMarketSalesReport.rdlc" />
+    <EmbeddedResource Include="Areas\Target\Report\TargetDetail.rdlc" />
+    <EmbeddedResource Include="Areas\Target\Report\TargetSummary.rdlc" />
+    <EmbeddedResource Include="Areas\Target\Report\MarketTarget.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57442</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44387/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\salesdistributionmanagementsystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\salesdistributionmanagementsystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\salesdistributionmanagementsystem\packages\Microsoft.Data.SqlClient.SNI.3.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\salesdistributionmanagementsystem\packages\Microsoft.Data.SqlClient.SNI.3.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets'))" />
+    <Error Condition="!Exists('..\salesdistributionmanagementsystem\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\salesdistributionmanagementsystem\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+    <!--<Error Condition="!Exists('..\SalesAndDistributionSystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\SalesAndDistributionSystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />-->
+    <!--<Error Condition="!Exists('..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+    <Error Condition="!Exists('..\SalesAndDistributionSystem\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\SalesAndDistributionSystem\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets'))" />
+    <Error Condition="!Exists('..\SalesAndDistributionSystem\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\SalesAndDistributionSystem\packages\NUnit.3.13.3\build\NUnit.props'))" />-->
+  </Target>
+  <Import Project="..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\SalesAndDistributionSystem\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.14.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <Import Project="..\SalesAndDistributionSystem\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\SalesAndDistributionSystem\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
+  <Import Project="..\salesdistributionmanagementsystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\salesdistributionmanagementsystem\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\salesdistributionmanagementsystem\packages\Microsoft.Data.SqlClient.SNI.3.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\salesdistributionmanagementsystem\packages\Microsoft.Data.SqlClient.SNI.3.0.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

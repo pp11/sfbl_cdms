@@ -1,0 +1,275 @@
+﻿@{
+    ViewData["Title"] = "Sales Order";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" data-target="#exampleModalScrollable" ng-click="LoadOrderRationableSKUs()">Show Filter</button></li>
+
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/SalesOrder/InsertOrEdit">Entry</a></li>
+
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Refresh</button></li>
+
+
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset>
+                <legend style="width:250px">Sales Order List</legend>
+                <div class="row" style="height: 60vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 58vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px;">
+                    <div class="modal-content" style="height:350px !important;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Order View Filter</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" ng-show="model.LIST_VIEW == 'Active'">
+                            <div class="card">
+                                <div class="row" style="margin:10px">
+                                    <div class="col-md-4 space-bottom" id="date_from_param">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="DATE_FROM">From Date</label>
+                                            </div>
+                                            <div class="col-md-8 simple-date2">
+
+                                                <div class="input-group date">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                    </div>
+                                                    <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="model.DATE_FROM">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4 space-bottom" id="date_to_param">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="DATE_TO">To Date</label>
+                                            </div>
+                                            <div class="col-md-8 simple-date2">
+                                                <div class="input-group date">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                    </div>
+                                                    <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="model.DATE_TO">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_divition_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_STATUS">Status</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="ORDER_STATUS"
+                                                        name="ORDER_STATUS" ng-model="model.ORDER_STATUS" style="width:100%">
+                                                    <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_divition_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_TYPE">Order Type</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="ORDER_STATUS"
+                                                        name="ORDER_TYPE" ng-model="model.ORDER_TYPE" style="width:100%">
+                                                    <option ng-repeat="item in InvoiceTypes" value="{{item.INVOICE_TYPE_CODE}}">{{item.INVOICE_TYPE_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_divition_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_ENTRY_TYPE">Entry Type</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="ORDER_ENTRY_TYPE"
+                                                        name="ORDER_ENTRY_TYPE" ng-model="model.ORDER_ENTRY_TYPE" style="width:100%">
+                                                    <option ng-repeat="item in EntryType" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-4 space-bottom" id="company_divition_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="DIVISION_ID">Division</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="DIVISION_ID"
+                                                        name="DIVISION" ng-model="model.DIVISION_ID" style="width:100%" ng-change="DivisionChange()">
+                                                    <option ng-repeat="item in Divisions | orderBy:'DIVISION_NAME'" value="{{item.DIVISION_ID}}">{{item.DIVISION_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_region_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="REGION_ID">Region</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="REGION_ID"
+                                                        name="REGION_ID" ng-model="model.REGION_ID" style="width:100%" ng-change="RegionChange()">
+                                                    <option ng-repeat="item in Regions | orderBy:'REGION_NAME'" value="{{item.REGION_ID}}" ng-selected="item.REGION_ID == model.REGION_ID">{{item.REGION_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_area_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="AREA_ID">Area</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="AREA_ID"
+                                                        name="AREA_ID" ng-model="model.AREA_ID" style="width:100%" ng-change="AreaChange()">
+                                                    <option ng-repeat="item in Areas | orderBy:'AREA_NAME'" value="{{item.AREA_ID}}" ng-selected="item.AREA_ID == model.AREA_ID">{{item.AREA_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_Territory_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="TERRITORY_ID">Territory</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="TERRITORY_ID"
+                                                        name="TERRITORY_ID" ng-model="model.TERRITORY_ID" style="width:100%" ng-change="TerritoryChange()">
+
+                                                    <option ng-repeat="item in Territories" value="{{item.TERRITORY_ID}}" ng-selected="item.TERRITORY_ID == model.TERRITORY_ID">{{item.TERRITORY_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom" id="company_market_param" style="display:none">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="MARKET_ID">Market</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="MARKET_ID"
+                                                        name="MARKET_ID" ng-model="model.MARKET_ID" style="width:100%" ng-change="">
+
+                                                    <option ng-repeat="item in Markets " value="{{item.MARKET_ID}}" value="{{item.MARKET_ID}}" ng-selected="item.MARKET_ID == model.MARKET_ID">{{item.MARKET_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8 space-bottom" id="company_region_param" style="display:block">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label for="REGION_ID">Customer</label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <select class="select2-single form-control" id="CUSTOMER_ID"
+                                                        name="CUSTOMER_ID" ng-model="model.CUSTOMER_ID" style="width:100%" ng-change="RegionChange()">
+                                                    <option ng-repeat="item in GetDivitionToMarketRelations | orderBy:'CUSTOMER_NAME'" value="{{item.CUSTOMER_NAME}}" ng-selected="item.CUSTOMER_ID == model.CUSTOMER_ID">{{item.CUSTOMER_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-4 space-bottom" id="date_to_param">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <button class="btn  bg-success mb-1" style="color:white;width:100%" data-toggle="modal" data-target="#exampleModalScrollable" ng-disabled="DATE_FROM =='' && DATE_TO == ''" ng-click="LoadFilteredData()">Process</button>
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <button class="btn  btn-danger mb-1" style="color:white;width:100%" ng-click="ClearForm()">Reset</button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>@*                  <button type="button" class="btn btn-primary">Save changes</button>
+*@                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+
+</div>
+@section Scripts {
+
+    <script src="~/ScriptsNg/SalesAndDistribution/RepClaim/Controller/ListCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/RepClaim/Service/InsertOrEditServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+
+             $(".select2-single").select2({
+               placeholder: "Select",
+               allowClear: true
+
+           });
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNetCore.Http
+@using SalesAndDistributionSystem.Domain.Models.ViewModels.Security;
+@using System.Text.Json
+@{
+    MenuDistribution Model = new MenuDistribution();
+    Model.PermittedMenus = new List<PermittedMenu>();
+    Model.PermittedModules = new List<PermittedModule>();
+    string data = Context.Session.GetString("RolePermission");
+    if (data != null)
+    {
+        Model = JsonSerializer.Deserialize<MenuDistribution>(data);
+    }
+    else
+    {
+        Context.Response.Redirect("/Security/Login/Index");
+    }
+}
+<li>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <div class="sidebar-brand-icon">
+            <img src="~/Design/img/logo/logo-square.jpg">
+        </div>
+        <div class="sidebar-brand-text mx-3">SFBL</div>
+
+    </a>
+</li>
+
+<hr class="sidebar-divider my-0">
+@foreach (var item in Model.PermittedModules.OrderBy(x => x.ORDER_BY_NO))
+{
+    PermittedMenu _menuMaster = Model.PermittedMenus.Where(x => x.MODULE_ID == item.MODULE_ID && x.MENU_SHOW == "Active").FirstOrDefault();
+    if (_menuMaster != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#@("collapseBootstrapitem" + item.MODULE_ID)" aria-expanded="true" aria-controls="@("collapseBootstrapitem"+item.MODULE_ID)" id="@("navcollapseBootstrapitem"+item.MODULE_ID)">
+                @switch (item.MODULE_NAME)
+                {
+                    case "Security":
+                        <i class="fas fa-fw fa-shield-alt"></i>
+                        break;
+                    case "Master Data":
+                        <i class="fas fa-fw fa-database"></i>
+                        break;
+                    case "Sales":
+                        <i class="fab fa-fw fa-wpforms"></i>
+                        break;
+                    case "Inventory":
+                        <i class="fas fa-fw fa-table"></i>
+                        break;
+                    case "Distribution":
+                        <i class="fas fa-shipping-fast"></i>
+                        break;
+                    case "Target":
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        break;
+                    default:
+                        <i class="far fa-square"></i>
+                        break;
+                }
+                <span>@item.MODULE_NAME</span>
+            </a>
+            <div id="@("collapseBootstrapitem"+item.MODULE_ID)" class="collapse" aria-labelledby="@("headingBootstrap"+item.MODULE_ID)" data-parent="#accordionSidebar" style="max-height:280px;overflow-x:auto;">
+                <div class="bg-white py-0 collapse-inner rounded">
+                    <ul class="listree">
+                        @foreach (var menu in Model.PermittedMenus.Where(x => x.MODULE_ID == item.MODULE_ID && x.PARENT_MENU_ID == 0 && x.MENU_SHOW == "Active").OrderBy(x => x.ORDER_BY_SLNO))
+                        {
+                            List<PermittedMenu> subMenu = Model.PermittedMenus.Where(x => x.PARENT_MENU_ID == menu.MENU_ID && x.MENU_SHOW == "Active").ToList();
+                            @if (subMenu == null || subMenu.Count < 1)
+                            {
+                                <li style="list-style-type: disc;"><a class="holdMenu" href="~/@menu.AREA/@menu.CONTROLLER/@menu.ACTION" id="@(menu.MENU_ID.ToString() + "_"+ menu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())">@menu.MENU_NAME</a></li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <div class="listree-submenu-heading collapsed pb-1" id="@("btn_" + menu.MENU_ID.ToString() + "_"+ menu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())">@menu.MENU_NAME</div>
+                                    <ul class="listree-submenu-items" id="@( menu.MENU_ID.ToString() + "_"+ menu.PARENT_MENU_ID.ToString())" style="display: none;">
+
+                                        @foreach (var submenu in subMenu.OrderBy(x => x.ORDER_BY_SLNO))
+                                        {
+                                            List<PermittedMenu> subMenu_1 = Model.PermittedMenus.Where(x => x.PARENT_MENU_ID == submenu.MENU_ID && x.MENU_SHOW == "Active").OrderBy(x => x.ORDER_BY_SLNO).ToList();
+                                            @if (subMenu_1 == null || subMenu_1.Count < 1)
+                                            {
+                                                <li style="list-style-type: disc;"><a class="holdMenu" href="~/@submenu.AREA/@submenu.CONTROLLER/@submenu.ACTION" id="@(submenu.MENU_ID.ToString() + "_"+ submenu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())">@submenu.MENU_NAME</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li style="list-style-type: disc;">
+                                                    <div class="listree-submenu-heading collapsed pb-1" id="@("btn_" + submenu.MENU_ID.ToString() + "_"+ submenu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())">@submenu.MENU_NAME</div>
+                                                    <ul class="listree-submenu-items" id="@(submenu.MENU_ID.ToString() + "_"+ submenu.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())" style="display: none;">
+                                                        @foreach (var submenu_1 in subMenu_1)
+                                                        {
+                                                            <li style="list-style-type: disc;"> <a class="holdMenu" href="~/@submenu_1.AREA/@submenu_1.CONTROLLER/@submenu_1.ACTION" id="@(submenu_1.MENU_ID.ToString() + "_"+ submenu_1.PARENT_MENU_ID.ToString()+ "_"+ item.MODULE_ID.ToString())">@submenu_1.MENU_NAME</a> </li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </li>
+    }
+}

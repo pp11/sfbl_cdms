@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Target Delete";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/Target/CustomerTarget/CustomerNationalTargetList">Search</a></li>
+        </ol>
+    </div>
+    <div class="card mb-4" id="MarketSalesCreate" style="display:block">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:180px">Target For</legend>
+
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="YEAR">Target Year</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="YEAR" required
+                                            name="YEAR" ng-model="model.YEAR" style="width:100%">
+
+                                        <option ng-repeat="item in years" value="{{item}}" ng-selected="item == model.YEAR">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MONTH_CODE">Target Month</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="MONTH_CODE" required
+                                            name="MONTH_CODE" ng-model="model.MONTH_CODE" style="width:100%">
+
+                                        <option ng-repeat="item in months" value="{{item.Id}}" ng-selected="item.MONTH_CODE == model.MONTH_CODE">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        @* <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="CUSTOMER_ID">Customer</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="select2-single form-control" id="CUSTOMER_ID" required
+                                            name="CUSTOMER_ID" ng-model="model.CUSTOMER_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Customers" value="{{item.CUSTOMER_ID}}" ng-selected="item.CUSTOMER_ID == model.CUSTOMER_ID">{{item.CUSTOMER_CODE}} -- {{item.CUSTOMER_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="CUSTOMER_CODE">Password</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="CUSTOMER_CODE" type="password" class="form-control"
+                                           name="CUSTOMER_CODE" ng-model="model.CUSTOMER_CODE" ng-keypress="onChangePassword($event)" />
+                                    <span>**min**nde*etetar*et</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+
+    <script src="~/ScriptsNg/Target/CustomerTarget/Controller/CustomerTargetDeleteCtr.js?v=12"></script>
+    <script src="~/ScriptsNg/Target/CustomerTarget/Service/CustomerTargetDeleteService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Security/Notification/Service/LiveNotificationServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+        });
+    </script>
+}

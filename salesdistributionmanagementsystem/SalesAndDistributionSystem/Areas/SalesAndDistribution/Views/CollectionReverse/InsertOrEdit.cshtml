@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "Collection Reverse";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngCollectionReverseCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-info mb-1" ng-click="SearchData()">Search</button></li>
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ResetData()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="frmStockAdjustment.$invalid" name="btnSave" class="btn  btn-success mb-1" ng-click="SaveData()">Save</button></li>
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="frmCollectionReverse">
+
+                <fieldset>
+                    <legend style="width:80px">Entry</legend>
+
+                    <div class="row" style="margin:5px">
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REVERSE_DATE">Collection Reverse Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.REVERSE_DATE" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CUSTOMER_CODE">Customer Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.CUSTOMER_CODE" placeholder="Double Click to select Transaction" ng-dblclick="OpenModal()" readonly ng-disabled="model.COLLECTION_DTL_ID>0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BATCH_NO">Batch No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.BATCH_NO" ng-disabled="model.COLLECTION_DTL_ID>0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Customer Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control" ng-model="model.CUSTOMER_NAME" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BATCH_DATE">Batch Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control" ng-model="model.BATCH_DATE" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COLLECTION_MODE">Customer Mode</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.COLLECTION_MODE" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VOUCHER_NO">Voucher No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.VOUCHER_NO" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="VOUCHER_DATE">Voucher Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.VOUCHER_DATE" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COLLECTION_AMT">Collection Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.COLLECTION_AMT" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="TDS_AMT">TDS Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.TDS_AMT" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="NET_COLLECTION_AMT">Net Collection Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.NET_COLLECTION_AMT" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BANK_NAME">Bank</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.BANK_NAME" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BRANCH_NAME">Branch</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.BRANCH_NAME" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MEMO_COST">Memo Cost</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="model.MEMO_COST" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" ng-model="model.REMARKS">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal fade" id="BatchListModal" tabindex="-1" role="dialog"
+                         aria-labelledby="BatchListModalTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+                            <div class="modal-content" style="height:1000px !important">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="BatchListModalTitle">Batch List</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="height: 75vh;">
+                                        <div class="col-lg-12 mb-4">
+                                            <div class="card" style="margin: 10px">
+
+                                                <div ui-grid="gridBatchList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* <div class="modal fade" id="SearchDataModal" tabindex="-1" role="dialog"
+                         aria-labelledby="SearchDataModalTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+                            <div class="modal-content" style="height:1000px !important">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SearchDataModalTitle">Search Data</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="height: 75vh;">
+                                        <div class="col-lg-12 mb-4">
+                                            <div class="card" style="margin: 10px">
+                                                <div ui-grid="gridSearchData" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/scriptsng/salesanddistribution/collectionreverse/collectionreversectrl.js?v=dfhdieehgdjk"></script>
+    <script src="~/scriptsng/salesanddistribution/collectionreverse/collectionreverseservice.js?v=dfhdieehgdjk"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/scriptsng/services/permissionprovider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single-customer").select2({
+                placeholder: "Select",
+            });
+        });
+
+    </script>
+}

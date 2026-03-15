@@ -1,0 +1,319 @@
+﻿@model List<SalesAndDistributionSystem.Domain.Models.ViewModels.Security.ReportPermission>
+@{
+    int d = 0;
+    ViewData["Title"] = "Sales and Collection Report";
+
+}
+@section Styles {
+    <link href="/css/site.css" rel="stylesheet">
+    <style>
+        .ui-grid-header-cell .ui-grid-cell-contents {
+            white-space: normal !important;
+            text-align: center !important;
+        }
+
+        .table td, .table th {
+            padding: .3rem !important;
+        }
+
+    </style>
+}
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/Target/Report/TargetReport" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetExcel()' ng-disabled="model.CSV_PERMISSION != 'Active'" type="button" class="btn btn-secondary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-excel"></i>
+                    </span>
+                    <span class="text">Excel Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Dot Printer Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">Dot Printer PDF Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">PDF Report</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-1">
+                <div class="card-body p-1">
+                    <form name="formProductAdd">
+                        <fieldset>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="table-responsive font-weight-bold">
+                                                <table class="table align-items-center table-flush">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>SL</th>
+                                                            <th>Select</th>
+                                                            <th>Report Name</th>
+                                                            <th>Report Id</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>@(++d)</td>
+                                                                <td><input class="form-control checkbox-inline" name="selection[@d]" id="selection[@d]" ng-click="LoadReportParamters(@item.REPORT_ID,@d)" type="checkbox" value="true" height="10" style="height:20px !important" /></td>
+                                                                <td>@item.REPORT_NAME <input id="ReportIdEncrypt[@d]" name="ReportIdEncrypt" value="@item.ReportIdEncrypt" hidden /></td>
+                                                                <td>@item.REPORT_ID</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-footer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 ">
+                                        <div class="card">
+                                            <div class="card-header py-3 bg-secondary d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold text-light">Parameter</h6>
+                                            </div>
+                                            <div>
+                                                <div class="customer-message align-items-center m-1">
+                                                    <div class="col-md-12 space-bottom" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="COMPANY_ID">Company</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%">
+
+                                                                    <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_unit_param" style="display:block">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="UNIT_ID">Unit</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="UNIT_ID"
+                                                                        name="UNIT_ID" ng-model="model.UNIT_ID" ng-change="selectUnitName()" style="width:100%">
+
+                                                                    <option ng-repeat="item in CompanyUnit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="date_from_param" style="display:block">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DATE_FROM">{{InvoiceDate}} Date</label>
+                                                            </div>
+                                                            <div class="col-md-8 simple-date2">
+
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" ng-model="model.DATE_FROM" ng-change="parameterChanged()">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="date_to_param" style="display:block">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DATE_TO">To Date</label>
+                                                            </div>
+                                                            <div class="col-md-8 simple-date2">
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" ng-model="model.DATE_TO" ng-change="parameterChanged()">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_division_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DIVISION_CODE">Division</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="DIVISION_CODE" multiple
+                                                                        name="DIVISION_CODE" ng-model="model.DIVISION_CODE" ng-change="onChangeDivision()" style="width:100%">
+
+                                                                    <option ng-repeat="item in Divisions" value="{{item.DIVISION_CODE}}" ng-selected="item.DIVISION_CODE == model.DIVISION_CODE">{{item.DIVISION_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_region_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="REGION_CODE">Region</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="REGION_CODE" multiple
+                                                                        name="REGION_CODE" ng-model="model.REGION_CODE" ng-change="onChangeRegion()" style="width:100%">
+
+                                                                    <option ng-repeat="item in Regions" value="{{item.REGION_CODE}}" ng-selected="item.REGION_CODE == model.REGION_CODE">{{item.REGION_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_area_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="AREA_CODE">Area</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="AREA_CODE" multiple
+                                                                        name="AREA_CODE" ng-model="model.AREA_CODE" ng-change="onChangeArea()" style="width:100%">
+
+                                                                    <option ng-repeat="item in Areas" value="{{item.AREA_CODE}}" ng-selected="item.AREA_CODE == model.AREA_CODE">{{item.AREA_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_territory_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="TERRITORY_CODE">Territory</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="TERRITORY_CODE" multiple
+                                                                        name="TERRITORY_CODE" ng-model="model.TERRITORY_CODE" ng-change="onChangeTerritory()" style="width:100%">
+
+                                                                    <option ng-repeat="item in Territories" value="{{item.TERRITORY_CODE}}" ng-selected="item.TERRITORY_CODE == model.TERRITORY_CODE">{{item.TERRITORY_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_customer_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="MARKET_CUSTOMER_ID">Customer</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="MARKET_CUSTOMER_ID" multiple
+                                                                        name="MARKET_CUSTOMER_ID" ng-model="model.MARKET_CUSTOMER_ID" style="width:100%">
+
+                                                                    <option ng-repeat="item in MarketCustomers" value="{{item.CUSTOMER_ID}}" ng-selected="item.CUSTOMER_ID == model.MARKET_CUSTOMER_ID">{{item.CUSTOMER_NAME}} | {{item.CUSTOMER_CODE}} </option>
+                                                                </select>
+                                                                <span>Customer will be load after Territory select</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="customer_id_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Customer</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="CUSTOMER_ID" @*multiple*@
+                                                                        name="CUSTOMER_ID" ng-model="model.CUSTOMER_ID" style="width:100%">
+
+                                                                    <option ng-repeat="item in Customers" ng-selected="item.CUSTOMER_ID == model.CUSTOMER_ID" value="{{item.CUSTOMER_ID}}">{{item.CUSTOMER_NAME}} | CODE:{{item.CUSTOMER_CODE}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="mst_id_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Invoice</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="MST_ID"
+                                                                        name="MST_ID" ng-model="model.MST_ID" style="width:100%">
+
+                                                                    <option ng-repeat="item in InvoiceNumbers" ng-selected="item.MST_ID == model.MST_ID" value="{{item.MST_ID}}">{{item.INVOICE_NO}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="Color_no_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="MST_ID">Color</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="form-control" name="ReportColor" ng-model="model.ReportColor" id="ReportColor" style="width:100%">
+                                                                    <option value="color">Colorful</option>
+                                                                    <option value="Grayscale">Grayscale</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    @*<partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>*@
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/Report/Controller/SalesAndCollectionReportCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Report/Service/SalesAndCollectionReportServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+            });
+        });
+    </script>
+}

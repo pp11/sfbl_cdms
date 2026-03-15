@@ -1,0 +1,157 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.Order_Adjustment
+@{
+    ViewData["Title"] = "Order Adjustment";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:240px">Adjustment Entry</legend>
+                    <span ng-init="GetOrderData('@Model.ORDER_MST_ID','@Model.ORDER_NO', '@Model.ORDER_UNIT_ID')"></span>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                           name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                    <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                           name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                                    <input id="ORDER_UNIT_ID" type="number" hidden class="form-control" required
+                                           name="ORDER_UNIT_ID" ng-model="model.ORDER_UNIT_ID">
+                                    <input id="ORDER_UNIT_NAME" type="text" hidden class="form-control"
+                                           name="ORDER_UNIT_NAME" ng-model="model.ORDER_UNIT_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_NO">Order No</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ORDER_NO" type="text" disabled class="form-control" required
+                                           name="ORDER_NO" ng-model="model.ORDER_NO">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ADJUSTMENT_ID">Adjustment Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="ADJUSTMENT_ID" required
+                                            name="ADJUSTMENT_ID" ng-model="model.ADJUSTMENT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Adjustments" value="{{item.ADJUSTMENT_ID}}" ng-selected="item.ADJUSTMENT_ID == model.ADJUSTMENT_ID">{{item.ADJUSTMENT_NAME}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ADJUSTMENT_AMOUNT">Adjustment Amount </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="ADJUSTMENT_AMOUNT" type="number" class="form-control" required
+                                           name="ADJUSTMENT_AMOUNT" ng-model="model.ADJUSTMENT_AMOUNT">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REMARKS" type="text" class="form-control"
+                                           name="REMARKS" ng-model="model.REMARKS">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset>
+                <legend style="width:240px">Adjustment List</legend>
+                <div class="row" style="height: 57vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsListAdj" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/OrderAdjustment/Controller/AdjustmentCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/OrderAdjustment/Service/AdjustmentServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+               $(".select2-single").select2({
+                   placeholder: "Select...."
+               });
+
+        });
+    </script>
+}

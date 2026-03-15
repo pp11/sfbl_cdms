@@ -1,0 +1,137 @@
+﻿@model List<SalesAndDistributionSystem.Domain.Models.ViewModels.Security.ReportPermission>
+@{
+    int d = 0;
+    ViewData["Title"] = "Target Report";
+
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/Target/Report/TargetReport" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetExcel()' ng-disabled="model.CSV_PERMISSION != 'Active'" type="button" class="btn btn-secondary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-excel"></i>
+                    </span>
+                    <span class="text">Excel Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Dot Printer Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">Dot Printer PDF Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">PDF Report</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-1">
+                <div class="card-body p-1">
+                    <form name="formProductAdd">
+                        <fieldset>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="table-responsive font-weight-bold">
+                                                <table class="table align-items-center table-flush">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>SL</th>
+                                                            <th>Select</th>
+                                                            <th>Report Name</th>
+                                                            <th>Report Id</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>@(++d)</td>
+                                                                <td><input class="form-control checkbox-inline" name="selection[@d]" id="selection[@d]" ng-click="LoadReportParamters(@item.REPORT_ID,@d)" type="checkbox" value="true" height="10" style="height:20px !important" /></td>
+                                                                <td>@item.REPORT_NAME <input id="ReportIdEncrypt[@d]" name="ReportIdEncrypt" value="@item.ReportIdEncrypt" hidden /></td>
+                                                                <td>@item.REPORT_ID</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-footer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 ">
+                                        <div class="card">
+                                            <div class="card-header py-3 bg-secondary d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold text-light">Parameter</h6>
+                                            </div>
+                                            <div>
+                                                <div class="customer-message align-items-center m-1">
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    @*<partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>*@
+</div>
+<!--Row-->
+@section Scripts {
+    <script src="~/ScriptsNg/Target/Report/Controller/TargetReportCtr.js?v=2"></script>
+    <script src="~/ScriptsNg/Target/Report/Service/TargetReportService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+            });
+        });
+    </script>
+}

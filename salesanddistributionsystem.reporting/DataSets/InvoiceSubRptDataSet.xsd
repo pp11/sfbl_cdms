@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="InvoiceSubRptDataSet" targetNamespace="http://tempuri.org/InvoiceSubRptDataSet.xsd" xmlns:mstns="http://tempuri.org/InvoiceSubRptDataSet.xsd" xmlns="http://tempuri.org/InvoiceSubRptDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;Persist Security Info=True;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="silsqadb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT '' INVOICE_NO, 0 SKU_ID, 0 UNIT_TP, 0 INVOICE_QTY, '' BONUS_STATUS FROM DUAL</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="SKU_ID" DataSetColumn="SKU_ID" />
+              <Mapping SourceColumn="UNIT_TP" DataSetColumn="UNIT_TP" />
+              <Mapping SourceColumn="INVOICE_QTY" DataSetColumn="INVOICE_QTY" />
+              <Mapping SourceColumn="BONUS_STATUS" DataSetColumn="BONUS_STATUS" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="InvoiceSubRptDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="InvoiceSubRptDataSet" msprop:Generator_DataSetName="InvoiceSubRptDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_ID" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" msprop:Generator_UserColumnName="SKU_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_QTY" msprop:Generator_ColumnPropNameInRow="INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="INVOICE_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_QTY" msprop:Generator_UserColumnName="INVOICE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BONUS_STATUS" msprop:Generator_ColumnPropNameInRow="BONUS_STATUS" msprop:Generator_ColumnPropNameInTable="BONUS_STATUSColumn" msprop:Generator_ColumnVarNameInTable="columnBONUS_STATUS" msprop:Generator_UserColumnName="BONUS_STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

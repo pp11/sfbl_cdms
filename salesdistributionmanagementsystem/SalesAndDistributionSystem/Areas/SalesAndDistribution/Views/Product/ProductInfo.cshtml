@@ -1,0 +1,534 @@
+﻿@{
+    ViewData["Title"] = "Product Info";
+}
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button type="button" style="width: 200px;color:white;cursor:pointer" pe="button" data-toggle="modal" data-target="#exampleModalScrollable1" ng-click="LoadSKU_DEPOTData()" name="btnSubmit1" class="btn  btn-success mb-1">Load Depo SKU Relation </button></li>
+
+            <li class="breadcrumb-item"><button class="btn  bg-primary mb-1" style="color:white" data-toggle="modal" data-target="#exampleModalScrollable">Incomplete Product</button></li>
+
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" @*ng-disabled="formMenuCategoryAdd.$invalid"*@ name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+
+
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:220px">Product Entry</legend>
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                           name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                    <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                           name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="UNIT_ID" required
+                                            name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in CompanyUnit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom" style="display:none">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID" style="">Distributor Product Type</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="DISTRIBUTOR_PRODUCT_TYPE" @*ng-disabled="model.USER_TYPE != 'SuperAdmin'"*@
+                                            name="DISTRIBUTOR_PRODUCT_TYPE" ng-model="model.DISTRIBUTOR_PRODUCT_TYPE" style="width:100%">
+                                        <option ng-selected="item.BRAND_ID == model.BRAND_ID" value="ALL">ALL</option>
+                                        <option ng-selected="item.BRAND_ID == model.BRAND_ID" value="TEST">TEST</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="STATUS">Status</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PRODUCT_STATUS"
+                                            name="PRODUCT_STATUS" ng-model="model.PRODUCT_STATUS" style="width:100%">
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.PRODUCT_STATUS">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SKU_CODE">SKU Code<sup style="color:red">**</sup></label>
+                                </div>
+
+                                <div class="col-md-8" ng-hide="model.SKU_ID>0">
+                                    <select class="select2-single form-control" id="SKU_CODE" ng-change="LoadSkuInfo()"
+                                            name="SKU_CODE" ng-model="model.SKU_CODE" style="width:100%">
+                                        <option ng-repeat="item in SkuCode" value="{{item.SKU_CODE}}" ng-selected="item.SKU_CODE == model.SKU_CODE">{{item.SKU_NAME+" ("+item.SKU_CODE+")"}}</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-8" ng-hide="model.SKU_ID==0">
+                                    <input id="SKU_CODE" type="text" class="form-control" disabled
+                                           name="SKU_CODE" ng-model="model.SKU_CODE">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="SKU_NAME">SKU Name<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="SKU_NAME" type="text" class="form-control" required
+                                           name="SKU_NAME" ng-model="model.SKU_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PACK_SIZE">Pack Size</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <select class="form-control" id="STATUS"
+                                            name="PACK_SIZE" ng-model="model.PACK_SIZE" style="width:100%">
+
+                                        <option ng-repeat="item in PackSize" value="{{item.PACK_SIZE}}" ng-selected="item.PACK_SIZE == model.PACK_SIZE">{{item.PACK_SIZE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="SKU_NAME_BANGLA">SKU (Bangla)</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input id="SKU_NAME_BANGLA" type="text" class="form-control"
+                                           name="SKU_NAME_BANGLA" ng-model="model.SKU_NAME_BANGLA">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BRAND_ID">Brand<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="BRAND_ID" required
+                                            name="BRAND_ID" ng-model="model.BRAND_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Brand" ng-selected="item.BRAND_ID == model.BRAND_ID" value="{{item.BRAND_ID}}">{{item.BRAND_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="CATEGORY_ID">Category<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="CATEGORY_ID" required
+                                            name="CATEGORY_ID" ng-model="model.CATEGORY_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Categories" value="{{item.CATEGORY_ID}}" ng-selected="item.CATEGORY_ID == model.CATEGORY_ID">{{item.CATEGORY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PRIMARY_PRODUCT_ID">Primary Product<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="PRIMARY_PRODUCT_ID" required
+                                            name="PRIMARY_PRODUCT_ID" ng-model="model.PRIMARY_PRODUCT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in PrimaryProduct" value="{{item.PRIMARY_PRODUCT_ID}}" ng-selected="item.PRIMARY_PRODUCT_ID == model.PRIMARY_PRODUCT_ID">{{item.PRIMARY_PRODUCT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="BASE_PRODUCT_ID">Base Product<sup style="color:red">**</sup> </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="BASE_PRODUCT_ID" required
+                                            name="BASE_PRODUCT_ID" ng-model="model.BASE_PRODUCT_ID" style="width:100%">
+
+                                        <option ng-repeat="item in BaseProduct" value="{{item.BASE_PRODUCT_ID}}" ng-selected="item.BASE_PRODUCT_ID == model.BASE_PRODUCT_ID">{{item.BASE_PRODUCT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PRODUCT_SEASON_ID">Product Season<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="PRODUCT_SEASON_ID" required
+                                            name="PRODUCT_SEASON_ID" ng-model="model.PRODUCT_SEASON_ID" style="width:100%">
+
+                                        <option ng-repeat="item in ProductSeason" value="{{item.PRODUCT_SEASON_ID}}" ng-selected="item.PRODUCT_SEASON_ID == model.PRODUCT_SEASON_ID">{{item.PRODUCT_SEASON_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="GROUP_ID">Group<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="GROUP_ID" required
+                                            name="GROUP_ID" ng-model="model.GROUP_ID" style="width:100%">
+
+                                        <option ng-repeat="item in Group" value="{{item.GROUP_ID}}" ng-selected="item.GROUP_ID == model.GROUP_ID">{{item.GROUP_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PRODUCT_TYPE_ID">Product Type<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PRODUCT_TYPE_ID" required
+                                            name="PRODUCT_TYPE_ID" ng-model="model.PRODUCT_TYPE_ID" style="width:100%">
+
+                                        <option ng-repeat="item in ProductType" value="{{item.PRODUCT_TYPE_ID}}" ng-selected="item.PRODUCT_TYPE_ID == model.PRODUCT_TYPE_ID">{{item.PRODUCT_TYPE_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="STORAGE_ID">Storage<sup style="color:red">**</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="STORAGE_ID" required
+                                            name="STORAGE_ID" ng-model="model.STORAGE_ID" style="width:100%">
+
+                                        <option ng-repeat="item in ProducStorage" value="{{item.STORAGE_ID}}" ng-selected="item.STORAGE_ID == model.STORAGE_ID">{{item.STORAGE_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="FONT_COLOR">Font Color</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="FONT_COLOR" type="text" class="form-control"
+                                           name="FONT_COLOR" ng-model="model.FONT_COLOR">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="QTY_PER_PACK">Qty/Pack<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="QTY_PER_PACK" type="number" class="form-control" min="0" name="QTY_PER_PACK" ng-model="model.QTY_PER_PACK">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="WEIGHT_PER_PACK">Weight/Pack</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="WEIGHT_PER_PACK" type="number" class="form-control" min="0" name="WEIGHT_PER_PACK" ng-model="model.WEIGHT_PER_PACK">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="WEIGHT_UNIT">Weight Unit</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="WEIGHT_UNIT" name="WEIGHT_UNIT" ng-model="model.WEIGHT_UNIT" style="width:100%">
+                                        <option ng-repeat="item in Unit" value="{{item.MEASURING_UNIT_NAME}}" ng-selected="item.MEASURING_UNIT_NAME == model.WEIGHT_UNIT">{{item.MEASURING_UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SHIPPER_QTY">Shipper QTY<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="SHIPPER_QTY" type="number" class="form-control" min="0" name="SHIPPER_QTY" ng-model="model.SHIPPER_QTY">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SHIPPER_WEIGHT">Shipper Weight<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input id="SHIPPER_WEIGHT" type="number" class="form-control" min="0" name="SHIPPER_WEIGHT" ng-model="model.SHIPPER_WEIGHT">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="SHIPPER_WEIGHT_UNIT" name="SHIPPER_WEIGHT_UNIT" ng-model="model.SHIPPER_WEIGHT_UNIT" style="width:100%">
+                                        <option ng-repeat="item in Unit" value="{{item.MEASURING_UNIT_NAME}}" ng-selected="item.MEASURING_UNIT_NAME == model.SHIPPER_WEIGHT_UNIT">{{item.MEASURING_UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="SHIPPER_VOLUME">Shipper Volume<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input id="SHIPPER_VOLUME" type="number" class="form-control" min="0" name="SHIPPER_VOLUME" ng-model="model.SHIPPER_VOLUME">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class=" form-control" id="SHIPPER_VOLUME_UNIT" name="SHIPPER_VOLUME_UNIT" ng-model="model.SHIPPER_VOLUME_UNIT" style="width:100%">
+                                        <option ng-repeat="item in Unit" value="{{item.MEASURING_UNIT_NAME}}" ng-selected="item.MEASURING_UNIT_NAME == model.SHIPPER_VOLUME_UNIT">{{item.MEASURING_UNIT_NAME}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PACK_UNIT">Pack Unit<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PACK_UNIT" name="PACK_UNIT" ng-model="model.PACK_UNIT" style="width:100%">
+                                        <option ng-repeat="item in Unit" value="{{item.MEASURING_UNIT_NAME}}" ng-selected="item.MEASURING_UNIT_NAME == model.PACK_UNIT">{{item.MEASURING_UNIT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PACK_VALUE">Pack Value<sup style="color:red">*</sup></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="PACK_VALUE" type="number" class="form-control" min="0" name="PACK_VALUE" ng-model="model.PACK_VALUE">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REMARKS" type="text" class="form-control" name="REMARKS" ng-model="model.REMARKS">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="PRODUCT_SEGMENT_NAME">Product Segmant</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="PRODUCT_SEGMENT_NAME" name="PRODUCT_SEGMENT_NAME" ng-model="model.PRODUCT_SEGMENT_NAME" style="width:100%">
+                                        <option ng-repeat="item in Segments" value="{{item.PRODUCT_SEGMENT_NAME}}" ng-selected="item.PRODUCT_SEGMENT_NAME == model.PRODUCT_SEGMENT_NAME">{{item.PRODUCT_SEGMENT_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <fieldset style="overflow:hidden">
+                <legend style="width:190px">Product List</legend>
+                <div class="row" style="background-color:#eaecf4;margin-top:5px;padding:5px">
+                    <div class="col-md-8"><h5 style="margin-left:10px;margin-top:7px;font-weight:700;color:blueviolet"><sup>*</sup>Please Click on CheckBox of All, Active and InActive to view Status filtered Data</h5></div>
+                    <div class="col-md-1" style="display:flex;font-weight:700;color:blueviolet; justify-content:left" ">
+                        <input id="AllCustomer" type="checkbox" class="form-control" name="AllCustomer" ng-checked="ActiveCustomer == false && InActiveCustomer == false && AllCustomer == true" ng-model="AllCustomer" ng-change="LoadStatusFilteredDataAll()"><label>All</label>
+                    </div>
+                    <div class="col-md-1" style="display:flex">
+                        <input id="ActiveCustomer" type="checkbox" class="form-control" name="ActiveCustomer" ng-model="ActiveCustomer" ng-checked="ActiveCustomer == true && InActiveCustomer == false && AllCustomer == false" ng-change="LoadStatusFilteredDataActive()"><label>Active</label>
+                    </div>
+                    <div class="col-md-1" style="display:flex">
+                        <input id="InActiveCustomer" type="checkbox" class="form-control" name="InActiveCustomer" ng-model="InActiveCustomer" ng-checked="ActiveCustomer == false && InActiveCustomer == true && AllCustomer == false" ng-change="LoadStatusFilteredDataInActive()"><label>InActive</label>
+                    </div>
+                </div>
+                <div class="row" style="height: 57vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+            <div class="modal-content" style="height:1000px !important">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal scrollable title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="height: 75vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                                <div ui-grid="gridPrimaryOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalScrollable1Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+            <div class="modal-content" style="height:1000px !important">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollable1Title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="SHIPPER_WEIGHT">Shipper Weight<sup style="color:red">*</sup></label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="select2-single form-control" id="SKU_CUSTOMER"
+                                    name="SKU_CUSTOMER" ng-model="SKU_CUSTOMER" style="width:100%">
+
+                                <option ng-repeat="item in product_list" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == SKU_CUSTOMER">{{item.SKU_CODE}}|{{item.SKU_NAME}}</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" id="UNIT_CUSTOMER" name="UNIT_CUSTOMER" ng-model="UNIT_CUSTOMER" style="width:100%">
+
+                                <option ng-repeat="item in CompanyUnit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == UNIT_CUSTOMER">{{item.UNIT_NAME}}</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-2">
+                            <li class="breadcrumb-item"><button class="btn  bg-primary mb-1" style="color:white" ng-click="SaveSKUDepotRelation()">Save</button></li>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 75vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                                <div ui-grid="gridSKUDepoOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/Product/Controller/ProductInfoCtr.js?v=14"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Product/Service/ProductInfoServices.js?v=14"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $(".select2-single").select2({
+        });
+        });
+    </script>
+                    
+}

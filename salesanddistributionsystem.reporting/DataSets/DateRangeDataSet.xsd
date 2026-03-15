@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DateRangeDataSet" targetNamespace="http://tempuri.org/DateRangeDataSet.xsd" xmlns:mstns="http://tempuri.org/DateRangeDataSet.xsd" xmlns="http://tempuri.org/DateRangeDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DateRangeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DateRangeDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DateRangeDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DATE_FROM" msprop:Generator_ColumnPropNameInTable="DATE_FROMColumn" msprop:Generator_ColumnPropNameInRow="DATE_FROM" msprop:Generator_UserColumnName="DATE_FROM" msprop:Generator_ColumnVarNameInTable="columnDATE_FROM" type="xs:string" minOccurs="0" />
+              <xs:element name="DATE_TO" msprop:Generator_ColumnPropNameInTable="DATE_TOColumn" msprop:Generator_ColumnPropNameInRow="DATE_TO" msprop:Generator_UserColumnName="DATE_TO" msprop:Generator_ColumnVarNameInTable="columnDATE_TO" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_TO" msprop:Generator_ColumnPropNameInRow="INVOICE_TO" msprop:Generator_ColumnPropNameInTable="INVOICE_TOColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_TO" msprop:Generator_UserColumnName="INVOICE_TO" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_FROM" msprop:Generator_ColumnPropNameInRow="INVOICE_FROM" msprop:Generator_ColumnPropNameInTable="INVOICE_FROMColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_FROM" msprop:Generator_UserColumnName="INVOICE_FROM" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

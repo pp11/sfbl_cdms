@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CustomerCollectionDataSet" targetNamespace="http://tempuri.org/CustomerCollectionDataSet.xsd" xmlns:mstns="http://tempuri.org/CustomerCollectionDataSet.xsd" xmlns="http://tempuri.org/CustomerCollectionDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sildemodb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT M.COLLECTION_MST_ID, BATCH_NO,
+    TO_CHAR(BATCH_DATE, 'DD/MM/YYYY') BATCH_DATE,
+    --BATCH_STATUS,
+    BATCH_POSTING_STATUS,
+    FN_UNIT_NAME(M.COMPANY_ID, M.UNIT_ID) UNIT_NAME,
+    D.CUSTOMER_ID,
+    D.CUSTOMER_CODE,
+    C.CUSTOMER_NAME,
+    D.VOUCHER_NO,
+    TO_CHAR(VOUCHER_DATE, 'DD/MM/YYYY') VOUCHER_DATE,
+    FN_BRANCH_NAME(BANK_ID, BRANCH_ID) BRANCH_NAME,
+    FN_BANK_NAME(BANK_ID) BANK_NAME,
+    INVOICE_NO,
+    COLLECTION_MODE,
+    COLLECTION_AMT,
+    TDS_AMT,
+    MEMO_COST,
+    NET_COLLECTION_AMT,
+    D.REMARKS
+    FROM COLLECTION_MST M, COLLECTION_DTL D, CUSTOMER_INFO C 
+    WHERE M.COLLECTION_MST_ID = D.COLLECTION_MST_ID
+    AND   D.CUSTOMER_ID =C.CUSTOMER_ID 
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="COLLECTION_MST_ID" DataSetColumn="COLLECTION_MST_ID" />
+              <Mapping SourceColumn="BATCH_NO" DataSetColumn="BATCH_NO" />
+              <Mapping SourceColumn="BATCH_DATE" DataSetColumn="BATCH_DATE" />
+              <Mapping SourceColumn="BATCH_POSTING_STATUS" DataSetColumn="BATCH_POSTING_STATUS" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+              <Mapping SourceColumn="CUSTOMER_ID" DataSetColumn="CUSTOMER_ID" />
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="VOUCHER_NO" DataSetColumn="VOUCHER_NO" />
+              <Mapping SourceColumn="VOUCHER_DATE" DataSetColumn="VOUCHER_DATE" />
+              <Mapping SourceColumn="BRANCH_NAME" DataSetColumn="BRANCH_NAME" />
+              <Mapping SourceColumn="BANK_NAME" DataSetColumn="BANK_NAME" />
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="COLLECTION_MODE" DataSetColumn="COLLECTION_MODE" />
+              <Mapping SourceColumn="COLLECTION_AMT" DataSetColumn="COLLECTION_AMT" />
+              <Mapping SourceColumn="TDS_AMT" DataSetColumn="TDS_AMT" />
+              <Mapping SourceColumn="MEMO_COST" DataSetColumn="MEMO_COST" />
+              <Mapping SourceColumn="NET_COLLECTION_AMT" DataSetColumn="NET_COLLECTION_AMT" />
+              <Mapping SourceColumn="REMARKS" DataSetColumn="REMARKS" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CustomerCollectionDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="CustomerCollectionDataSet" msprop:Generator_DataSetName="CustomerCollectionDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COLLECTION_MST_ID" msprop:Generator_ColumnPropNameInRow="COLLECTION_MST_ID" msprop:Generator_ColumnPropNameInTable="COLLECTION_MST_IDColumn" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_MST_ID" msprop:Generator_UserColumnName="COLLECTION_MST_ID" type="xs:decimal" />
+              <xs:element name="BATCH_NO" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BATCH_DATE" msprop:Generator_ColumnPropNameInRow="BATCH_DATE" msprop:Generator_ColumnPropNameInTable="BATCH_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_DATE" msprop:Generator_UserColumnName="BATCH_DATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BATCH_POSTING_STATUS" msprop:Generator_ColumnPropNameInRow="BATCH_POSTING_STATUS" msprop:Generator_ColumnPropNameInTable="BATCH_POSTING_STATUSColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_POSTING_STATUS" msprop:Generator_UserColumnName="BATCH_POSTING_STATUS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_ID" msprop:Generator_ColumnPropNameInRow="CUSTOMER_ID" msprop:Generator_ColumnPropNameInTable="CUSTOMER_IDColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_ID" msprop:Generator_UserColumnName="CUSTOMER_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOUCHER_NO" msprop:Generator_ColumnPropNameInRow="VOUCHER_NO" msprop:Generator_ColumnPropNameInTable="VOUCHER_NOColumn" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_NO" msprop:Generator_UserColumnName="VOUCHER_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOUCHER_DATE" msprop:Generator_ColumnPropNameInRow="VOUCHER_DATE" msprop:Generator_ColumnPropNameInTable="VOUCHER_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_DATE" msprop:Generator_UserColumnName="VOUCHER_DATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRANCH_NAME" msprop:Generator_ColumnPropNameInRow="BRANCH_NAME" msprop:Generator_ColumnPropNameInTable="BRANCH_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnBRANCH_NAME" msprop:Generator_UserColumnName="BRANCH_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BANK_NAME" msprop:Generator_ColumnPropNameInRow="BANK_NAME" msprop:Generator_ColumnPropNameInTable="BANK_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnBANK_NAME" msprop:Generator_UserColumnName="BANK_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COLLECTION_MODE" msprop:Generator_ColumnPropNameInRow="COLLECTION_MODE" msprop:Generator_ColumnPropNameInTable="COLLECTION_MODEColumn" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_MODE" msprop:Generator_UserColumnName="COLLECTION_MODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COLLECTION_AMT" msprop:Generator_ColumnPropNameInRow="COLLECTION_AMT" msprop:Generator_ColumnPropNameInTable="COLLECTION_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_AMT" msprop:Generator_UserColumnName="COLLECTION_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TDS_AMT" msprop:Generator_ColumnPropNameInRow="TDS_AMT" msprop:Generator_ColumnPropNameInTable="TDS_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnTDS_AMT" msprop:Generator_UserColumnName="TDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MEMO_COST" msprop:Generator_ColumnPropNameInRow="MEMO_COST" msprop:Generator_ColumnPropNameInTable="MEMO_COSTColumn" msprop:Generator_ColumnVarNameInTable="columnMEMO_COST" msprop:Generator_UserColumnName="MEMO_COST" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NET_COLLECTION_AMT" msprop:Generator_ColumnPropNameInRow="NET_COLLECTION_AMT" msprop:Generator_ColumnPropNameInTable="NET_COLLECTION_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnNET_COLLECTION_AMT" msprop:Generator_UserColumnName="NET_COLLECTION_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_ColumnVarNameInTable="columnREMARKS" msprop:Generator_UserColumnName="REMARKS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

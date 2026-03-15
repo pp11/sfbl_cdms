@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "SalesAndDistributionSystem\\SalesAndDistributionSystem.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\SalesAndDistributionSystem.Reporting\\SalesAndDistributionSystem.Reporting.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

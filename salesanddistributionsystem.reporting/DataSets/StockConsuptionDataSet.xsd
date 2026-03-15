@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockConsuptionDataSet" targetNamespace="http://tempuri.org/StockConsuptionDataSet.xsd" xmlns:mstns="http://tempuri.org/StockConsuptionDataSet.xsd" xmlns="http://tempuri.org/StockConsuptionDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockConsuptionDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="StockConsuptionDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StockConsuptionDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_UserColumnName="COMPANY_ID" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="COMPANY_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_NAMEColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_NAME" msprop:Generator_UserColumnName="COMPANY_NAME" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_UserColumnName="SKU_ID" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OPENING_QTY" msprop:Generator_ColumnPropNameInTable="OPENING_QTYColumn" msprop:Generator_ColumnPropNameInRow="OPENING_QTY" msprop:Generator_UserColumnName="OPENING_QTY" msprop:Generator_ColumnVarNameInTable="columnOPENING_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQ_RECEIVE_QTY" msprop:Generator_ColumnPropNameInTable="REQ_RECEIVE_QTYColumn" msprop:Generator_ColumnPropNameInRow="REQ_RECEIVE_QTY" msprop:Generator_UserColumnName="REQ_RECEIVE_QTY" msprop:Generator_ColumnVarNameInTable="columnREQ_RECEIVE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQ_RET_RCV_QTY" msprop:Generator_ColumnPropNameInTable="REQ_RET_RCV_QTYColumn" msprop:Generator_ColumnPropNameInRow="REQ_RET_RCV_QTY" msprop:Generator_UserColumnName="REQ_RET_RCV_QTY" msprop:Generator_ColumnVarNameInTable="columnREQ_RET_RCV_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INV_RET_RCV_QTY" msprop:Generator_ColumnPropNameInTable="INV_RET_RCV_QTYColumn" msprop:Generator_ColumnPropNameInRow="INV_RET_RCV_QTY" msprop:Generator_UserColumnName="INV_RET_RCV_QTY" msprop:Generator_ColumnVarNameInTable="columnINV_RET_RCV_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GAIN_ADJUSTMENT_QTY" msprop:Generator_ColumnPropNameInTable="GAIN_ADJUSTMENT_QTYColumn" msprop:Generator_ColumnPropNameInRow="GAIN_ADJUSTMENT_QTY" msprop:Generator_UserColumnName="GAIN_ADJUSTMENT_QTY" msprop:Generator_ColumnVarNameInTable="columnGAIN_ADJUSTMENT_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TRANS_RCV_QTY" msprop:Generator_ColumnPropNameInTable="TRANS_RCV_QTYColumn" msprop:Generator_ColumnPropNameInRow="TRANS_RCV_QTY" msprop:Generator_UserColumnName="TRANS_RCV_QTY" msprop:Generator_ColumnVarNameInTable="columnTRANS_RCV_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTAL_IN" msprop:Generator_ColumnPropNameInTable="TOTAL_INColumn" msprop:Generator_ColumnPropNameInRow="TOTAL_IN" msprop:Generator_UserColumnName="TOTAL_IN" msprop:Generator_ColumnVarNameInTable="columnTOTAL_IN" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQ_ISSUE_QTY" msprop:Generator_ColumnPropNameInTable="REQ_ISSUE_QTYColumn" msprop:Generator_ColumnPropNameInRow="REQ_ISSUE_QTY" msprop:Generator_UserColumnName="REQ_ISSUE_QTY" msprop:Generator_ColumnVarNameInTable="columnREQ_ISSUE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQ_RETURN_QTY" msprop:Generator_ColumnPropNameInTable="REQ_RETURN_QTYColumn" msprop:Generator_ColumnPropNameInRow="REQ_RETURN_QTY" msprop:Generator_UserColumnName="REQ_RETURN_QTY" msprop:Generator_ColumnVarNameInTable="columnREQ_RETURN_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_QTY" msprop:Generator_ColumnPropNameInTable="INVOICE_QTYColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_QTY" msprop:Generator_UserColumnName="INVOICE_QTY" msprop:Generator_ColumnVarNameInTable="columnINVOICE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LOSE_ADJUSTMENT_QTY" msprop:Generator_ColumnPropNameInTable="LOSE_ADJUSTMENT_QTYColumn" msprop:Generator_ColumnPropNameInRow="LOSE_ADJUSTMENT_QTY" msprop:Generator_UserColumnName="LOSE_ADJUSTMENT_QTY" msprop:Generator_ColumnVarNameInTable="columnLOSE_ADJUSTMENT_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TRANSFER_QTY" msprop:Generator_ColumnPropNameInTable="TRANSFER_QTYColumn" msprop:Generator_ColumnPropNameInRow="TRANSFER_QTY" msprop:Generator_UserColumnName="TRANSFER_QTY" msprop:Generator_ColumnVarNameInTable="columnTRANSFER_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTAL_OUT" msprop:Generator_ColumnPropNameInTable="TOTAL_OUTColumn" msprop:Generator_ColumnPropNameInRow="TOTAL_OUT" msprop:Generator_UserColumnName="TOTAL_OUT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_OUT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_QTY" msprop:Generator_ColumnPropNameInTable="CLOSING_QTYColumn" msprop:Generator_ColumnPropNameInRow="CLOSING_QTY" msprop:Generator_UserColumnName="CLOSING_QTY" msprop:Generator_ColumnVarNameInTable="columnCLOSING_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FG_RECEIVE_QTY" msprop:Generator_ColumnPropNameInTable="FG_RECEIVE_QTYColumn" msprop:Generator_ColumnPropNameInRow="FG_RECEIVE_QTY" msprop:Generator_UserColumnName="FG_RECEIVE_QTY" msprop:Generator_ColumnVarNameInTable="columnFG_RECEIVE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MISC_ISSUE_QTY" msprop:Generator_ColumnPropNameInTable="MISC_ISSUE_QTYColumn" msprop:Generator_ColumnPropNameInRow="MISC_ISSUE_QTY" msprop:Generator_UserColumnName="MISC_ISSUE_QTY" msprop:Generator_ColumnVarNameInTable="columnMISC_ISSUE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" type="xs:string" minOccurs="0" />
+              <xs:element name="UN_FREEZE_QTY" msprop:Generator_UserColumnName="UN_FREEZE_QTY" msprop:Generator_ColumnPropNameInTable="UN_FREEZE_QTYColumn" msprop:Generator_ColumnPropNameInRow="UN_FREEZE_QTY" msprop:Generator_ColumnVarNameInTable="columnUN_FREEZE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FREEZE_QTY" msprop:Generator_UserColumnName="FREEZE_QTY" msprop:Generator_ColumnPropNameInTable="FREEZE_QTYColumn" msprop:Generator_ColumnPropNameInRow="FREEZE_QTY" msprop:Generator_ColumnVarNameInTable="columnFREEZE_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_FREEZE_QTY" msprop:Generator_ColumnPropNameInRow="CLOSING_FREEZE_QTY" msprop:Generator_ColumnPropNameInTable="CLOSING_FREEZE_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnCLOSING_FREEZE_QTY" msprop:Generator_UserColumnName="CLOSING_FREEZE_QTY" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

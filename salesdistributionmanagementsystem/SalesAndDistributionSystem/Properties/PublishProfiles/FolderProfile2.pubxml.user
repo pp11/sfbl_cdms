@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <History>True|2025-06-15T03:31:17.5673973Z||;True|2025-06-15T09:18:09.2456250+06:00||;True|2025-06-15T09:14:46.6838882+06:00||;False|2025-06-15T09:13:18.9002364+06:00||;True|2025-06-12T16:03:57.1536596+06:00||;True|2025-06-12T15:52:20.1873938+06:00||;False|2025-06-12T15:49:00.9603740+06:00||;</History>
+    <LastFailureDetails />
+    <_PublishTargetUrl>E:\CDMS_NEW_VERSION\salesdistributionmanagementsystem\SalesAndDistributionSystem\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+  </PropertyGroup>
+</Project>

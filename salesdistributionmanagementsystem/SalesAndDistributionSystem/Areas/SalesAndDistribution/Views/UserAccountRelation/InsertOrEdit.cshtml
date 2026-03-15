@@ -1,0 +1,132 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution.User_Account_Relation_Mst
+@{
+    ViewData["Title"] = "User Account Relation";
+}
+@section Styles {
+    <link href="/css/site.css" rel="stylesheet">
+}
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/UserAccountRelation/List" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Search</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button type="button" class="btn btn-info btn-icon-split btn-sm" ng-click="ClearForm()">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </span>
+                    <span class="text">Reset</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid" ng-click="SaveData(model)">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <!--row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <form name="formMenuCategoryAdd">
+                        <span ng-init="GetEditDataById('@Model.USER_ACCOUNT_MST_ID_ENCRYPTED')"></span>
+                        <fieldset>
+                            <legend style="width:220px">User Account Relation</legend>
+                            <div class="row" style="margin:20px">
+                                <div class="col-md-6 space-bottom">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="COMPANY_ID">Company</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                                   name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                            <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                                   name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 space-bottom">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="USER_TYPE">Status</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="USER_TYPE"
+                                                    name="USER_TYPE" ng-model="model.USER_TYPE" style="width:100%">
+
+                                                <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.USER_TYPE && model.USER_TYPE != ''">{{item.STATUS}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 space-bottom">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="USER_CODE">User Name</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select class="select2-single-User form-control" id="USER_CODE"
+                                                    name="USER_CODE" ng-model="model.USER_CODE" style="width:100%" ng-change="typeaheadSelectedDivision()">
+
+                                                <option ng-repeat="item in Users" ng-selected="item.USER_CODE == model.USER_CODE" value="{{item.USER_CODE}}">{{item.USER_NAME}} -- {{item.USER_CODE}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 space-bottom">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="USER_CODE">Code</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input id="USER_CODE" ng-disabled="true" type="text" class="form-control" required
+                                                   name="USER_CODE" ng-model="model.USER_CODE">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div>
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                     style="color: #252222;height: 59vh " class="grid m-2">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/UserAccountRelation/Controller/InsertOrEditCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/UserAccountRelation/Service/InsertOrEditServices.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Customer/Service/CustomerInfoServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+              $(".select2-single").select2({});
+        });
+    </script>
+}

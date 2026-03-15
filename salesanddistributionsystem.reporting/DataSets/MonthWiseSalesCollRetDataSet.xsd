@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MonthWiseSalesCollRetDataSet" targetNamespace="http://tempuri.org/MonthWiseSalesCollRetDataSet.xsd" xmlns:mstns="http://tempuri.org/MonthWiseSalesCollRetDataSet.xsd" xmlns="http://tempuri.org/MonthWiseSalesCollRetDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sildemodb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 0 OPENING_INVOICE_AMOUNT,
+               0 OPENING_TDS_AMOUNT,
+               0 NET_INVOICE_AMOUNT,
+               0 INVOICE_TDS_AMOUNT,
+               0 NET_COLLECTION_AMT,
+               0 COLLECTION_TDS_AMOUNT,
+               0 NET_RETURN_AMOUNT,
+               0 RETURN_TDS_AMOUNT,
+               0 UNIT_ID,
+               0 UNIT_NAME,
+               0 TRAN_YEAR,
+               0 TRAN_MONTH,
+               0 CLOSING_INVOICE_AMOUNT,
+               0 CLOSING_TDS_AMOUNT
+FROM DUAL</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OPENING_INVOICE_AMOUNT" DataSetColumn="OPENING_INVOICE_AMOUNT" />
+              <Mapping SourceColumn="OPENING_TDS_AMOUNT" DataSetColumn="OPENING_TDS_AMOUNT" />
+              <Mapping SourceColumn="NET_INVOICE_AMOUNT" DataSetColumn="NET_INVOICE_AMOUNT" />
+              <Mapping SourceColumn="INVOICE_TDS_AMOUNT" DataSetColumn="INVOICE_TDS_AMOUNT" />
+              <Mapping SourceColumn="NET_COLLECTION_AMT" DataSetColumn="NET_COLLECTION_AMT" />
+              <Mapping SourceColumn="COLLECTION_TDS_AMOUNT" DataSetColumn="COLLECTION_TDS_AMOUNT" />
+              <Mapping SourceColumn="NET_RETURN_AMOUNT" DataSetColumn="NET_RETURN_AMOUNT" />
+              <Mapping SourceColumn="RETURN_TDS_AMOUNT" DataSetColumn="RETURN_TDS_AMOUNT" />
+              <Mapping SourceColumn="UNIT_ID" DataSetColumn="UNIT_ID" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+              <Mapping SourceColumn="TRAN_YEAR" DataSetColumn="TRAN_YEAR" />
+              <Mapping SourceColumn="TRAN_MONTH" DataSetColumn="TRAN_MONTH" />
+              <Mapping SourceColumn="CLOSING_INVOICE_AMOUNT" DataSetColumn="CLOSING_INVOICE_AMOUNT" />
+              <Mapping SourceColumn="CLOSING_TDS_AMOUNT" DataSetColumn="CLOSING_TDS_AMOUNT" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MonthWiseSalesCollRetDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="MonthWiseSalesCollRetDataSet" msprop:Generator_DataSetName="MonthWiseSalesCollRetDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OPENING_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInRow="OPENING_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInTable="OPENING_INVOICE_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnOPENING_INVOICE_AMOUNT" msprop:Generator_UserColumnName="OPENING_INVOICE_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OPENING_TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="OPENING_TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="OPENING_TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnOPENING_TDS_AMOUNT" msprop:Generator_UserColumnName="OPENING_TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NET_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInRow="NET_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInTable="NET_INVOICE_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnNET_INVOICE_AMOUNT" msprop:Generator_UserColumnName="NET_INVOICE_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="INVOICE_TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="INVOICE_TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_TDS_AMOUNT" msprop:Generator_UserColumnName="INVOICE_TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NET_COLLECTION_AMT" msprop:Generator_ColumnPropNameInRow="NET_COLLECTION_AMT" msprop:Generator_ColumnPropNameInTable="NET_COLLECTION_AMTColumn" msprop:Generator_ColumnVarNameInTable="columnNET_COLLECTION_AMT" msprop:Generator_UserColumnName="NET_COLLECTION_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COLLECTION_TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="COLLECTION_TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="COLLECTION_TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_TDS_AMOUNT" msprop:Generator_UserColumnName="COLLECTION_TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NET_RETURN_AMOUNT" msprop:Generator_ColumnPropNameInRow="NET_RETURN_AMOUNT" msprop:Generator_ColumnPropNameInTable="NET_RETURN_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnNET_RETURN_AMOUNT" msprop:Generator_UserColumnName="NET_RETURN_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RETURN_TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="RETURN_TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="RETURN_TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnRETURN_TDS_AMOUNT" msprop:Generator_UserColumnName="RETURN_TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TRAN_YEAR" msprop:Generator_ColumnPropNameInRow="TRAN_YEAR" msprop:Generator_ColumnPropNameInTable="TRAN_YEARColumn" msprop:Generator_ColumnVarNameInTable="columnTRAN_YEAR" msprop:Generator_UserColumnName="TRAN_YEAR" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TRAN_MONTH" msprop:Generator_ColumnPropNameInRow="TRAN_MONTH" msprop:Generator_ColumnPropNameInTable="TRAN_MONTHColumn" msprop:Generator_ColumnVarNameInTable="columnTRAN_MONTH" msprop:Generator_UserColumnName="TRAN_MONTH" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInRow="CLOSING_INVOICE_AMOUNT" msprop:Generator_ColumnPropNameInTable="CLOSING_INVOICE_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnCLOSING_INVOICE_AMOUNT" msprop:Generator_UserColumnName="CLOSING_INVOICE_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_TDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="CLOSING_TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="CLOSING_TDS_AMOUNTColumn" msprop:Generator_ColumnVarNameInTable="columnCLOSING_TDS_AMOUNT" msprop:Generator_UserColumnName="CLOSING_TDS_AMOUNT" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReqRaiseDataSet" targetNamespace="http://tempuri.org/ReqRaiseDataSet.xsd" xmlns:mstns="http://tempuri.org/ReqRaiseDataSet.xsd" xmlns="http://tempuri.org/ReqRaiseDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;Persist Security Info=True;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+          <Connection ConnectionStringObject="Data Source=sildemodb1;User ID=STL_ERP_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="sildemodb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sildemodb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT '' SL,M.REQUISITION_UNIT_ID,M.REMARKS MASTER_REMARKS,  M.ISSUE_UNIT_ID, M.REQUISITION_NO,M.REQUISITION_DATE, M.TOTAL_VOLUME, M.TOTAL_WEIGHT ,I.SKU_CODE,I.PACK_SIZE, I.SKU_NAME,  D.SKU_ID, D.UNIT_TP, D.REQUISITION_QTY, D.REQUISITION_AMOUNT, D.REMARKS 
+From DEPOT_REQUISITION_RAISE_MST M
+left outer join DEPOT_REQUISITION_RAISE_DTL D ON D.MST_ID= M.MST_ID
+left outer join PRODUCT_INFO I on I.SKU_ID= D.SKU_ID
+order by M.REQUISITION_NO</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="REQUISITION_UNIT_ID" DataSetColumn="REQUISITION_UNIT_ID" />
+              <Mapping SourceColumn="ISSUE_UNIT_ID" DataSetColumn="ISSUE_UNIT_ID" />
+              <Mapping SourceColumn="REQUISITION_NO" DataSetColumn="REQUISITION_NO" />
+              <Mapping SourceColumn="SKU_ID" DataSetColumn="SKU_ID" />
+              <Mapping SourceColumn="SKU_CODE" DataSetColumn="SKU_CODE" />
+              <Mapping SourceColumn="UNIT_TP" DataSetColumn="UNIT_TP" />
+              <Mapping SourceColumn="REQUISITION_QTY" DataSetColumn="REQUISITION_QTY" />
+              <Mapping SourceColumn="REQUISITION_AMOUNT" DataSetColumn="REQUISITION_AMOUNT" />
+              <Mapping SourceColumn="REMARKS" DataSetColumn="REMARKS" />
+              <Mapping SourceColumn="MASTER_REMARKS" DataSetColumn="MASTER_REMARKS" />
+              <Mapping SourceColumn="PACK_SIZE" DataSetColumn="PACK_SIZE" />
+              <Mapping SourceColumn="SKU_NAME" DataSetColumn="SKU_NAME" />
+              <Mapping SourceColumn="REQUISITION_DATE" DataSetColumn="REQUISITION_DATE" />
+              <Mapping SourceColumn="SL" DataSetColumn="SL" />
+              <Mapping SourceColumn="TOTAL_VOLUME" DataSetColumn="TOTAL_VOLUME" />
+              <Mapping SourceColumn="TOTAL_WEIGHT" DataSetColumn="TOTAL_WEIGHT" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReqRaiseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ReqRaiseDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReqRaiseDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="REQUISITION_UNIT_ID" msprop:Generator_ColumnPropNameInTable="REQUISITION_UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_UNIT_ID" msprop:Generator_UserColumnName="REQUISITION_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ISSUE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="ISSUE_UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="ISSUE_UNIT_ID" msprop:Generator_UserColumnName="ISSUE_UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnISSUE_UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQUISITION_NO" msprop:Generator_ColumnPropNameInTable="REQUISITION_NOColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_NO" msprop:Generator_UserColumnName="REQUISITION_NO" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_UserColumnName="SKU_ID" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQUISITION_QTY" msprop:Generator_ColumnPropNameInTable="REQUISITION_QTYColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_QTY" msprop:Generator_UserColumnName="REQUISITION_QTY" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REQUISITION_AMOUNT" msprop:Generator_ColumnPropNameInTable="REQUISITION_AMOUNTColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_AMOUNT" msprop:Generator_UserColumnName="REQUISITION_AMOUNT" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_AMOUNT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_UserColumnName="REMARKS" msprop:Generator_ColumnVarNameInTable="columnREMARKS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MASTER_REMARKS" msprop:Generator_ColumnPropNameInTable="MASTER_REMARKSColumn" msprop:Generator_ColumnPropNameInRow="MASTER_REMARKS" msprop:Generator_UserColumnName="MASTER_REMARKS" msprop:Generator_ColumnVarNameInTable="columnMASTER_REMARKS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REQUISITION_DATE" msprop:Generator_ColumnPropNameInTable="REQUISITION_DATEColumn" msprop:Generator_ColumnPropNameInRow="REQUISITION_DATE" msprop:Generator_UserColumnName="REQUISITION_DATE" msprop:Generator_ColumnVarNameInTable="columnREQUISITION_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SL" msprop:Generator_UserColumnName="SL" msprop:Generator_ColumnPropNameInTable="SLColumn" msprop:Generator_ColumnPropNameInRow="SL" msprop:Generator_ColumnVarNameInTable="columnSL" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_VOLUME" msprop:Generator_ColumnPropNameInRow="TOTAL_VOLUME" msprop:Generator_ColumnPropNameInTable="TOTAL_VOLUMEColumn" msprop:Generator_ColumnVarNameInTable="columnTOTAL_VOLUME" msprop:Generator_UserColumnName="TOTAL_VOLUME" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTAL_WEIGHT" msprop:Generator_ColumnPropNameInRow="TOTAL_WEIGHT" msprop:Generator_ColumnPropNameInTable="TOTAL_WEIGHTColumn" msprop:Generator_ColumnVarNameInTable="columnTOTAL_WEIGHT" msprop:Generator_UserColumnName="TOTAL_WEIGHT" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:REQUISITION_NO" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

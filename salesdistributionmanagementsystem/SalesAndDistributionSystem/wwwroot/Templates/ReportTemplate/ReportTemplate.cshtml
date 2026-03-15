@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+}
+
+
+<html>
+    <head></head>
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  font-family: 'AvenirNext-Light', 'Avenir Next Light', 'Avenir Next', sans-serif;
+}
+
+@@page {
+  size: A4;
+  @@bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+  }
+  @@bottom-left {
+    content: string(footerTitle);
+  }
+}
+
+body {
+  font-size: 100%;
+  padding: 50px;
+  background: #fff;
+}
+
+.header {
+  width: 100%;
+  float: left;
+  font-size: 2em;
+}
+
+.printTable {
+  width: 100%;
+  min-width: 37em;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.printTable tr {
+  height: 1em;
+}
+
+.printTable td {
+  font-size: 0.8em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  box-sizing: border-box;
+  border-bottom: #ccc 0.125em solid;
+}
+
+.printTable .titleTr {
+  font-size: 1.4em;
+}
+
+.printTable .titleTd {
+  padding-bottom: 0;
+  padding-left: 0px;
+  padding-right: 0px;
+  border: 0px solid;
+}
+
+.printTable .subtitleTr {
+  font-size: 1.1em;
+  border: 0px solid;
+}
+
+.printTable .headingTr {
+  font-size: 0.9em;
+  font-weight: 500;
+  background: #d3ebfd;
+}
+
+.printTable .headingTd {
+  border-bottom: #000 0.125em solid;
+  border-top: #000 0.125em solid;
+}
+
+.printTable .sectionTr {
+  background: #f6f3f7;
+}
+
+.printTable .sectionTd {
+  font-weight: 500;
+}
+
+.printTable .col1 {
+  width: 13%;
+}
+
+.printTable .col2 {
+  width: 42%;
+}
+
+.printTable .col3 {
+  text-align: right;
+  width: 30%;
+}
+
+.printTable .col4 {
+  text-align: right;
+  width: 15%;
+}
+
+.footer {
+  string-set: footerTitle content() width: 100%;
+  float: left;
+  height: 1em;
+  padding-right: 0;
+  font-size: 0.6em;
+  padding-top: 0.4em;
+}
+
+.right-align {display: -webkit-box; display: -webkit-flex; display: flex; justify-content: flex-end; -webkit-justify-content: flex-end; text-align:right;} </style>
+    <body>
+        <div class="header">
+  <p>Printable (and scalable) table for reports</p>
+</div>
+
+<table class="printTable">
+  <tr class="titleTr">
+    <td class="titleTd" colspan=2>Change body {font-size} to adjust scale</td>
+    <td class="titleTd col4" colspan=2>Reporting Period</td>
+  </tr>
+  <tr class="subtitleTr">
+    <td class="titleTd col1" colspan=2>Homer Simpson Jr.</td>
+    <td class="titleTd col4" colspan=2>February 2015 - April 2016</td>
+  </tr>
+
+  <tr></tr>
+
+  <tr class="headingTr">
+    <td class="headingTd col1">DATE</td>
+    <td class="headingTd col2">DETAILS</td>
+    <td class="headingTd col3">SUBDETAILS</td>
+    <td class="headingTd col4">AMOUNT</td>
+  </tr>
+
+  <tr class="sectionTr">
+    <td class="sectionTd col1" colspan=2>February 2016</td>
+    <td class="sectionTd col4" colspan=2>$3546.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">02/03/2016</td>
+    <td class="col2" colspan="2">Annual taxes</td>
+    <td class="col4">$2,000.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Feb 15, 2016</td>
+    <td class="col2">Income</td>
+    <td class="col3">Cash</td>
+    <td class="col4">$999.99</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Feb 21, 2016</td>
+    <td class="col2" colspan="2">Monthly expenses, Galactic Energy Suppliers Limited (peridod Feb 15, 2015 - Feb 15, 2016)</td>
+    <td class="col4"><div class="right-align">$11.11</div></td>
+  </tr>
+
+  <tr class="sectionTr">
+    <td class="sectionTd col1" colspan=2>March 2016</td>
+    <td class="sectionTd col4" colspan=2>$46.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Mar 21, 2013</td>
+    <td class="col2" colspan="2">Cookies</td>
+    <td class="col4">$10.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Mar 21 ,2013</td>
+    <td class="col2" colspan="2">Juice</td>
+    <td class="col4">ARG $2,000.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Mar 21, 2013</td>
+    <td class="col2" colspan="2">To be, or not to be, that is the question: Whether 'tis Nobler in the mind to suffer The Slings and Arrows of outrageous Fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep No more; and by a sleep, to say
+      we end The Heart-ache, and the thousand Natural shocks That Flesh is heir to? 'Tis a consummation Devoutly to be wished. To die, to sleep, To sleep, perchance to Dream; aye, there's the rub, For in that sleep of death, what dreams may come, When
+      we have shuffled off this mortal coil, Must give us pause. </td>
+    <td class="col4">$0,01</td>
+  </tr>
+
+  <tr class="sectionTr">
+    <td class="sectionTd col1" colspan=2>April 2016</td>
+    <td class="sectionTd col4" colspan=2>$46.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">Mar 21, 2013</td>
+    <td class="col2" colspan="2">Cookies</td>
+    <td class="col4">$10.00</td>
+  </tr>
+
+  <tr>
+    <td class="col1">29/08/2013</td>
+    <td class="col2" colspan="2">Juice</td>
+    <td class="col4">CHF 154,000.00</td>
+  </tr>
+
+  <tr class="headingTr">
+    <td class="headingTd col1" colspan="2"></td>
+    <td class="headingTd col3">TOTAL</td>
+    <td class="headingTd col4">$455456.00</td>
+  </tr>
+</table>
+
+<div class="footer">
+  Generated by Landlordy app – <a href="https://landlordy.com">landlordy.com</a>
+</div>
+    </body>
+</html>

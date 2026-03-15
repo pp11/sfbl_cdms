@@ -1,0 +1,254 @@
+﻿@model SalesAndDistributionSystem.Domain.Models.Entities.Target.IN_MARKET_SALES_MST
+@{
+    ViewData["Title"] = "In Market Sales";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+   <script src="https://cdn.rawgit.com/SheetJS/js-xlsx/v0.8.0/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.rawgit.com/SheetJS/js-xlsx/v0.8.0/dist/ods.js"></script>
+<style>
+    .grid-msg-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+       /* background: rgba(0, 0, 0, 0.4);*/
+    }
+
+        .grid-msg-overlay .msg {
+            opacity: 1;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 50%;
+            background-color: #eee;
+            border-radius: 4px;
+            border: 1px solid #555;
+            text-align: center;
+            font-size: 24px;
+            display: table;
+        }
+
+            .grid-msg-overlay .msg > .center {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+    .grid input[type="file"] {
+        font-size: 14px;
+        display: inline-block;
+    }
+</style>
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item" id="Create" style="display:none"><button class="btn btn-info mb-1" ng-click="DataLoad('Create')">Go to Create</button></li>
+            <li class="breadcrumb-item" id="SaveData"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">{{SaveButton}}</button></li>
+            <li class="breadcrumb-item" id="Search"><button type="button" class="btn mb-1" ng-click="DataLoad('Search')">Search</button></li>
+        </ol>
+    </div>
+    <div class="card mb-4" id="MarketSalesCreate" style="display:block">
+        <div class="card-body">
+            <form name="formMenuCategoryAdd">
+                <span ng-init="GetEditDataById('@Model.MST_ID_ENCRYPTED')"></span>
+                <fieldset>
+                    <legend style="width:220px">In Market Sales Entry</legend>
+                    <div class="row" style="margin:20px">
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company Unit</label>
+                                </div>
+                                <div class="col-md-8" >
+                                    <select class="select2-single form-control" id="UNIT_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                            name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%" ng-change="GetRequisitionNo()" c>
+
+                                        <option ng-repeat="item in CompanyUnit" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                            <div class="row" style="display:none" >
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                            name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="GetRequisitionNo()">
+
+                                        <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ORDER_TYPE">Market</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control" id="MARKET_ID" required
+                                            name="MARKET_ID" ng-model="model.MARKET_ID" style="width:100%" ng-change="typeaheadSelectedMarket()">
+
+                                        <option ng-repeat="item in Markets" value="{{item.MARKET_ID}}" ng-selected="item.MARKET_ID == model.MARKET_ID">{{item.MARKET_NAME}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MARKET_CODE">Market Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" required autocomplete="off" class="form-control" ng-model="model.MARKET_CODE" value="" id="MARKET_CODE">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ENTRY_DATE">Date</label>
+                                </div>
+                                <div class="col-md-8 simple-date2">
+                                    <div class="input-group date">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="text" required autocomplete="off" class="form-control" ng-model="model.ENTRY_DATE" value="" id="ENTRY_DATE">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="YEAR">Year</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class ="form-control" id="YEAR" required  name="YEAR" ng-model="model.YEAR" style="width:100%" />                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="MONTH_CODE">Month</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single form-control MONTH_CODE" id="MONTH_CODE" required
+                                            name="MONTH_CODE" ng-model="model.MONTH_CODE" style="width:100%">
+
+                                        <option ng-repeat="item in months" value="{{item.MONTH_CODE}}" ng-selected="item.MONTH_CODE == model.MONTH_CODE">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" style="height: 57vh;">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card" style="margin: 10px">
+                                <div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 35vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+        <div class="card mb-4" id="MarketSalesList" style="display:none">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:250px">In Market Sales List</legend>
+                <div class="row" style="height: 60vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 58vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <div class="card mb-4" id="MarketSalesxlsx" style="display:block">
+        <div class="card-body">
+            <fieldset>
+                <legend style="width:250px"> In Market Sales</legend>
+                <div class="row" style="height: 100vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-primary" ng-click="reset()">Reset Grid</button>
+                                    <button type="button" class="btn btn-success" ng-click="SaveDataXlsx(model)">Save Data</button>
+                                </div>
+                               
+                            </div>
+                           
+                            <div id="grid1" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid="gridOptionsxlsx" class="grid" style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;">
+                                <div class="grid-msg-overlay" ng-show="!gridOptionsxlsx.data.length">
+                                    <div class="msg">
+                                        <div class="center">
+                                            <span class="muted">Select Spreadsheet File</span>
+                                            <br />
+                                            <input type="file" accept=".xls,.xlsx,.ods" fileread="Products" opts="gridOptionsxlsx" multiple="false" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="hide" class="grid-msg-overlay" ng-show="gridOptionsxlsx.data.length>0">
+                                    <div class="msg">
+                                        <div class="center">
+                                            <button type="button" class="btn btn-success" ng-click="process()">Process Data</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+
+
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+    <script src="~/scriptsng/target/inmarket/controller/inmarketsalesctr.js"></script>
+    <script src="~/scriptsng/target/inmarket/service/inmarketsalesservice.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Security/Notification/Service/LiveNotificationServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+
+    </script>
+
+
+</div>

@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Report Configuration";
+}
+<link href="/css/site.css" rel="stylesheet">
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/Security/ReportConfiguration/index" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid" ng-show="model.ADD_PERMISSION == 'Active'" ng-click="SaveData(model)">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="model.INVOICE_STATUS =='Complete'">
+                <a href="#" class="btn btn-secondary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-invoice"></i>
+                    </span>
+                    <span class="text">Invoice Completed</span>
+                </a>
+            </li>
+        </ol>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-body p-1">
+                    <form name="formMenuCategoryAdd">
+                        <fieldset>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="COMPANY_ID">Company</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select required class="select2-single form-control" id="COMPANY_ID" ng-change="DataLoad(model.COMPANY_ID)" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%">
+
+                                                    <option ng-repeat="item in Companies" ng-selected="model.COMPANY_ID == item.COMPANY_ID" s value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="REPORT_NAME">Report Name</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" autocomplete="off" data-val="true" required
+                                                       name="REPORT_NAME" ng-model="model.REPORT_NAME" placeholder="Enter Report Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="REPORT_TITLE">Report Title</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" autocomplete="off" data-val="true" required
+                                                       name="REPORT_TITLE" ng-model="model.REPORT_TITLE" placeholder="Enter Report Title">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_BY_SLNO">SL No</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="ORDER_BY_SLNO" type="number" class="form-control" required
+                                                       name="ORDER_BY_SLNO" ng-model="model.ORDER_BY_SLNO" placeholder="Enter Report Serial">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="HAS_PREVIEW">Preview</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="HAS_PREVIEW" required
+                                                        name="HAS_PREVIEW" ng-model="model.HAS_PREVIEW" style="width:100%">
+
+                                                    <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="HAS_PDF">PDF</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="HAS_PDF" required
+                                                        name="HAS_PDF" ng-model="model.HAS_PDF" style="width:100%">
+
+                                                    <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="HAS_CSV">Excel</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="HAS_CSV" required
+                                                        name="HAS_CSV" ng-model="model.HAS_CSV" style="width:100%">
+
+                                                    <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="STATUS">Status</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="STATUS" required
+                                                        name="STATUS" ng-model="model.STATUS" style="width:100%">
+
+                                                    <option ng-repeat="item in Status" value="{{item.STATUS}}">{{item.STATUS}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label> Menu </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="select2-single form-control" id="MENU_ID" required
+                                                        name="MENU_ID" ng-model="model.MENU_ID" style="width:100%">
+
+                                                    <option ng-repeat="item in MenuData" value="{{item.MENU_ID}}">{{item.MENU_NAME}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <fieldset>
+                        <legend style="width:190px">Report List</legend>
+                        <div ng-show="model.LIST_VIEW == 'Active'">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="color: #252222;height: 53vh " class="grid m-2">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/ScriptsNg/Security/ReportConfiguration/Controller/ReportConfigurationCtr.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Security/ReportConfiguration/Service/ReportConfigurationServices.js?v=ridwanSL1"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}
+
+

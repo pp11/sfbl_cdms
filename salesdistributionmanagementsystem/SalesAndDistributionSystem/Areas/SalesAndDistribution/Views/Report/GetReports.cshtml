@@ -1,0 +1,102 @@
+﻿@model List<SalesAndDistributionSystem.Domain.Common.ReportDataSpecify>
+@{
+    int d = 0;
+}
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Reports</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reports</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <!-- Simple Tables -->
+            <div class="card">
+                <div class="card-header align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Color</label>
+                            <select class="form-control" name="ReportColor" id="ReportColor" style="width:100%">
+                                <option value="color">Colorful</option>
+                                <option value="Grayscale">Grayscale</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Is Logo Applicable</label>
+                            <select class="form-control" name="IsLogoApplicable" id="IsLogoApplicable" style="width:100%">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Is Company Name Applicable</label>
+                            <select class="form-control" name="IsCompanyApplicable" id="IsCompanyApplicable" style="width:100%">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>SL</th>
+                                <th>Report Name</th>
+                                <th>Report Area</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                d++;
+                                <tr>
+                                    <td>@d</td>
+                                    <td>@item.ReportName</td>
+                                    <td>@item.ReportArea</td>
+                                    <td><button onclick='GetPdfView("@item.ReportIdEncrypt")' style="margin-left:5px" class="btn btn-sm btn-primary">PDF Report</button><button onclick='GetPreview("@item.ReportIdEncrypt")' style="margin-left:5px" class="btn btn-sm btn-primary">Preview Report</button><button onclick='GetExcel("@item.ReportIdEncrypt")' style="margin-left:5px" class="btn btn-sm btn-primary">Excel File</button></td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!--Row-->
+</div>
+@section Scripts {
+    <script>
+          function GetPdfView(reportId)
+        {
+           var color = $("#ReportColor").val();
+           var IsLogoApplicable = $("#IsLogoApplicable").val();
+           var IsCompanyApplicable = $("#IsCompanyApplicable").val();
+           var  href = "/SalesAndDistribution/Report/CreatePDF?ReportId="+ reportId + "&Color="+color + "&IsLogoApplicable=" +IsLogoApplicable + "&IsCompanyApplicable=" + IsCompanyApplicable ;
+           window.open(href, '_blank');
+        }
+
+           function GetPreview(reportId)
+        {
+           var color = $("#ReportColor").val();
+           var IsLogoApplicable = $("#IsLogoApplicable").val();
+           var IsCompanyApplicable = $("#IsCompanyApplicable").val();
+           var  href = "/SalesAndDistribution/Report/ReportPreview?ReportId="+ reportId + "&Color=" + color + "&IsLogoApplicable=" +IsLogoApplicable + "&IsCompanyApplicable=" + IsCompanyApplicable ;
+           window.open(href, '_blank');
+        }
+
+           function GetExcel(reportId)
+        {
+           var  href = "/SalesAndDistribution/Report/ReportExcel?ReportId="+ reportId;
+           window.open(href, '_blank');
+        }
+    </script>
+}

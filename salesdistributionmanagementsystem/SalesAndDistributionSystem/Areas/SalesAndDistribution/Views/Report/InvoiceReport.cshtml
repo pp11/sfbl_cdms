@@ -1,0 +1,382 @@
+﻿@model List<SalesAndDistributionSystem.Domain.Models.ViewModels.Security.ReportPermission>
+@{
+    int d = 0;
+    ViewData["Title"] = "Invoice Report";
+
+}
+
+@section Styles {
+    <link href="/css/site.css" rel="stylesheet">
+    <style>
+        .ui-grid-header-cell .ui-grid-cell-contents {
+            white-space: normal !important;
+            text-align: center !important;
+        }
+
+        .table td, .table th {
+            padding: .2rem !important;
+        }
+    </style>
+}
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/Target/Report/TargetReport" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetExcel()' ng-disabled="model.CSV_PERMISSION != 'Active'" type="button" class="btn btn-secondary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-excel"></i>
+                    </span>
+                    <span class="text">Excel Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPreview()' ng-disabled="model.PREVIEW_PERMISSION != 'Active'" type="button" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <span class="text">Dot Printer Preview Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item" ng-show="dotMatrixPrinterButton">
+                <button ng-click='GetDotPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">Dot Printer PDF Report</span>
+                </button>
+            </li>
+            <li class="breadcrumb-item">
+                <button ng-click='GetPdfView()' ng-disabled="model.PDF_PERMISSION != 'Active'" type="button" class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span class="text">PDF Report</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-1">
+                <div class="card-body p-1">
+                    <form name="formProductAdd">
+                        <fieldset>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="table-responsive font-weight-bold">
+                                                <table class="table align-items-center table-flush">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>SL</th>
+                                                            <th>Select</th>
+                                                            <th>Report Name</th>
+                                                            <th>Report Id</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>@(++d)</td>
+                                                                <td><input class="form-control checkbox-inline" name="selection[@d]" id="selection[@d]" ng-click="LoadReportParamters(@item.REPORT_ID,@d)" type="checkbox" value="true" height="10" style="height:20px !important" /></td>
+                                                                <td>@item.REPORT_NAME <input id="ReportIdEncrypt[@d]" name="ReportIdEncrypt" value="@item.ReportIdEncrypt" hidden /></td>
+                                                                <td>@item.REPORT_ID</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-footer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 ">
+                                        <div class="card">
+                                            <div class="card-header py-3 bg-secondary d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold text-light">Parameter</h6>
+                                            </div>
+                                            <div>
+                                                <div class="customer-message align-items-center m-1">
+                                                    <div class="col-md-12 space-bottom" id="company_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="COMPANY_ID">Company *</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="COMPANY_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                                                        name="COMPANY_ID" ng-model="model.COMPANY_ID" style="width:100%" ng-change="InvoiceDateChange()">
+
+                                                                    <option ng-repeat="item in Companies" ng-selected="item.COMPANY_ID == model.COMPANY_ID" value="{{item.COMPANY_ID}}">{{item.COMPANY_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_unit_param" style="display:block">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="UNIT_ID">Unit*</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="UNIT_ID" ng-disabled="model.USER_TYPE != 'SuperAdmin'"
+                                                                        name="UNIT_ID" ng-model="model.UNIT_ID" style="width:100%" ng-change="InvoiceDateChange()">
+
+                                                                    <option ng-repeat="item in CompanyUnit" ng-selected="item.UNIT_ID == model.UNIT_ID" value="{{item.UNIT_ID}}" ng-selected="item.UNIT_ID == model.UNIT_ID">{{item.UNIT_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="date_from_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DATE_FROM">From Date</label>
+                                                            </div>
+                                                            <div class="col-md-8 simple-date2">
+
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                                    </div>
+                                                                    <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="model.DATE_FROM">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="date_to_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DATE_TO">To Date</label>
+                                                            </div>
+                                                            <div class="col-md-8 simple-date2">
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                                    </div>
+                                                                    <input type="text" ng-change="LoadReportParamters" class="form-control" ng-model="model.DATE_TO">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="invoice_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="">{{Invoice}} Date*</label>
+                                                            </div>
+                                                            <div class="col-md-8 simple-date2">
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                                    </div>
+                                                                    <input type="text" ng-change="InvoiceDateChange()" class="form-control" ng-model="model.INVOICE_DATE">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_invoice_no_from_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="INVOICE_NO_FROM">{{Invoice}}*</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        From
+                                                                        <div class="typeaheadcontainer">
+                                                                            <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                                                                   ng-model="model.INVOICE_NO_FROM"
+                                                                                   uib-typeahead="Invoice.INVOICE_NO as Invoice.INVOICE_NO for Invoice in AutoCompleteDataLoadForInvoice($viewValue)"
+                                                                                   typeahead-append-to-body="true"
+                                                                                   placeholder="Invoice No min. 1 character"
+                                                                                   typeahead-editable="false"
+                                                                                   typeahead-on-select="typeaheadSelectedInvoice(model, $item)" />
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        To
+
+                                                                        <div class="typeaheadcontainer">
+                                                                            <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                                                                   ng-model="model.INVOICE_NO_TO"
+                                                                                   uib-typeahead="Invoice.INVOICE_NO as Invoice.INVOICE_NO for Invoice in AutoCompleteInvoiceDesc($viewValue)"
+                                                                                   typeahead-append-to-body="true"
+                                                                                   placeholder="Invoice No min. 1 character"
+                                                                                   typeahead-editable="false"
+                                                                                   typeahead-on-select="typeaheadSelectedInvoice(model, $item)" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_divition_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="DIVISION_ID">Division</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="DIVISION_ID"
+                                                                        name="DIVISION" ng-model="model.DIVISION_ID" style="width:100%" ng-change="DivisionChange()">
+                                                                    <option ng-repeat="item in Divisions | orderBy:'DIVISION_NAME'" value="{{item.DIVISION_ID}}">{{item.DIVISION_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_region_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="REGION_ID">Region</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="REGION_ID"
+                                                                        name="REGION_ID" ng-model="model.REGION_ID" style="width:100%" ng-change="RegionChange()">
+                                                                    <option ng-repeat="item in Regions | orderBy:'REGION_NAME'" value="{{item.REGION_ID}}" ng-selected="item.REGION_ID == model.REGION_ID">{{item.REGION_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_area_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="AREA_ID">Area</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="AREA_ID"
+                                                                        name="AREA_ID" ng-model="model.AREA_ID" style="width:100%" ng-change="AreaChange()">
+                                                                    <option ng-repeat="item in Areas | orderBy:'AREA_NAME'" value="{{item.AREA_ID}}" ng-selected="item.AREA_ID == model.AREA_ID">{{item.AREA_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_Territory_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="TERRITORY_ID">Territory</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="TERRITORY_ID"
+                                                                        name="TERRITORY_ID" ng-model="model.TERRITORY_ID" style="width:100%" ng-change="TerritoryChange()">
+
+                                                                    <option ng-repeat="item in Territories" value="{{item.TERRITORY_ID}}" ng-selected="item.TERRITORY_ID == model.TERRITORY_ID">{{item.TERRITORY_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_market_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="MARKET_ID">Market</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="select2-single form-control" id="MARKET_ID"
+                                                                        name="MARKET_ID" ng-model="model.MARKET_ID" style="width:100%" ng-change="">
+
+                                                                    <option ng-repeat="item in Markets " value="{{item.MARKET_ID}}" value="{{item.MARKET_ID}}" ng-selected="item.MARKET_ID == model.MARKET_ID">{{item.MARKET_NAME}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_customer_name_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="CUSTOMER_NAME">Customer</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="typeaheadcontainer">
+                                                                    <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                                                           ng-model="model.CUSTOMER_NAME"
+                                                                           uib-typeahead="Customer.CUSTOMER_NAME as Customer.CUSTOMER_NAME_CODE for Customer in AutoCompleteDataLoadForCustomer($viewValue)"
+                                                                           typeahead-append-to-body="true"
+                                                                           placeholder="Customer Name Min. Two Character"
+                                                                           typeahead-editable="false"
+                                                                           typeahead-on-select="typeaheadSelectedCustomer(model, $item)" />
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-12 space-bottom" id="company_reportColor_param" style="display:none">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="ReportColor">Color</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+
+
+                                                                <select class="form-control" name="ReportColor" ng-model="model.ReportColor" id="ReportColor" style="width:100%">
+                                                                    <option value="color">Colorful</option>
+                                                                    <option value="Grayscale">Grayscale</option>
+
+                                                                </select>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    @*<partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>*@
+</div>
+<!--Row-->
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/Report/Controller/InvoiceReportCtr.js?v=17122"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Report/Service/InvoiceReportServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+            });
+        });
+
+    </script>
+
+}

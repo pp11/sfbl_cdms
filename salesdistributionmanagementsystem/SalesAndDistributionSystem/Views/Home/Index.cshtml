@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<style>
+    .bg-secondary {
+        background-color: #515255 !important;
+    }
+</style>
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </div>
+    <div class="row mb-2">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Order (Monthly)</div>
+                            <div id="W_O" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            <div class="mt-2 mb-0 text-muted text-xs">
+                                <span id="W_O_P" class="text-success mr-2"></span>
+                                <span>Since Last Month</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Annual) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4 pl-0">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Invoice (Monthly)</div>
+                            <div id="W_I" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            <div class="mt-2 mb-0 text-muted text-xs">
+                                <span id="W_I_P" class="text-success mr-2"></span>
+                                <span>Since Last Month</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- New User Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4 pl-0">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Return (Monthly)</div>
+                            <div id="W_R" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+                            <div class="mt-2 mb-0 text-muted text-xs">
+                                <span id="W_R_P" class="text-success mr-2"></span>
+                                <span>Since Last Month</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-undo  fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4 pl-0">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Collection (Monthly)</div>
+                            <div id="W_G" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            <div class="mt-2 mb-0 text-muted text-xs">
+                                <span id="W_G_P" class="text-danger mr-2"></span>
+                                <span>Since Last Month</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-credit-card fa-2x text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Month Depot Wise Invoice % -->
+        <div class="col-xl-4 col-lg-4 col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">Current Month Depot Wise Invoice %</div>
+                <div class="card-body">
+                    <div class="chart-pie mb-4">
+                        <canvas id="myPieChart" width="100%" height="50"></canvas>
+                    </div>
+                    <div class="list-group list-group-flush" id="list-group">
+                        <!-- List items will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Current Month Depot Wise Invoice % -->
+
+        <div class="col-xl-8 col-lg-8 col-md-8 mb-4 pl-0">
+            <div class="row mb-4">
+                <!-- Target Overview -->
+                <div class="col-md-6">
+                    <div class="card bg-secondary border-0">
+                        <div class="card-body">
+                            <h5 class="text-white-50">Target Overview</h5>
+                            <div class="mb-4">
+                                <span id="T_M" class="display-4 text-white"></span>
+                                <span class="text-white-50">current month achievement</span>
+                            </div>
+                            <div class="progress bg-danger rounded-pill" style="height: 0.5rem">
+                                <div id="T_A" class="progress-bar bg-white rounded-pill" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pl-0">
+                    <a class="card lift h-100" href="#!">
+                        <div class="card-body d-flex justify-content-center flex-column pb-2">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="me-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book feather-xl text-secondary mb-3"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                                    <h5>Notice & Announcement</h5>
+                                    <div class="text-muted small">To keep you on track when working with our toolkit</div>
+                                </div>
+                                <img src="~/design/img/processing.svg" alt="..." style="width: 8rem">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Row for Project Tracker Card -->
+            <div class="row">
+                <!-- Area Chart -->
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="card mb-0">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Monthly Invoice (million)</h6>
+                        </div>
+                        <div class="card-body m-0 p-0">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bar Chart -->
+                <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
+                    <div class="card shadow mb-0">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Monthly Return (million)</h6>
+                        </div>
+                        <div class="card-body m-0 p-0">
+                            <div class="chart-bar">
+                                <canvas id="myBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Project tracker card example -->
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Monthly Return (million)</h6>
+                </div>
+                <div>
+                    <canvas id="canvas" height="100"></canvas> <!-- Default is 400, try 250 or 200 -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="~/design/vendor/chart.js/chart.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/design/js/demo/chart-area-demo.js"></script>
+    <script src="~/design/js/demo/chart-pie-demo.js"></script>
+    <script src="~/design/js/demo/chart-bar-demo.js"></script>
+    <script src="~/design/js/demo/chart-dash-demo.js"></script>
+    <script src="~/design/js/demo/chart-sbu-demo.js"></script>
+}

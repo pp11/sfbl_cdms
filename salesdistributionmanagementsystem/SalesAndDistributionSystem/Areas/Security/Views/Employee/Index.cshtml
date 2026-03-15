@@ -1,0 +1,186 @@
+﻿@{
+    ViewData["Title"] = "Employee Configuration";
+}
+
+@section Styles{
+    <style>
+        .ui-grid-header-cell .ui-grid-cell-contents {
+            white-space: normal !important;
+            text-align: center !important;
+        }
+    </style>
+    <link href="/css/site.css" rel="stylesheet">
+}
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h4 class="h3 mb-0 text-gray-600">@ViewData["Title"].ToString()</h4>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item" ng-show="!showDiv">
+                <a href="/Security/Employee/Index" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item" ng-show="!showDiv">
+                <button type="button" class="btn btn-success btn-icon-split btn-sm" ng-disabled="formMenuCategoryAdd.$invalid" ng-show="model.ADD_PERMISSION == 'Active'" ng-click="SaveData(model)">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-body p-1">
+                    <form name="formMenuCategoryAdd">
+                        <fieldset>
+                            <div class="ml-3 mr-3 mt-3">
+                                <div class="row">
+                                    <div class="col-md-4 space-bottom d-none">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="COMPANY_ID">Company</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="COMPANY_ID" type="text" class="form-control d-none" required
+                                                       name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                                <input id="COMPANY_NAME" type="text" class="form-control"
+                                                       name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="EMPLOYEE_NAME">Employee Name </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="EMPLOYEE_NAME" type="text" class="form-control" required
+                                                       name="EMPLOYEE_NAME" ng-model="model.EMPLOYEE_NAME">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="UNIT_ID">Depot/Unit</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="UNIT_ID" id="UNIT_ID" ng-model="model.UNIT_ID"
+                                                        ng-options="option.UNIT_ID as option.UNIT_NAME for option in CompanyUnits" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="ORDER_BY_SLNO">Employee Type</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select ng-disabled="true" class="form-control" ng-model="model.USER_TYPE" id="USER_TYPE" name="USER_TYPE" ng-change="loadDistributor()">
+                                                    <option value="General">Normal/Admin</option>
+                                                    <option value="Distributor">Distributor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom d-none" id="company_customer_name_param" style="display:none">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="CUSTOMER_NAME">Select Distributor</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="typeaheadcontainer">
+                                                    <input type="text" autocomplete="off" style="width:100%;" class="form-control" name="ROLE_NAME"
+                                                           ng-model="model.CUSTOMER_NAME"
+                                                           uib-typeahead="Customer.CUSTOMER_NAME as Customer.CUSTOMER_NAME_CODE for Customer in AutoCompleteDataLoadForCustomer($viewValue)"
+                                                           typeahead-append-to-body="true"
+                                                           placeholder="Customer Name Min. Two Character"
+                                                           typeahead-editable="false"
+                                                           typeahead-on-select="typeaheadSelectedCustomer(model, $item)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="EMPLOYEE_ID">Employee Id</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="EMPLOYEE_ID" ng-disabled="model.ID>0" type="number" class="form-control" required ng-change="updateEmployeeCode()" name="EMPLOYEE_ID" ng-model="model.EMPLOYEE_ID" maxlength="8">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label> Employee Code </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input id="EMPLOYEE_CODE" type="text" class="form-control" required readonly
+                                                       name="EMPLOYEE_CODE" ng-model="model.EMPLOYEE_CODE" placeholder="Enter Employee Code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 space-bottom">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label> Employee Satus </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="EMPLOYEE_STATUS" id="EMPLOYEE_STATUS" ng-model="model.EMPLOYEE_STATUS"
+                                                        ng-options="option.VALUE as option.NAME for option in EmployeeStatus" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-2">
+                    <fieldset>
+                        <legend style="width:190px">Employee List</legend>
+                        <div ng-show="model.LIST_VIEW == 'Active'">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                 style="color: #252222;height: 59vh " class="grid m-2">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/scriptsng/security/employee/controller/EmployeeCtr.js"></script>
+    <script src="~/scriptsng/security/employee/service/EmployeeService.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select...."
+            });
+
+        });
+    </script>
+}

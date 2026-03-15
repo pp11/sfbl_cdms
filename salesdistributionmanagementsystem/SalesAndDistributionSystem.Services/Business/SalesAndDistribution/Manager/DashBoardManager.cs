@@ -1,0 +1,259 @@
+﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework.Internal;
+using SalesAndDistributionSystem.Domain.Models.Entities.SalesAndDistribution;
+using SalesAndDistributionSystem.Services.Business.Company;
+using SalesAndDistributionSystem.Services.Business.SalesAndDistribution.IManager;
+using SalesAndDistributionSystem.Services.Business.Security;
+using SalesAndDistributionSystem.Services.Common;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SalesAndDistributionSystem.Services.Business.SalesAndDistribution.Manager
+{
+
+    public class DashBoardManager : IDashboardManager
+    {
+        private readonly ICommonServices _commonServices;
+        private readonly IConfiguration _configuration;
+        private readonly IUserLogManager _logManager;
+        private readonly INotificationManager _NotificationManager;
+
+        public DashBoardManager(ICommonServices commonServices, IConfiguration configuration)
+        {
+            _commonServices = commonServices;
+            _configuration = configuration;
+        }
+
+        //im//
+        public async Task<DataTable> GetChartAreaData(string db)
+        {
+            DataTable dataTable = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db),
+            @"SELECT TO_CHAR(INVOICE_DATE, 'Month') AS MONTH, 
+       SUM(NET_INVOICE_AMOUNT) / 1000000 AS AMOUNT
+FROM INVOICE_MST
+WHERE INVOICE_DATE >= ADD_MONTHS(SYSDATE, -12)
+AND INVOICE_DATE <= SYSDATE
+GROUP BY TO_CHAR(INVOICE_DATE, 'YYYY'),TO_CHAR(INVOICE_DATE, 'Month'), TO_CHAR(INVOICE_DATE, 'MM')
+ORDER BY TO_CHAR(INVOICE_DATE, 'YYYY'),TO_CHAR(INVOICE_DATE, 'MM')
+", _commonServices.AddParameter(new string[] {}));
+            return dataTable;
+        }
+        //im//
+        public async Task<DataTable> GetChartBarData(string db)
+        {
+            DataTable dataTable = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db),
+            @"SELECT TO_CHAR(RETURN_DATE, 'Month') AS MONTH, 
+       SUM(NET_RETURN_AMOUNT)/1000000 AS AMOUNT
+FROM RETURN_MST
+WHERE RETURN_DATE >= ADD_MONTHS(SYSDATE, -12)
+  AND RETURN_DATE <= SYSDATE
+GROUP BY TO_CHAR(RETURN_DATE, 'YYYY'), TO_CHAR(RETURN_DATE, 'Month'), TO_CHAR(RETURN_DATE, 'MM')
+ORDER BY TO_CHAR(RETURN_DATE, 'YYYY'), TO_CHAR(RETURN_DATE, 'MM')", _commonServices.AddParameter(new string[] { }));
+            return dataTable;
+        }
+        //im//
+        public async Task<DataTable> GetChartPieData(string db)
+        {
+            DataTable dataTable = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db),
+            @"SELECT
+    S.UNIT_SHORT_NAME MONTH,
+    ROUND((SUM(D.NET_INVOICE_AMOUNT) / NULLIF(Total.TotalAmount, 0)) * 100, 2) AS AMOUNT
+FROM
+    INVOICE_MST D
+    JOIN COMPANY_INFO S ON D.COMPANY_ID=S.COMPANY_ID AND D.INVOICE_UNIT_ID= S.UNIT_ID
+    CROSS JOIN (
+        SELECT SUM(D.NET_INVOICE_AMOUNT) AS TotalAmount
+        FROM INVOICE_MST D
+        WHERE TO_CHAR(D.INVOICE_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE) AND TO_CHAR(D.INVOICE_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+    ) Total
+WHERE
+    TO_CHAR(D.INVOICE_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE) AND TO_CHAR(D.INVOICE_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+GROUP BY
+    S.UNIT_SHORT_NAME, S.UNIT_ID, Total.TotalAmount
+ORDER BY
+    S.UNIT_ID", _commonServices.AddParameter(new string[] { }));
+            return dataTable;
+        }
+
+        //im//
+        public async Task<string> DashBoardData(string db)
+        {
+            DataTable dataTable = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db),
+            @"SELECT TRUNC(NVL(T.NET_TARGET_VALUE,0) / 1000000,2) T_M
+       ,TRUNC(T.ACHIV_PERCENT) T_A
+       ,TRUNC(NVL(O.CURRENTWEEKCOUNT,0)/ 1000000,2) W_O
+       ,NVL(O.PERCENTAGECHANGE,0) W_O_P
+       ,TRUNC(NVL(I.CURRENTWEEKCOUNT,0)/ 1000000,2) W_I
+       ,NVL(I.PERCENTAGECHANGE,0) W_I_P
+       ,TRUNC(NVL(R.CURRENTWEEKCOUNT,0)/ 1000000,2) W_R
+       ,NVL(R.PERCENTAGECHANGE,0) W_R_P
+       ,TRUNC(NVL(G.CURRENTWEEKCOUNT,0)/ 1000000,2) W_G
+       ,NVL(G.PERCENTAGECHANGE,0) W_G_P
+FROM 
+(
+SELECT NET_TARGET_VALUE,
+ROUND(
+                CASE 
+                    WHEN NVL((T.NET_TARGET_VALUE), 0) = 0 THEN 0
+                    ELSE (NVL((NVL(I.SALES_VALUE, 0)) - (NVL(R.RETURN_AMOUNT, 0)), 0) / NVL((T.NET_TARGET_VALUE), 0)) * 100
+                END,2
+             ) AS ACHIV_PERCENT
+
+FROM 
+( 
+    SELECT    SUM(B.TARGET_VALUE) NET_TARGET_VALUE
+    FROM      CUSTOMER_TARGET_MST A
+              JOIN CUSTOMER_TARGET_DTL B ON A.MST_ID=B.MST_ID
+    WHERE     A.YEAR = EXTRACT (YEAR FROM SYSDATE) AND A.MONTH_CODE = EXTRACT (MONTH FROM SYSDATE)
+) T,
+(
+    SELECT    NVL(SUM(A.NET_INVOICE_AMOUNT),0) SALES_VALUE  
+    FROM      INVOICE_MST A
+    WHERE     TO_CHAR(A.INVOICE_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE) AND TO_CHAR(A.INVOICE_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+                        
+) I,
+(
+    SELECT    NVL(SUM(M.NET_RETURN_AMOUNT),0) RETURN_AMOUNT
+    FROM      RETURN_MST M
+    WHERE     TO_CHAR(M.RETURN_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE)
+              AND TO_CHAR(M.RETURN_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+)R
+WHERE 1=1
+) T,
+(
+SELECT
+CURRENT_WEEK_SALES.SALESCOUNT AS CURRENTWEEKCOUNT,
+PREVIOUS_WEEK_SALES.SALESCOUNT AS PREVIOUSWEEKCOUNT,
+CASE
+WHEN PREVIOUS_WEEK_SALES.SALESCOUNT = 0 THEN NULL
+ELSE ROUND(((CURRENT_WEEK_SALES.SALESCOUNT - PREVIOUS_WEEK_SALES.SALESCOUNT) / PREVIOUS_WEEK_SALES.SALESCOUNT) * 100, 2)
+END AS PERCENTAGECHANGE
+FROM
+(
+SELECT SUM(NET_ORDER_AMOUNT) AS SALESCOUNT
+FROM ORDER_MST A
+WHERE TO_CHAR(A.ORDER_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE) AND TO_CHAR(A.ORDER_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+) CURRENT_WEEK_SALES,
+(
+SELECT SUM(NET_ORDER_AMOUNT) AS SALESCOUNT
+FROM ORDER_MST A
+WHERE TO_CHAR(A.ORDER_DATE, 'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMM')
+
+) PREVIOUS_WEEK_SALES
+WHERE 1=1
+) O,
+(
+SELECT
+CURRENT_WEEK_SALES.SALESCOUNT AS CURRENTWEEKCOUNT,
+PREVIOUS_WEEK_SALES.SALESCOUNT AS PREVIOUSWEEKCOUNT,
+CASE
+WHEN PREVIOUS_WEEK_SALES.SALESCOUNT = 0 THEN NULL
+ELSE ROUND(((CURRENT_WEEK_SALES.SALESCOUNT - PREVIOUS_WEEK_SALES.SALESCOUNT) / PREVIOUS_WEEK_SALES.SALESCOUNT) * 100, 2)
+END AS PERCENTAGECHANGE
+FROM
+(
+SELECT SUM(NET_INVOICE_AMOUNT) AS SALESCOUNT
+FROM INVOICE_MST A
+WHERE     TO_CHAR(A.INVOICE_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE) AND TO_CHAR(A.INVOICE_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+) CURRENT_WEEK_SALES,
+(
+SELECT SUM(NET_INVOICE_AMOUNT)  AS SALESCOUNT
+FROM INVOICE_MST A
+WHERE TO_CHAR(A.INVOICE_DATE, 'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMM')
+) PREVIOUS_WEEK_SALES
+WHERE 1=1
+) I,
+(
+SELECT
+CURRENT_WEEK_SALES.SALESCOUNT AS CURRENTWEEKCOUNT,
+PREVIOUS_WEEK_SALES.SALESCOUNT AS PREVIOUSWEEKCOUNT,
+CASE
+WHEN PREVIOUS_WEEK_SALES.SALESCOUNT = 0 THEN NULL
+ELSE ROUND(((CURRENT_WEEK_SALES.SALESCOUNT - PREVIOUS_WEEK_SALES.SALESCOUNT) / PREVIOUS_WEEK_SALES.SALESCOUNT) * 100, 2)
+END AS PERCENTAGECHANGE
+FROM
+(
+SELECT SUM(NET_RETURN_AMOUNT) AS SALESCOUNT
+FROM RETURN_MST M
+WHERE     TO_CHAR(M.RETURN_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE)
+          AND TO_CHAR(M.RETURN_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+) CURRENT_WEEK_SALES,
+(
+SELECT SUM(NET_RETURN_AMOUNT) AS SALESCOUNT
+FROM RETURN_MST A
+WHERE TO_CHAR(A.RETURN_DATE, 'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMM')
+
+) PREVIOUS_WEEK_SALES
+WHERE 1=1
+) R,
+(
+SELECT
+CURRENT_WEEK_SALES.SALESCOUNT AS CURRENTWEEKCOUNT,
+PREVIOUS_WEEK_SALES.SALESCOUNT AS PREVIOUSWEEKCOUNT,
+CASE
+WHEN PREVIOUS_WEEK_SALES.SALESCOUNT = 0 THEN NULL
+ELSE ROUND(((CURRENT_WEEK_SALES.SALESCOUNT - PREVIOUS_WEEK_SALES.SALESCOUNT) / PREVIOUS_WEEK_SALES.SALESCOUNT) * 100, 2)
+END AS PERCENTAGECHANGE
+FROM
+(
+SELECT NVL(SUM(NET_COLLECTION_AMT),0) AS SALESCOUNT
+FROM  COLLECTION_MST M
+      JOIN COLLECTION_DTL D ON  M.COLLECTION_MST_ID= D.COLLECTION_MST_ID 
+WHERE     TO_CHAR(M.APPROVED_DATE,'YYYY')=EXTRACT (YEAR FROM SYSDATE)
+          AND TO_CHAR(M.APPROVED_DATE,'MM')=EXTRACT (MONTH FROM SYSDATE)
+) CURRENT_WEEK_SALES,
+(
+SELECT NVL(SUM(NET_COLLECTION_AMT),0) AS SALESCOUNT
+FROM  COLLECTION_MST M
+      JOIN COLLECTION_DTL D ON  M.COLLECTION_MST_ID= D.COLLECTION_MST_ID 
+WHERE TO_CHAR(M.APPROVED_DATE, 'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMM')
+
+) PREVIOUS_WEEK_SALES
+WHERE 1=1
+) G
+WHERE 1=1",
+
+            _commonServices.AddParameter(new string[] { }));
+            return _commonServices.DataTableToJSON(dataTable);
+        }
+
+        //im//
+        public async Task<string> GetSbuData(string db)
+        {
+            DataTable dataTable = await _commonServices.GetDataTableAsyn(_configuration.GetConnectionString(db),
+                @"SELECT 
+    TO_CHAR(MONTHS.MONTH_DATE, 'Mon') AS MONTH_LABEL,
+    
+    TRUNC(NVL((
+        SELECT SUM(NET_INVOICE_AMOUNT) / 1000000
+        FROM INVOICE_MST
+        WHERE TO_CHAR(INVOICE_DATE, 'YYYY-MM') = TO_CHAR(MONTHS.MONTH_DATE, 'YYYY-MM')
+    ), 0), 2) AS SALES_MILLION,
+
+    TRUNC(NVL((
+        SELECT SUM(NET_ORDER_AMOUNT) / 1000000
+        FROM ORDER_MST
+        WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM') = TO_CHAR(MONTHS.MONTH_DATE, 'YYYY-MM')
+    ), 0), 2) AS ORDER_MILLION,
+
+    TRUNC(NVL((
+        SELECT SUM(NET_COLLECTION_AMT) / 1000000
+        FROM COLLECTION_MST M
+        JOIN COLLECTION_DTL D ON M.COLLECTION_MST_ID = D.COLLECTION_MST_ID
+        WHERE TO_CHAR(APPROVED_DATE, 'YYYY-MM') = TO_CHAR(MONTHS.MONTH_DATE, 'YYYY-MM')
+    ), 0), 2) AS COLLECTIONS_MILLION
+
+FROM (
+    SELECT ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -LEVEL + 1) AS MONTH_DATE
+    FROM DUAL
+    CONNECT BY LEVEL <= 12
+) MONTHS
+ORDER BY MONTHS.MONTH_DATE",
+            _commonServices.AddParameter(new string[] { }));
+            return _commonServices.DataTableToJSON(dataTable);
+        }
+    }
+}

@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Gift Item Info";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="formMenuCategoryAdd.$invalid" name="btnSubmit" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+
+
+        </ol>
+    </div>
+
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+
+
+            <form name="formMenuCategoryAdd">
+                <fieldset>
+                    <legend style="width:220px">Gift Item Entry</legend>
+
+                    <div class="row" style="margin:20px">
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="COMPANY_ID">Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="COMPANY_ID" type="number" hidden class="form-control" required
+                                           name="COMPANY_ID" ng-model="model.COMPANY_ID">
+                                    <input id="COMPANY_NAME" type="text" disabled class="form-control" required
+                                           name="COMPANY_NAME" ng-model="model.COMPANY_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="STATUS">Status</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="STATUS"
+                                            name="STATUS" ng-model="model.STATUS" style="width:100%">
+
+                                        <option ng-repeat="item in Status" value="{{item.STATUS}}" ng-selected="item.STATUS == model.STATUS">{{item.STATUS}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="GIFT_ITEM_NAME">Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="GIFT_ITEM_NAME" type="text" class="form-control" required
+                                           name="GIFT_ITEM_NAME" ng-model="model.GIFT_ITEM_NAME">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="REMARKS">Remarks</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="REMARKS" type="text" class="form-control"
+                                           name="REMARKS" ng-model="model.REMARKS">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset>
+                <legend style="width:190px">Gift Item List</legend>
+                <div class="row" style="height: 57vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" ng-show="model.LIST_VIEW == 'Active'" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 50vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+
+
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/GiftItem/Controller/GiftItemInfoCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/GiftItem/Service/GiftItemInfoServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+               $(".select2-single").select2({
+                   placeholder: "Select...."
+               });
+
+        });
+    </script>
+}

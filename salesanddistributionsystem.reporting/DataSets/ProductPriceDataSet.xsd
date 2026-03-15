@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ProductPriceDataSet" targetNamespace="http://tempuri.org/ProductPriceDataSet.xsd" xmlns:mstns="http://tempuri.org/ProductPriceDataSet.xsd" xmlns="http://tempuri.org/ProductPriceDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;Persist Security Info=True;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="silsqadb1.STL_ERP_SDS" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT A.PRICE_ENTRY_DATE,
+          A.PRICE_EFFECT_DATE,
+          A.SKU_ID,
+          A.SKU_CODE,
+          '' SKU_NAME,
+          '' PACK_SIZE,
+          B.SHIPPER_QTY,
+          A.UNIT_TP,
+          A.UNIT_VAT,
+          A.SUPPLIMENTARY_TAX,
+          A.MRP,
+          A.EMPLOYEE_PRICE,
+          A.SPECIAL_PRICE,
+          A.GROSS_PROFIT,
+          
+          B.PRODUCT_TYPE_ID, 
+          '' PRODUCT_TYPE_NAME,
+          B.PRIMARY_PRODUCT_ID,
+          '' PRIMARY_PRODUCT_NAME,
+          B.BRAND_ID,
+          '' BRNAD_NAME, 
+          B.CATEGORY_ID, 
+          '' CATEGORY_NAME,
+          B.BASE_PRODUCT_ID,
+          '' BASE_PRODUCT_NAME,
+          B.GROUP_ID,          
+          '' GROUP_NAME,
+          A.COMPANY_ID,
+          '' COMPANY_NAME,
+          A.UNIT_ID,
+          '' UNIT_NAME,
+          '' Status
+     FROM PRODUCT_PRICE_INFO A, PRODUCT_INFO B
+    WHERE     A.COMPANY_ID = B.COMPANY_ID
+          AND A.SKU_ID = B.SKU_ID
+          AND TRUNC (PRICE_ENTRY_DATE) =
+                 (SELECT MAX (TRUNC (PRICE_ENTRY_DATE))
+                    FROM PRODUCT_PRICE_INFO
+                   WHERE     COMPANY_ID = A.COMPANY_ID
+                         AND UNIT_ID = A.UNIT_ID
+                         AND SKU_ID = A.SKU_ID
+                         AND TRUNC (PRICE_EFFECT_DATE) &lt;= TRUNC (SYSDATE))
+          AND B.PRODUCT_STATUS = 'Active'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PRICE_ENTRY_DATE" DataSetColumn="PRICE_ENTRY_DATE" />
+              <Mapping SourceColumn="PRICE_EFFECT_DATE" DataSetColumn="PRICE_EFFECT_DATE" />
+              <Mapping SourceColumn="SKU_ID" DataSetColumn="SKU_ID" />
+              <Mapping SourceColumn="SKU_CODE" DataSetColumn="SKU_CODE" />
+              <Mapping SourceColumn="SKU_NAME" DataSetColumn="SKU_NAME" />
+              <Mapping SourceColumn="PACK_SIZE" DataSetColumn="PACK_SIZE" />
+              <Mapping SourceColumn="SHIPPER_QTY" DataSetColumn="SHIPPER_QTY" />
+              <Mapping SourceColumn="UNIT_TP" DataSetColumn="UNIT_TP" />
+              <Mapping SourceColumn="UNIT_VAT" DataSetColumn="UNIT_VAT" />
+              <Mapping SourceColumn="SUPPLIMENTARY_TAX" DataSetColumn="SUPPLIMENTARY_TAX" />
+              <Mapping SourceColumn="MRP" DataSetColumn="MRP" />
+              <Mapping SourceColumn="EMPLOYEE_PRICE" DataSetColumn="EMPLOYEE_PRICE" />
+              <Mapping SourceColumn="SPECIAL_PRICE" DataSetColumn="SPECIAL_PRICE" />
+              <Mapping SourceColumn="GROSS_PROFIT" DataSetColumn="GROSS_PROFIT" />
+              <Mapping SourceColumn="PRODUCT_TYPE_ID" DataSetColumn="PRODUCT_TYPE_ID" />
+              <Mapping SourceColumn="PRODUCT_TYPE_NAME" DataSetColumn="PRODUCT_TYPE_NAME" />
+              <Mapping SourceColumn="PRIMARY_PRODUCT_ID" DataSetColumn="PRIMARY_PRODUCT_ID" />
+              <Mapping SourceColumn="PRIMARY_PRODUCT_NAME" DataSetColumn="PRIMARY_PRODUCT_NAME" />
+              <Mapping SourceColumn="BRAND_ID" DataSetColumn="BRAND_ID" />
+              <Mapping SourceColumn="BRNAD_NAME" DataSetColumn="BRNAD_NAME" />
+              <Mapping SourceColumn="CATEGORY_ID" DataSetColumn="CATEGORY_ID" />
+              <Mapping SourceColumn="CATEGORY_NAME" DataSetColumn="CATEGORY_NAME" />
+              <Mapping SourceColumn="BASE_PRODUCT_ID" DataSetColumn="BASE_PRODUCT_ID" />
+              <Mapping SourceColumn="BASE_PRODUCT_NAME" DataSetColumn="BASE_PRODUCT_NAME" />
+              <Mapping SourceColumn="GROUP_ID" DataSetColumn="GROUP_ID" />
+              <Mapping SourceColumn="GROUP_NAME" DataSetColumn="GROUP_NAME" />
+              <Mapping SourceColumn="COMPANY_ID" DataSetColumn="COMPANY_ID" />
+              <Mapping SourceColumn="COMPANY_NAME" DataSetColumn="COMPANY_NAME" />
+              <Mapping SourceColumn="UNIT_ID" DataSetColumn="UNIT_ID" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+              <Mapping SourceColumn="STATUS" DataSetColumn="STATUS" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ProductPriceDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ProductPriceDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ProductPriceDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PRICE_ENTRY_DATE" msprop:Generator_ColumnPropNameInTable="PRICE_ENTRY_DATEColumn" msprop:Generator_ColumnPropNameInRow="PRICE_ENTRY_DATE" msprop:Generator_UserColumnName="PRICE_ENTRY_DATE" msprop:Generator_ColumnVarNameInTable="columnPRICE_ENTRY_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PRICE_EFFECT_DATE" msprop:Generator_ColumnPropNameInTable="PRICE_EFFECT_DATEColumn" msprop:Generator_ColumnPropNameInRow="PRICE_EFFECT_DATE" msprop:Generator_UserColumnName="PRICE_EFFECT_DATE" msprop:Generator_ColumnVarNameInTable="columnPRICE_EFFECT_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_UserColumnName="SKU_ID" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="SHIPPER_QTY" msprop:Generator_ColumnPropNameInTable="SHIPPER_QTYColumn" msprop:Generator_ColumnPropNameInRow="SHIPPER_QTY" msprop:Generator_UserColumnName="SHIPPER_QTY" msprop:Generator_ColumnVarNameInTable="columnSHIPPER_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_VAT" msprop:Generator_ColumnPropNameInTable="UNIT_VATColumn" msprop:Generator_ColumnPropNameInRow="UNIT_VAT" msprop:Generator_UserColumnName="UNIT_VAT" msprop:Generator_ColumnVarNameInTable="columnUNIT_VAT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SUPPLIMENTARY_TAX" msprop:Generator_ColumnPropNameInTable="SUPPLIMENTARY_TAXColumn" msprop:Generator_ColumnPropNameInRow="SUPPLIMENTARY_TAX" msprop:Generator_UserColumnName="SUPPLIMENTARY_TAX" msprop:Generator_ColumnVarNameInTable="columnSUPPLIMENTARY_TAX" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MRP" msprop:Generator_ColumnPropNameInTable="MRPColumn" msprop:Generator_ColumnPropNameInRow="MRP" msprop:Generator_UserColumnName="MRP" msprop:Generator_ColumnVarNameInTable="columnMRP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EMPLOYEE_PRICE" msprop:Generator_ColumnPropNameInTable="EMPLOYEE_PRICEColumn" msprop:Generator_ColumnPropNameInRow="EMPLOYEE_PRICE" msprop:Generator_UserColumnName="EMPLOYEE_PRICE" msprop:Generator_ColumnVarNameInTable="columnEMPLOYEE_PRICE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SPECIAL_PRICE" msprop:Generator_ColumnPropNameInTable="SPECIAL_PRICEColumn" msprop:Generator_ColumnPropNameInRow="SPECIAL_PRICE" msprop:Generator_UserColumnName="SPECIAL_PRICE" msprop:Generator_ColumnVarNameInTable="columnSPECIAL_PRICE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GROSS_PROFIT" msprop:Generator_ColumnPropNameInTable="GROSS_PROFITColumn" msprop:Generator_ColumnPropNameInRow="GROSS_PROFIT" msprop:Generator_UserColumnName="GROSS_PROFIT" msprop:Generator_ColumnVarNameInTable="columnGROSS_PROFIT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PRODUCT_TYPE_ID" msprop:Generator_ColumnPropNameInTable="PRODUCT_TYPE_IDColumn" msprop:Generator_ColumnPropNameInRow="PRODUCT_TYPE_ID" msprop:Generator_UserColumnName="PRODUCT_TYPE_ID" msprop:Generator_ColumnVarNameInTable="columnPRODUCT_TYPE_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PRODUCT_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="PRODUCT_TYPE_NAMEColumn" msprop:Generator_ColumnPropNameInRow="PRODUCT_TYPE_NAME" msprop:Generator_UserColumnName="PRODUCT_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnPRODUCT_TYPE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PRIMARY_PRODUCT_ID" msprop:Generator_ColumnPropNameInTable="PRIMARY_PRODUCT_IDColumn" msprop:Generator_ColumnPropNameInRow="PRIMARY_PRODUCT_ID" msprop:Generator_UserColumnName="PRIMARY_PRODUCT_ID" msprop:Generator_ColumnVarNameInTable="columnPRIMARY_PRODUCT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PRIMARY_PRODUCT_NAME" msprop:Generator_ColumnPropNameInTable="PRIMARY_PRODUCT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="PRIMARY_PRODUCT_NAME" msprop:Generator_UserColumnName="PRIMARY_PRODUCT_NAME" msprop:Generator_ColumnVarNameInTable="columnPRIMARY_PRODUCT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BRAND_ID" msprop:Generator_ColumnPropNameInTable="BRAND_IDColumn" msprop:Generator_ColumnPropNameInRow="BRAND_ID" msprop:Generator_UserColumnName="BRAND_ID" msprop:Generator_ColumnVarNameInTable="columnBRAND_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BRNAD_NAME" msprop:Generator_ColumnPropNameInTable="BRNAD_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BRNAD_NAME" msprop:Generator_UserColumnName="BRNAD_NAME" msprop:Generator_ColumnVarNameInTable="columnBRNAD_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="CATEGORY_ID" msprop:Generator_ColumnPropNameInTable="CATEGORY_IDColumn" msprop:Generator_ColumnPropNameInRow="CATEGORY_ID" msprop:Generator_UserColumnName="CATEGORY_ID" msprop:Generator_ColumnVarNameInTable="columnCATEGORY_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CATEGORY_NAME" msprop:Generator_ColumnPropNameInTable="CATEGORY_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CATEGORY_NAME" msprop:Generator_UserColumnName="CATEGORY_NAME" msprop:Generator_ColumnVarNameInTable="columnCATEGORY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BASE_PRODUCT_ID" msprop:Generator_ColumnPropNameInTable="BASE_PRODUCT_IDColumn" msprop:Generator_ColumnPropNameInRow="BASE_PRODUCT_ID" msprop:Generator_UserColumnName="BASE_PRODUCT_ID" msprop:Generator_ColumnVarNameInTable="columnBASE_PRODUCT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BASE_PRODUCT_NAME" msprop:Generator_ColumnPropNameInTable="BASE_PRODUCT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BASE_PRODUCT_NAME" msprop:Generator_UserColumnName="BASE_PRODUCT_NAME" msprop:Generator_ColumnVarNameInTable="columnBASE_PRODUCT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="GROUP_ID" msprop:Generator_ColumnPropNameInTable="GROUP_IDColumn" msprop:Generator_ColumnPropNameInRow="GROUP_ID" msprop:Generator_UserColumnName="GROUP_ID" msprop:Generator_ColumnVarNameInTable="columnGROUP_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GROUP_NAME" msprop:Generator_ColumnPropNameInTable="GROUP_NAMEColumn" msprop:Generator_ColumnPropNameInRow="GROUP_NAME" msprop:Generator_UserColumnName="GROUP_NAME" msprop:Generator_ColumnVarNameInTable="columnGROUP_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_UserColumnName="COMPANY_ID" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" type="xs:decimal" />
+              <xs:element name="COMPANY_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_NAMEColumn" msprop:Generator_ColumnPropNameInRow="COMPANY_NAME" msprop:Generator_UserColumnName="COMPANY_NAME" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" type="xs:decimal" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

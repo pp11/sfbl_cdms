@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DailyCollectionRegisterDataSet" targetNamespace="http://tempuri.org/DailyCollectionRegisterDataSet.xsd" xmlns:mstns="http://tempuri.org/DailyCollectionRegisterDataSet.xsd" xmlns="http://tempuri.org/DailyCollectionRegisterDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DailyCollectionRegisterDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DailyCollectionRegisterDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DailyCollectionRegisterDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DailyCollectionRegister" msprop:Generator_RowEvHandlerName="DailyCollectionRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="DailyCollectionRegisterRowDeleted" msprop:Generator_RowDeletingName="DailyCollectionRegisterRowDeleting" msprop:Generator_RowEvArgName="DailyCollectionRegisterRowChangeEvent" msprop:Generator_TablePropName="DailyCollectionRegister" msprop:Generator_RowChangedName="DailyCollectionRegisterRowChanged" msprop:Generator_UserTableName="DailyCollectionRegister" msprop:Generator_RowChangingName="DailyCollectionRegisterRowChanging" msprop:Generator_RowClassName="DailyCollectionRegisterRow" msprop:Generator_TableClassName="DailyCollectionRegisterDataTable" msprop:Generator_TableVarName="tableDailyCollectionRegister">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_DATE" msprop:Generator_ColumnPropNameInTable="BATCH_DATEColumn" msprop:Generator_ColumnPropNameInRow="BATCH_DATE" msprop:Generator_UserColumnName="BATCH_DATE" msprop:Generator_ColumnVarNameInTable="columnBATCH_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_STATUS" msprop:Generator_ColumnPropNameInTable="BATCH_STATUSColumn" msprop:Generator_ColumnPropNameInRow="BATCH_STATUS" msprop:Generator_UserColumnName="BATCH_STATUS" msprop:Generator_ColumnVarNameInTable="columnBATCH_STATUS" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_POSTING_STATUS" msprop:Generator_ColumnPropNameInTable="BATCH_POSTING_STATUSColumn" msprop:Generator_ColumnPropNameInRow="BATCH_POSTING_STATUS" msprop:Generator_UserColumnName="BATCH_POSTING_STATUS" msprop:Generator_ColumnVarNameInTable="columnBATCH_POSTING_STATUS" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLECTION_UNIT" msprop:Generator_ColumnPropNameInTable="COLLECTION_UNITColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_UNIT" msprop:Generator_UserColumnName="COLLECTION_UNIT" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_UNIT" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_NO" msprop:Generator_ColumnPropNameInTable="VOUCHER_NOColumn" msprop:Generator_ColumnPropNameInRow="VOUCHER_NO" msprop:Generator_UserColumnName="VOUCHER_NO" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_DATE" msprop:Generator_ColumnPropNameInTable="VOUCHER_DATEColumn" msprop:Generator_ColumnPropNameInRow="VOUCHER_DATE" msprop:Generator_UserColumnName="VOUCHER_DATE" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH_NAME" msprop:Generator_ColumnPropNameInTable="BRANCH_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BRANCH_NAME" msprop:Generator_UserColumnName="BRANCH_NAME" msprop:Generator_ColumnVarNameInTable="columnBRANCH_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BANK_NAME" msprop:Generator_ColumnPropNameInTable="BANK_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BANK_NAME" msprop:Generator_UserColumnName="BANK_NAME" msprop:Generator_ColumnVarNameInTable="columnBANK_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLECTION_MODE" msprop:Generator_ColumnPropNameInTable="COLLECTION_MODEColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_MODE" msprop:Generator_UserColumnName="COLLECTION_MODE" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_MODE" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLECTION_AMT" msprop:Generator_ColumnPropNameInTable="COLLECTION_AMTColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_AMT" msprop:Generator_UserColumnName="COLLECTION_AMT" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TDS_AMT" msprop:Generator_ColumnPropNameInTable="TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="TDS_AMT" msprop:Generator_UserColumnName="TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnTDS_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="MEMO_COST" msprop:Generator_ColumnPropNameInTable="MEMO_COSTColumn" msprop:Generator_ColumnPropNameInRow="MEMO_COST" msprop:Generator_UserColumnName="MEMO_COST" msprop:Generator_ColumnVarNameInTable="columnMEMO_COST" type="xs:string" minOccurs="0" />
+              <xs:element name="NET_COLLECTION_AMT" msprop:Generator_ColumnPropNameInTable="NET_COLLECTION_AMTColumn" msprop:Generator_ColumnPropNameInRow="NET_COLLECTION_AMT" msprop:Generator_UserColumnName="NET_COLLECTION_AMT" msprop:Generator_ColumnVarNameInTable="columnNET_COLLECTION_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLECTION_MST_ID" msprop:Generator_UserColumnName="COLLECTION_MST_ID" msprop:Generator_ColumnPropNameInTable="COLLECTION_MST_IDColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_MST_ID" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_MST_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_ColumnVarNameInTable="columnREMARKS" msprop:Generator_UserColumnName="REMARKS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

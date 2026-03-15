@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Reverse Collection (Central)";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mt-1">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"].ToString()</h1>
+        <ol class="breadcrumb mb-0 pb-1">
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/CollectionReverse/InsertOrEdit" class="btn btn-info btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </span>
+                    <span class="text">Reverse Collection Entry</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/SalesAndDistribution/CollectionReverse/List" class="btn btn-warning btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Reload</span>
+                </a>
+            </li>
+
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body p-1">
+            <fieldset>
+                <div ng-show="!showDiv">
+                    <form name="formMenuCategoryAdd">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @*<strong class="m-2">Special Price Information</strong>*@
+                                <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize ui-grid-pinning
+                                     style="color: #252222; height: 80vh" class="grid m-2">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/collectionreverse/ListCtr.js?v=7874ddddddsdd"></script>
+    <script src="~/scriptsng/salesanddistribution/collectionreverse/collectionreverseservice.js?v=dfhdihgdjk"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2-single").select2({
+                placeholder: "Select"
+            });
+
+        });
+    </script>
+}

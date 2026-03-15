@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BatchWiseStockV2DataSet" targetNamespace="http://tempuri.org/BatchWiseStockV2DataSet.xsd" xmlns:mstns="http://tempuri.org/BatchWiseStockV2DataSet.xsd" xmlns="http://tempuri.org/BatchWiseStockV2DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BatchWiseStockV2DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="BatchWiseStockV2DataSet" msprop:Generator_DataSetName="BatchWiseStockV2DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COMPANY_ID" msprop:Generator_ColumnPropNameInRow="COMPANY_ID" msprop:Generator_ColumnPropNameInTable="COMPANY_IDColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_ID" msprop:Generator_UserColumnName="COMPANY_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_ID" msprop:Generator_ColumnPropNameInRow="UNIT_ID" msprop:Generator_ColumnPropNameInTable="UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_ID" msprop:Generator_UserColumnName="UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SKU_ID" msdata:Caption="STOCK_DATE" msprop:Generator_ColumnPropNameInRow="SKU_ID" msprop:Generator_ColumnPropNameInTable="SKU_IDColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_ID" msprop:Generator_UserColumnName="SKU_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_CODE" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="MRP" msprop:Generator_ColumnPropNameInRow="MRP" msprop:Generator_ColumnPropNameInTable="MRPColumn" msprop:Generator_ColumnVarNameInTable="columnMRP" msprop:Generator_UserColumnName="MRP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_TP" msprop:Generator_ColumnPropNameInRow="UNIT_TP" msprop:Generator_ColumnPropNameInTable="UNIT_TPColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_TP" msprop:Generator_UserColumnName="UNIT_TP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BATCH_NO" msprop:Generator_ColumnPropNameInRow="BATCH_NO" msprop:Generator_ColumnPropNameInTable="BATCH_NOColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_NO" msprop:Generator_UserColumnName="BATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_ID" msdata:Caption="STOCK_QTY" msprop:Generator_ColumnPropNameInRow="BATCH_ID" msprop:Generator_ColumnPropNameInTable="BATCH_IDColumn" msprop:Generator_ColumnVarNameInTable="columnBATCH_ID" msprop:Generator_UserColumnName="BATCH_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SALEABLE_STOCK_QTY" msdata:Caption="BOOKING_QTY" msprop:Generator_ColumnPropNameInRow="SALEABLE_STOCK_QTY" msprop:Generator_ColumnPropNameInTable="SALEABLE_STOCK_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnSALEABLE_STOCK_QTY" msprop:Generator_UserColumnName="SALEABLE_STOCK_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FREEZING_STOCK_QTY" msprop:Generator_ColumnPropNameInRow="FREEZING_STOCK_QTY" msprop:Generator_ColumnPropNameInTable="FREEZING_STOCK_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnFREEZING_STOCK_QTY" msprop:Generator_UserColumnName="FREEZING_STOCK_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BOOKED_STOCK_QTY" msdata:Caption="FREEZING_STATUS" msprop:Generator_ColumnPropNameInRow="BOOKED_STOCK_QTY" msprop:Generator_ColumnPropNameInTable="BOOKED_STOCK_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnBOOKED_STOCK_QTY" msprop:Generator_UserColumnName="BOOKED_STOCK_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_PHYSICAL_STOCK_QTY" msdata:Caption="VALUE_IN_TP" msprop:Generator_ColumnPropNameInRow="TOTAL_PHYSICAL_STOCK_QTY" msprop:Generator_ColumnPropNameInTable="TOTAL_PHYSICAL_STOCK_QTYColumn" msprop:Generator_ColumnVarNameInTable="columnTOTAL_PHYSICAL_STOCK_QTY" msprop:Generator_UserColumnName="TOTAL_PHYSICAL_STOCK_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COMPANY_NAME" msprop:Generator_ColumnPropNameInRow="COMPANY_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_NAME" msprop:Generator_UserColumnName="COMPANY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY_UNIT_NAME" msprop:Generator_ColumnPropNameInRow="COMPANY_UNIT_NAME" msprop:Generator_ColumnPropNameInTable="COMPANY_UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_UNIT_NAME" msprop:Generator_UserColumnName="COMPANY_UNIT_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="VALUE_IN_TP" msprop:Generator_ColumnPropNameInRow="VALUE_IN_TP" msprop:Generator_ColumnPropNameInTable="VALUE_IN_TPColumn" msprop:Generator_ColumnVarNameInTable="columnVALUE_IN_TP" msprop:Generator_UserColumnName="VALUE_IN_TP" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DistributorLadgerDataSet" targetNamespace="http://tempuri.org/DistributorLadgerDataSet.xsd" xmlns:mstns="http://tempuri.org/DistributorLadgerDataSet.xsd" xmlns="http://tempuri.org/DistributorLadgerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=silsqadb1;User ID=STL_ERP_SDS;Password=STL_SDS;Unicode=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="silsqadb1.STL_ERP_SDS" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="INVOICE_MSTTableAdapter" GeneratorDataComponentClassName="INVOICE_MSTTableAdapter" Name="INVOICE_MST" UserDataComponentName="INVOICE_MSTTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="silsqadb1.STL_ERP_SDS" DbObjectName="STL_ERP_SDS.INVOICE_MST" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  TO_DATE(A.INVOICE_DATE,'DD/MM/RRRR')  INVOICE_DATE
+    ,   A.INVOICE_NO
+    ,   A.CUSTOMER_CODE 
+    ,   '' CUSTOMER_NAME
+    ,   '' CUSTOMER_ADDRESS
+    ,   null VOUCHER_DATE
+    ,   NUll VOUCHER_NO
+    ,   null BANK_ID
+    ,   null BRANCH_ID
+    ,    '' BANK_NAME
+    ,    '' BRANCH_NAME
+    ,   0 INVOICE_AMT 
+    , 0 INVOICE_UNIT_ID
+    ,  ' '  UNIT_NAME
+    ,   0 TDS_AMT
+    ,   0 COLLECTION_INV_AMT
+    ,   0 COLLECTION_TDS_AMT
+    ,   0 RETURN_INV_AMT
+    ,   0 RETURN_TDS_AMT
+    ,   0 OPENING_INV_AMT
+    ,   0 OPENING_TDS_AMT
+    ,   0 CLOSING_INV_AMT
+    ,   0 CLOSING_TDS_AMT
+FROM     INVOICE_MST A
+
+    WHERE       A.INVOICE_TYPE_CODE='I0001'
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="INVOICE_DATE" DataSetColumn="INVOICE_DATE" />
+              <Mapping SourceColumn="INVOICE_NO" DataSetColumn="INVOICE_NO" />
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="CUSTOMER_ADDRESS" DataSetColumn="CUSTOMER_ADDRESS" />
+              <Mapping SourceColumn="VOUCHER_DATE" DataSetColumn="VOUCHER_DATE" />
+              <Mapping SourceColumn="VOUCHER_NO" DataSetColumn="VOUCHER_NO" />
+              <Mapping SourceColumn="BANK_ID" DataSetColumn="BANK_ID" />
+              <Mapping SourceColumn="BRANCH_ID" DataSetColumn="BRANCH_ID" />
+              <Mapping SourceColumn="BANK_NAME" DataSetColumn="BANK_NAME" />
+              <Mapping SourceColumn="BRANCH_NAME" DataSetColumn="BRANCH_NAME" />
+              <Mapping SourceColumn="INVOICE_AMT" DataSetColumn="INVOICE_AMT" />
+              <Mapping SourceColumn="TDS_AMT" DataSetColumn="TDS_AMT" />
+              <Mapping SourceColumn="COLLECTION_INV_AMT" DataSetColumn="COLLECTION_INV_AMT" />
+              <Mapping SourceColumn="COLLECTION_TDS_AMT" DataSetColumn="COLLECTION_TDS_AMT" />
+              <Mapping SourceColumn="RETURN_INV_AMT" DataSetColumn="RETURN_INV_AMT" />
+              <Mapping SourceColumn="RETURN_TDS_AMT" DataSetColumn="RETURN_TDS_AMT" />
+              <Mapping SourceColumn="OPENING_INV_AMT" DataSetColumn="OPENING_INV_AMT" />
+              <Mapping SourceColumn="OPENING_TDS_AMT" DataSetColumn="OPENING_TDS_AMT" />
+              <Mapping SourceColumn="CLOSING_INV_AMT" DataSetColumn="CLOSING_INV_AMT" />
+              <Mapping SourceColumn="CLOSING_TDS_AMT" DataSetColumn="CLOSING_TDS_AMT" />
+              <Mapping SourceColumn="INVOICE_UNIT_ID" DataSetColumn="INVOICE_UNIT_ID" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DistributorLadgerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DistributorLadgerDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DistributorLadgerDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="INVOICE_MST" msprop:Generator_RowClassName="INVOICE_MSTRow" msprop:Generator_RowEvHandlerName="INVOICE_MSTRowChangeEventHandler" msprop:Generator_RowDeletedName="INVOICE_MSTRowDeleted" msprop:Generator_RowDeletingName="INVOICE_MSTRowDeleting" msprop:Generator_RowEvArgName="INVOICE_MSTRowChangeEvent" msprop:Generator_TablePropName="INVOICE_MST" msprop:Generator_RowChangedName="INVOICE_MSTRowChanged" msprop:Generator_UserTableName="INVOICE_MST" msprop:Generator_RowChangingName="INVOICE_MSTRowChanging" msprop:Generator_TableClassName="INVOICE_MSTDataTable" msprop:Generator_TableVarName="tableINVOICE_MST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVOICE_DATE" msprop:Generator_UserColumnName="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="INVOICE_NO" msprop:Generator_UserColumnName="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_CODE" msprop:Generator_UserColumnName="CUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_UserColumnName="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_ADDRESS" msprop:Generator_UserColumnName="CUSTOMER_ADDRESS" msprop:Generator_ColumnPropNameInTable="CUSTOMER_ADDRESSColumn" msprop:Generator_ColumnPropNameInRow="CUSTOMER_ADDRESS" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_ADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_DATE" msprop:Generator_UserColumnName="VOUCHER_DATE" msprop:Generator_ColumnPropNameInTable="VOUCHER_DATEColumn" msprop:Generator_ColumnPropNameInRow="VOUCHER_DATE" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_NO" msprop:Generator_UserColumnName="VOUCHER_NO" msprop:Generator_ColumnPropNameInTable="VOUCHER_NOColumn" msprop:Generator_ColumnPropNameInRow="VOUCHER_NO" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BANK_ID" msprop:Generator_UserColumnName="BANK_ID" msprop:Generator_ColumnPropNameInTable="BANK_IDColumn" msprop:Generator_ColumnPropNameInRow="BANK_ID" msprop:Generator_ColumnVarNameInTable="columnBANK_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH_ID" msprop:Generator_UserColumnName="BRANCH_ID" msprop:Generator_ColumnPropNameInTable="BRANCH_IDColumn" msprop:Generator_ColumnPropNameInRow="BRANCH_ID" msprop:Generator_ColumnVarNameInTable="columnBRANCH_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="BANK_NAME" msprop:Generator_UserColumnName="BANK_NAME" msprop:Generator_ColumnPropNameInTable="BANK_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BANK_NAME" msprop:Generator_ColumnVarNameInTable="columnBANK_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH_NAME" msprop:Generator_UserColumnName="BRANCH_NAME" msprop:Generator_ColumnPropNameInTable="BRANCH_NAMEColumn" msprop:Generator_ColumnPropNameInRow="BRANCH_NAME" msprop:Generator_ColumnVarNameInTable="columnBRANCH_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_AMT" msprop:Generator_UserColumnName="INVOICE_AMT" msprop:Generator_ColumnPropNameInTable="INVOICE_AMTColumn" msprop:Generator_ColumnPropNameInRow="INVOICE_AMT" msprop:Generator_ColumnVarNameInTable="columnINVOICE_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TDS_AMT" msprop:Generator_UserColumnName="TDS_AMT" msprop:Generator_ColumnPropNameInTable="TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnTDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COLLECTION_INV_AMT" msprop:Generator_UserColumnName="COLLECTION_INV_AMT" msprop:Generator_ColumnPropNameInTable="COLLECTION_INV_AMTColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_INV_AMT" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_INV_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COLLECTION_TDS_AMT" msprop:Generator_UserColumnName="COLLECTION_TDS_AMT" msprop:Generator_ColumnPropNameInTable="COLLECTION_TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="COLLECTION_TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnCOLLECTION_TDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RETURN_INV_AMT" msprop:Generator_UserColumnName="RETURN_INV_AMT" msprop:Generator_ColumnPropNameInTable="RETURN_INV_AMTColumn" msprop:Generator_ColumnPropNameInRow="RETURN_INV_AMT" msprop:Generator_ColumnVarNameInTable="columnRETURN_INV_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RETURN_TDS_AMT" msprop:Generator_UserColumnName="RETURN_TDS_AMT" msprop:Generator_ColumnPropNameInTable="RETURN_TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="RETURN_TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnRETURN_TDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OPENING_INV_AMT" msprop:Generator_UserColumnName="OPENING_INV_AMT" msprop:Generator_ColumnPropNameInTable="OPENING_INV_AMTColumn" msprop:Generator_ColumnPropNameInRow="OPENING_INV_AMT" msprop:Generator_ColumnVarNameInTable="columnOPENING_INV_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OPENING_TDS_AMT" msprop:Generator_UserColumnName="OPENING_TDS_AMT" msprop:Generator_ColumnPropNameInTable="OPENING_TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="OPENING_TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnOPENING_TDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_INV_AMT" msprop:Generator_UserColumnName="CLOSING_INV_AMT" msprop:Generator_ColumnPropNameInTable="CLOSING_INV_AMTColumn" msprop:Generator_ColumnPropNameInRow="CLOSING_INV_AMT" msprop:Generator_ColumnVarNameInTable="columnCLOSING_INV_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLOSING_TDS_AMT" msprop:Generator_UserColumnName="CLOSING_TDS_AMT" msprop:Generator_ColumnPropNameInTable="CLOSING_TDS_AMTColumn" msprop:Generator_ColumnPropNameInRow="CLOSING_TDS_AMT" msprop:Generator_ColumnVarNameInTable="columnCLOSING_TDS_AMT" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INVOICE_UNIT_ID" msprop:Generator_ColumnPropNameInRow="INVOICE_UNIT_ID" msprop:Generator_ColumnPropNameInTable="INVOICE_UNIT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnINVOICE_UNIT_ID" msprop:Generator_UserColumnName="INVOICE_UNIT_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_UserColumnName="UNIT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

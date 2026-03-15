@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  salesanddistributionsystem:
+    image: ${DOCKER_REGISTRY-} 
+    build:
+      context: .
+      dockerfile: SalesAndDistributionSystem/Dockerfile

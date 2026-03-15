@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SalesTrendAnalysisDataSet" targetNamespace="http://tempuri.org/SalesTrendAnalysisDataSet.xsd" xmlns:mstns="http://tempuri.org/SalesTrendAnalysisDataSet.xsd" xmlns="http://tempuri.org/SalesTrendAnalysisDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SalesTrendAnalysisDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="SalesTrendAnalysisDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SalesTrendAnalysisDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SKU_CODE" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="SKU_CODEColumn" msprop:Generator_ColumnPropNameInRow="SKU_CODE" msprop:Generator_UserColumnName="SKU_CODE" msprop:Generator_ColumnVarNameInTable="columnSKU_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SKU_NAME" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="SKU_NAMEColumn" msprop:Generator_ColumnPropNameInRow="SKU_NAME" msprop:Generator_UserColumnName="SKU_NAME" msprop:Generator_ColumnVarNameInTable="columnSKU_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SALES_TARGET_QTY" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="SALES_TARGET_QTYColumn" msprop:Generator_ColumnPropNameInRow="SALES_TARGET_QTY" msprop:Generator_UserColumnName="SALES_TARGET_QTY" msprop:Generator_ColumnVarNameInTable="columnSALES_TARGET_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="CONSUMPTION_QTY" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="CONSUMPTION_QTYColumn" msprop:Generator_ColumnPropNameInRow="CONSUMPTION_QTY" msprop:Generator_UserColumnName="CONSUMPTION_QTY" msprop:Generator_ColumnVarNameInTable="columnCONSUMPTION_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="TARGET_DUE_QTY" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="TARGET_DUE_QTYColumn" msprop:Generator_ColumnPropNameInRow="TARGET_DUE_QTY" msprop:Generator_UserColumnName="TARGET_DUE_QTY" msprop:Generator_ColumnVarNameInTable="columnTARGET_DUE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="ACHIEVEMENT" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="ACHIEVEMENTColumn" msprop:Generator_ColumnPropNameInRow="ACHIEVEMENT" msprop:Generator_UserColumnName="ACHIEVEMENT" msprop:Generator_ColumnVarNameInTable="columnACHIEVEMENT" type="xs:string" minOccurs="0" />
+              <xs:element name="FORECASTED_SALE_QTY" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="FORECASTED_SALE_QTYColumn" msprop:Generator_ColumnPropNameInRow="FORECASTED_SALE_QTY" msprop:Generator_UserColumnName="FORECASTED_SALE_QTY" msprop:Generator_ColumnVarNameInTable="columnFORECASTED_SALE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="OVER_SHORT_SALE_QTY" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="OVER_SHORT_SALE_QTYColumn" msprop:Generator_ColumnPropNameInRow="OVER_SHORT_SALE_QTY" msprop:Generator_UserColumnName="OVER_SHORT_SALE_QTY" msprop:Generator_ColumnVarNameInTable="columnOVER_SHORT_SALE_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="PACK_SIZE" msprop:Generator_UserColumnName="PACK_SIZE" msprop:Generator_ColumnPropNameInTable="PACK_SIZEColumn" msprop:Generator_ColumnPropNameInRow="PACK_SIZE" msprop:Generator_ColumnVarNameInTable="columnPACK_SIZE" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIT" msprop:Generator_ColumnPropNameInRow="UNIT" msprop:Generator_ColumnPropNameInTable="UNITColumn" msprop:Generator_ColumnVarNameInTable="columnUNIT" msprop:Generator_UserColumnName="UNIT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

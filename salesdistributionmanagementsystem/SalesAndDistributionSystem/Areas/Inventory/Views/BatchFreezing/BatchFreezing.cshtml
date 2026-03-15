@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Batch Freezing";
+}
+
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+
+
+<style>
+    .ui-grid-column-menu-button {
+        display: none;
+    }
+</style>
+
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngBatchFreezingCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ResetData()">Reset</button></li>
+            <li class="breadcrumb-item"><button type="button" style="width: 100px;color:white;cursor:pointer" pe="button" ng-disabled="frmBatchFreezing.$invalid" name="btnSave" class="btn  btn-success mb-1" ng-click="SaveData(model)">Save</button></li>
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="GeMstData()">Search</button></li>
+        </ol>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form name="frmBatchFreezing">
+                <fieldset>
+                    <legend style="width:150px">Batch Freezing</legend>
+                    <div class="row" style="margin:10px">
+                        <div class="col-md-12 space-bottom" hidden>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="MST_ID">Mst ID</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" id="MST_ID" name="MST_ID" ng-model="model.MST_ID">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 space-bottom" hidden>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="COMPANY_ID">Company ID</label>
+                                </div>
+                                <div class="col-md-10">
+
+                                    <input type="number" class="form-control" id="COMPANY_ID" name="COMPANY_ID" ng-model="model.COMPANY_ID" ng-disabled="isDisableCompanyId">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 space-bottom" hidden>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="COMPANY_ID">Company Name</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="COMPANY_NAME" name="COMPANY_NAME" ng-model="model.COMPANY_NAME" ng-disabled="isDisableCompanyName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="UNIT_ID">Unit</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" id="UNIT_ID" name="UNIT_ID" ng-model="model.UNIT_ID" ng-disabled="isDisableUnitId">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="UNIT_NAME" name="UNIT_NAME" ng-model="model.UNIT_NAME" ng-disabled="isDisableUnitName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="ENTRY_DATE">Entry Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="ENTRY_DATE" name="ENTRY_DATE" ng-model="model.ENTRY_DATE" ng-disabled="isDisableEntryDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>SKU Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="select2-single-Product form-control" id="SKU_ID" name="SKU_ID" ng-model="model.SKU_ID" ng-change="OnSelectSkuName()" style="width:100%">
+                                        <option ng-repeat="item in Products | orderBy : 'SKU_NAME'" value="{{item.SKU_ID}}" ng-selected="item.SKU_ID == model.SKU_ID">{{item.SKU_NAME}} -- {{item.SKU_CODE}} -- {{item.PACK_SIZE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 space-bottom">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <label for="SKU_CODE">SKU Code</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control" id="SKU_CODE" name="SKU_CODE" ng-model="model.SKU_CODE" ng-disabled="isDisableSkuCode">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 space-bottom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="REMARKS"> Remarks</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="REMARKS" name="REMARKS" ng-model="model.REMARKS">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:20px;">
+                    <legend style="width:220px">Batch Freezing Detail</legend>
+                    <div class="row" style="margin:5px">
+                        <div class="col-lg-12 mb-4" style="height: 32vh;">
+                            <div class="card">
+                                @*ng-show="model.LIST_VIEW == 'Active'"*@
+                                <div ui-grid="gridBatchFreezing" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                     style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 30vh;" class="grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="modal fade" id="SearchDataModal" tabindex="-1" role="dialog"
+                 aria-labelledby="SearchDataModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document" style="max-width:1200px">
+                    <div class="modal-content" style="height:1000px !important">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="SearchDataModalTitle">Search Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="height: 75vh;">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="card" style="margin: 10px">
+                                        <div ui-grid="gridSearchData" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                             style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 70vh;" class="grid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/ScriptsNg/Inventory/BatchFreezing/Controller/BatchFreezingCtr.js"></script>
+    <script src="~/ScriptsNg/Inventory/BatchFreezing/Service/BatchFreezingServices.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+}

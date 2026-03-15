@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Customer SKU Price Detail";
+}
+<link href="/css/site.css" rel="stylesheet">
+<link href="/Design/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+<div class="container-fluid" id="container-wrapper" ng-app="ngApp" ng-controller="ngGridCtrl">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 sm-breadcrumb">
+        <h4 class="h3 mb-0 text-gray-600">
+            @ViewData["Title"].ToString()
+        </h4>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn  btn-primary mb-1" href="/SalesAndDistribution/PriceInfo/CustomerPriceInfo">Entry</a></li>
+
+            <li class="breadcrumb-item"><button class="btn  btn-danger mb-1" ng-click="ClearForm()">Refresh</button></li>
+
+
+        </ol>
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <fieldset>
+                <legend style="width:250px"> Customer SKU Price Master</legend>
+                <div class="row" style="height: 60vh;">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card" style="margin: 10px">
+                            <div ui-grid="gridOptionsList" ui-grid-exporter ui-grid-auto-fit-columns ui-grid-resize-columns ui-grid-auto-resize
+                                 style="font-family: 'Open Sans', Arial, sans-serif; color: #252222 !important; height: 58vh;" class="grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_Loader.cshtml" ng-show="showloader"></partial>
+</div>
+@section Scripts {
+    <script src="~/ScriptsNg/SalesAndDistribution/CustomerPrice/Controller/ListCtr.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/CustomerPrice/Service/CustomerPriceInfoService.js"></script>
+    <script src="~/ScriptsNg/SalesAndDistribution/Area/Service/AreaInfoServices.js"></script>
+    <script src="~/ScriptsNg/Services/permissionProvider.js"></script>
+    <script src="~/ScriptsNg/Services/gridRegistrationService.js"></script>
+    <script src="~/Design/vendor/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+           $(document).ready(function () {
+               $(".select2-single").select2({
+                   placeholder: "Select"
+               });
+
+        });
+    </script>
+}
